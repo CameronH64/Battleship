@@ -1,6 +1,6 @@
 package menupanels;
 
-import java.awt.BorderLayout;
+import java.awt.*;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -10,7 +10,7 @@ import menucontrols.DeleteUserControl;
 public class DeleteUserPanel extends JPanel {
 	
 	/**
-	 * 
+	 * push+pull test
 	 */
 	private static final long serialVersionUID = 1L;
 	

@@ -1,5 +1,6 @@
 package menupanels;
 
+import java.awt.*;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -9,7 +10,7 @@ import menucontrols.CreateUserControl;
 public class CreateUserPanel extends JPanel {
 	
 	/**
-	 * 
+	 * Test GitHub push+pull
 	 */
 	private static final long serialVersionUID = 1L;
 	
