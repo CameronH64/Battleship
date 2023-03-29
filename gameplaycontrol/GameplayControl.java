@@ -1,4 +1,4 @@
-package instructioncontrol;
+package gameplaycontrol;
 
 import javax.swing.*;
 
@@ -7,13 +7,13 @@ import java.awt.event.*;
 import java.io.IOException;
 import java.io.Serializable;
 
-public class InstructionControl implements ActionListener
+public class GameplayControl implements ActionListener
 {
 	// Private data fields.
 	private JPanel container;
 	
 	// This constructor connects the outside components so that the control panel can affect things.
-	public InstructionControl(JPanel container)
+	public GameplayControl(JPanel container)
 	{
 		this.container = container;
 	}
