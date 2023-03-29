@@ -1,3 +1,6 @@
+// Grant Fugate
+// Battleship
+
 package grantspackage;
 
 public class Main {
