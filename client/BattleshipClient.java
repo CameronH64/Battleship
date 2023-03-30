@@ -1,7 +1,7 @@
 // Cameron Holbrook
 // Lab 3 Out
 
-package serverandclient;
+package client;
 
 import java.awt.CardLayout;
 import java.awt.Color;

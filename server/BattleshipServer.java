@@ -1,4 +1,4 @@
-package serverandclient;
+package server;
 
 import ocsf.server.AbstractServer;
 import ocsf.server.ConnectionToClient;

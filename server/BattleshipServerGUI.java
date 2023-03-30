@@ -1,4 +1,4 @@
-package serverandclient;
+package server;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -164,7 +164,7 @@ private static final long serialVersionUID = 1L;
 		// ==================== Event Handler ====================
 		
 		// Step 5: EventHandler
-		BattleshipServerControl eh = new BattleshipServerControl(portNumberTextField, timeoutTextField, serverLogTextArea, server);
+		BattleshipServerControl eh = new BattleshipServerControl(server);
 		listenButton.addActionListener(eh);
 		closeButton.addActionListener(eh);
 		quitButton.addActionListener(eh);

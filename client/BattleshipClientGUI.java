@@ -1,4 +1,4 @@
-package serverandclient;
+package client;
 
 public class BattleshipClientGUI {
 

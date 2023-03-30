@@ -1,4 +1,4 @@
-package serverandclient;
+package server;
 
 import javax.swing.*;
 
@@ -11,11 +11,13 @@ public class BattleshipServerControl implements ActionListener
 {
 	// Private data fields.
 	private JPanel container;
+	private BattleshipServer server;
 	
 	// This constructor connects the outside components so that the control panel can affect things.
-	public BattleshipServerControl(JPanel container)
+	public BattleshipServerControl(JPanel container, BattleshipServer server)
 	{
 		this.container = container;
+		this.server = server;
 	}
 
 	// Handle button clicks.
