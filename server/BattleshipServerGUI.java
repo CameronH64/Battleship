@@ -44,11 +44,10 @@ public class BattleshipServerGUI extends JFrame
 	private BattleshipServer	server;
 	
 	
-	
 	public BattleshipServerGUI()
 	{
 
-		// ==================== Create GUI ====================
+		// ------------------------ CREATE GUI ------------------------
 
 		this.setTitle("Server GUI");
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -172,7 +171,7 @@ public class BattleshipServerGUI extends JFrame
 		// ==================== Event Handler ====================
 		
 		// Step 5: EventHandler
-		BattleshipServerControl eh = new BattleshipServerControl(jFrameBuffer, server);
+		BattleshipServerControl eh = new BattleshipServerControl(jFrameBuffer, serverLogTextArea, connectionStatusLabel, server);
 		listenButton.addActionListener(eh);
 		closeButton.addActionListener(eh);
 		stopButton.addActionListener(eh);

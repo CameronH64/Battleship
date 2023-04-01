@@ -27,7 +27,7 @@ public class BattleshipClient extends AbstractClient{
 	public void connectionEstablished() {
 		
 	}
-	
+		
 	public void handleMessageFromServer(Object arg0) {
 		
 		// Reminder to myself: This method is a big if-else statement that takes in server information, and does stuff with it.
@@ -56,5 +56,7 @@ public class BattleshipClient extends AbstractClient{
 		
 		
 	}
+	
+	// Already has a sendToServer() method. No implementation needed.
 	
 }

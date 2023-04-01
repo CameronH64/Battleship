@@ -6,7 +6,7 @@ public class LoginData {
 	private String password;
 	
 	// Constructor
-	LoginData(String username, String password){
+	public LoginData(String username, String password){
 		
 		this.username = username;
 		this.password = password;
