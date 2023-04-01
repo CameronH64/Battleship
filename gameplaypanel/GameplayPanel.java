@@ -1,9 +1,12 @@
 package gameplaypanel;
 
 import javax.swing.*;
+
+import gameplaycontrol.GameplayControl;
+
 import java.awt.*;
 
-public class CreateUserPanel extends JPanel {
+public class GameplayPanel extends JPanel {
 	
 	/**
 	 * 
@@ -18,12 +21,12 @@ public class CreateUserPanel extends JPanel {
 	int clickCount;	
 	
 	// Constructor
-	public CreateUserPanel(CreateUserControl createUserControl){
+	public GameplayPanel(GameplayControl gameplayControl){
 		
 		// Make the GUI using JComponents.
 		listenLabel = new JLabel("Hey, listen! Press the button!");
 		pressingButton = new JButton("Press Me");
-		pressingButton.addActionListener(createUserControl);
+		pressingButton.addActionListener(gameplayControl);
 		clickCount = 0;
 		
 		// Add components to JPanel.

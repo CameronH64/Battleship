@@ -3,6 +3,8 @@ package gameplaypanel;
 import java.awt.*;
 import javax.swing.*;
 
+import gameplaycontrol.GameplayControl;
+
 public class TestCreateUserGUI extends JFrame {
 		
 	/**
@@ -22,11 +24,11 @@ public class TestCreateUserGUI extends JFrame {
 		
 		// For the control classes, you need to put the buffer panel inside of it.
 		// This connects the whatever GUI (just a JPanel) to the action listener.
-		CreateUserControl createUserControl = new CreateUserControl(buffer);
-		CreateUserPanel createUserGUI = new CreateUserPanel(createUserControl);
+		GameplayControl gameplayControl = new GameplayControl(buffer);
+		GameplayPanel gameplayGUI = new GameplayPanel(gameplayControl);
 		
 		// Add the GUI (just a JPanel and has the actionListener connected to it) to the JFrame (this JFrame).
-		add(createUserGUI, BorderLayout.CENTER);
+		add(gameplayGUI, BorderLayout.CENTER);
 
 		// Show the JFrame.
 		setSize(550, 350);
