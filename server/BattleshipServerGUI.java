@@ -1,10 +1,12 @@
+// Cameron Holbrook
+// Lab 3 Out
+
 package server;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
-import java.io.IOException;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -15,8 +17,11 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.JViewport;
 
-public class BattleshipServerGUI extends JFrame {
-private static final long serialVersionUID = 1L;
+//import lab3out.ChatServer;
+
+public class BattleshipServerGUI extends JFrame
+{
+	private static final long serialVersionUID = 1L;
 	
 	// Declare JComponents
 	private JLabel 		statusLabel;
@@ -36,7 +41,7 @@ private static final long serialVersionUID = 1L;
 	private JTextArea 	serverLogTextArea;
 	
 	// Other Declarations
-	private BattleshipServer 	server;
+	private BattleshipServer	server;
 	
 	
 	
@@ -53,10 +58,13 @@ private static final long serialVersionUID = 1L;
 		connectionStatusLabel.setForeground(Color.RED);
 
 		statusLabel		= new JLabel("Status: ");
+		portLabel		= new JLabel("Port #");
+		timeoutLabel	= new JLabel("Timeout");
 		serverLogLabel	= new JLabel("Server Log: ");
 		
 		listenButton	= new JButton("Listen");
 		closeButton		= new JButton("Close");
+		stopButton		= new JButton("Stop");
 		quitButton		= new JButton("Quit");
 
 		portNumberTextField = new JTextField("");
@@ -164,11 +172,12 @@ private static final long serialVersionUID = 1L;
 		// ==================== Event Handler ====================
 		
 		// Step 5: EventHandler
-		BattleshipServerControl eh = new BattleshipServerControl(server);
+		BattleshipServerControl eh = new BattleshipServerControl(jFrameBuffer, server);
 		listenButton.addActionListener(eh);
 		closeButton.addActionListener(eh);
+		stopButton.addActionListener(eh);
 		quitButton.addActionListener(eh);
-
+		
 		this.setSize(500, 500);
 		setVisible(true);
 
@@ -180,7 +189,11 @@ private static final long serialVersionUID = 1L;
 
 	{
 //		System.out.println("Current JVM version - " + Runtime.version());
-		new BattleshipServer(); //args[0] represents the title of the GUI
-		
+		new BattleshipServerGUI(); //args[0] represents the title of the GUI
+
 	}
+
 }
+
+
+

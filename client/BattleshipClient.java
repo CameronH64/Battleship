@@ -12,6 +12,8 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import ocsf.client.AbstractClient;
 
+import dataclasses.LoginData;
+
 public class BattleshipClient extends AbstractClient{
 	
 	private JPanel container;
@@ -23,10 +25,6 @@ public class BattleshipClient extends AbstractClient{
 	public void setContainer(JPanel container) { this.container = container; }
 	
 	public void connectionEstablished() {
-//		statusLabel.setText("Connected");
-//		statusLabel.setForeground(Color.GREEN);
-		
-		
 		
 	}
 	
@@ -37,9 +35,9 @@ public class BattleshipClient extends AbstractClient{
 //		serverMessageArea.append("Server: " + (String)arg0 + "\n");
 //		clientIDTextField.setText((String)arg0);
 		
-		boolean loginStatus = (boolean)arg0;
+//		boolean loginStatus = (boolean)arg0;
 		
-		if (loginStatus == true) {
+		if (arg0 instanceof LoginData) {
 			
 //			System.out.println("Can now display contact panel.");		// Debuggin
 			

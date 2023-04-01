@@ -20,17 +20,17 @@ public class TestGameplayGUI extends JFrame {
 
 		// Remember, this is a TESTING class, and it uses card layout.
 		CardLayout cardLayout = new CardLayout(); // Need to declare this separately because the cardLayout
-													// instantiation will be used later.
+		// instantiation will be used later.
 		JPanel buffer = new JPanel(cardLayout);
 
 		// For the control classes, you need to put the buffer panel inside of it.
 		// This connects the whatever GUI (just a JPanel) to the action listener.
-		GameplayControl gameplayControl = new GameplayControl(buffer);
-		GameplayPanel gameplayGUI = new GameplayPanel(gameplayControl);
+//		GameplayControl gameplayControl = new GameplayControl(buffer);
+//		GameplayPanel gameplayGUI = new GameplayPanel(gameplayControl);
 
 		// Add the GUI (just a JPanel and has the actionListener connected to it) to the
 		// JFrame (this JFrame).
-		add(gameplayGUI, BorderLayout.CENTER);
+//		add(gameplayGUI, BorderLayout.CENTER);
 
 		// Show the JFrame.
 		setSize(550, 350);

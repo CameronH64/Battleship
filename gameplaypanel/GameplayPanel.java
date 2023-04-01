@@ -2,6 +2,7 @@ package gameplaypanel;
 
 import javax.swing.*;
 
+import client.BattleshipClient;
 import gameplaycontrol.GameplayControl;
 
 import java.awt.*;
@@ -18,10 +19,12 @@ public class GameplayPanel extends JPanel {
 	
 	JLabel listenLabel;
 	JButton pressingButton;
-	int clickCount;	
+	int clickCount;
 	
 	// Constructor
 	public GameplayPanel(GameplayControl gameplayControl){
+		
+		BattleshipClient battleshipClient = new BattleshipClient();
 		
 		// Make the GUI using JComponents.
 		listenLabel = new JLabel("Hey, listen! Press the button!");
