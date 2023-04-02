@@ -30,7 +30,7 @@ public class BattleshipServer extends AbstractServer
 	
 	public BattleshipServer()
 	{		
-		super(12345);
+		super(8300);
 		
 		player1Ships = new ArrayList<String>();
 		player2Ships = new ArrayList<String>();
@@ -72,19 +72,42 @@ public class BattleshipServer extends AbstractServer
 			
 //			System.out.println("Valid!");
 			
-			System.out.println("Received a LoginData object!");
+			String username = ((LoginData) arg0).getUsername();
+			String password = ((LoginData) arg0).getPassword();
 			
-		} // else {
-//			
-////			System.out.println("Invalid!");
-//			sendToAllClients(false);
-//			
-//		}
+			System.out.println("Received a LoginData object!");
+			System.out.println(username);
+			System.out.println(password);
+			
+			
+		} else if (arg0 instanceof ShotFiredData) {
+			
+			int x = ((ShotFiredData) arg0).getX();
+			int y = ((ShotFiredData) arg0).getY();
+			
+			System.out.println("Received a ShotFiredData object!");
+			System.out.println(x);
+			System.out.println(y);
+			
+		}
 		
 		// Server-side debugging
 //		log.append("Debugging: " + data.getUsername() + " " + data.getPassword() + " " + arg1.toString() + "\n");
 
 	}
+	
+	
+	
+	
+	// More game logic methods go here.
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	protected boolean validateUser(LoginData data) {
 		

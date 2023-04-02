@@ -19,6 +19,7 @@ public class GameplayPanel extends JPanel {
 	
 	JLabel listenLabel;
 	JButton sendMessageButton;
+	JButton sendShotFiredButton;
 	JButton connectButton;
 	
 	// Constructor
@@ -33,10 +34,14 @@ public class GameplayPanel extends JPanel {
 		sendMessageButton = new JButton("Send Message");
 		sendMessageButton.addActionListener(gameplayControl);
 		
+		sendShotFiredButton = new JButton("Send Shot");
+		sendShotFiredButton.addActionListener(gameplayControl);
+		
 		// Add components to JPanel.
 		add(listenLabel, BorderLayout.CENTER);
 		add(sendMessageButton, BorderLayout.CENTER);
 		add(connectButton, BorderLayout.CENTER);
+		add(sendShotFiredButton, BorderLayout.CENTER);
 		
 		// Show the JPanel.
 		setSize(500, 500);

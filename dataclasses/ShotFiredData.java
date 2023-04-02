@@ -7,7 +7,7 @@ public class ShotFiredData implements Serializable {
 	private int x;
 	private int y;
 	
-	ShotFiredData(int x, int y){
+	public ShotFiredData(int x, int y){
 		
 		this.x = x;
 		this.y = y;

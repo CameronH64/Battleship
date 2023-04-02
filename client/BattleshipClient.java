@@ -25,7 +25,7 @@ public class BattleshipClient extends AbstractClient{
 	public void setContainer(JPanel container) { this.container = container; }
 	
 	public void connectionEstablished() {
-		
+		System.out.println("Client-side: Client connected. (runs when client connects to a server).");
 	}
 		
 	public void handleMessageFromServer(Object arg0) {

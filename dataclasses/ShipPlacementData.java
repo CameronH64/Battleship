@@ -7,7 +7,7 @@ public class ShipPlacementData implements Serializable {
 	
 	private ArrayList<String> shipConfiguration;
 	
-	ShipPlacementData(){
+	public ShipPlacementData(){
 				
 		shipConfiguration = new ArrayList<String>();
 		

@@ -4,6 +4,7 @@ import javax.swing.*;
 
 import client.BattleshipClient;
 import dataclasses.LoginData;
+import dataclasses.ShotFiredData;
 
 import java.awt.CardLayout;
 import java.awt.event.*;
@@ -43,8 +44,6 @@ public class GameplayControl implements ActionListener
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-
-			System.out.println("Client-side: Client connected.");
 			
 			
 			
@@ -55,7 +54,18 @@ public class GameplayControl implements ActionListener
 			try {
 				battleshipClient.sendToServer(testData);
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			System.out.println("Client-side: Message sent.");
+			
+		} else if (command == "Send Shot") {
+			
+			ShotFiredData testData = new ShotFiredData(10, 15);
+
+			try {
+				battleshipClient.sendToServer(testData);
+			} catch (IOException e) {
 				e.printStackTrace();
 			}
 			
