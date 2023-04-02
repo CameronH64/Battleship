@@ -24,9 +24,13 @@ public class BattleshipClientGUI extends JFrame {
 		CardLayout cardLayout = new CardLayout();
 		JPanel buffer = new JPanel(cardLayout);
 		
+		
+		
 		// This will be extended to include all of the JPanels.
 		GameplayControl gameplayControl = new GameplayControl(buffer, battleshipClient);
 		GameplayPanel gameplayPanel = new GameplayPanel(gameplayControl);
+		
+		
 		
 		// Add the panels to CardLayout
 		buffer.add(gameplayPanel, "6");
