@@ -32,9 +32,6 @@ public class BattleshipServerGUI extends JFrame
 	private JButton 	closeButton;
 	private JButton 	quitButton;
 	
-	private JTextField 	portNumberTextField;
-	private JTextField 	timeoutTextField;
-	
 	private JTextArea 	serverLogTextArea;
 	
 	// Other Declarations
@@ -44,7 +41,19 @@ public class BattleshipServerGUI extends JFrame
 	public BattleshipServerGUI()
 	{
 
-		// ------------------------ CREATE GUI ------------------------
+		// --------------------- Server Instantiation ---------------------
+		
+		server = new BattleshipServer();
+//		server.setPort(8300);
+		server.setTimeout(500);
+		server.setLog(serverLogTextArea);
+		server.setStatus(connectionStatusLabel);
+		
+		// --------------------- / Server Instantiation ---------------------
+
+		
+		
+		// ------------------------ Create GUI ------------------------
 
 		this.setTitle("Server GUI");
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -59,12 +68,6 @@ public class BattleshipServerGUI extends JFrame
 		listenButton	= new JButton("Listen");
 		closeButton		= new JButton("Close");
 		quitButton		= new JButton("Quit");
-
-		portNumberTextField = new JTextField("");
-		portNumberTextField.setColumns(10);
-
-		timeoutTextField = new JTextField("");
-		timeoutTextField.setColumns(10);
 
 		// For TextArea and ScrollPanes surrounding them.
 		serverLogTextArea = new JTextArea();
@@ -85,8 +88,6 @@ public class BattleshipServerGUI extends JFrame
 
 		// Center North
 		JPanel centerNorth 		= new JPanel(new BorderLayout());
-		JPanel clientIDPanel 	= new JPanel(new FlowLayout());
-		JPanel serverURLPanel 	= new JPanel(new FlowLayout());
 
 		// Center South
 		JPanel centerSouth 		= new JPanel(new BorderLayout());
@@ -126,13 +127,6 @@ public class BattleshipServerGUI extends JFrame
 		north1.add(statusLabel);
 		north1.add(connectionStatusLabel);
 
-		// Add north JComponents.
-		clientIDPanel.add(portNumberTextField);
-		centerNorth.add(clientIDPanel, BorderLayout.NORTH);
-
-		serverURLPanel.add(timeoutTextField);
-		centerNorth.add(serverURLPanel, BorderLayout.CENTER);
-
 		// Add south JComponents.
 
 		serverDataPanel.add(serverLogLabel, BorderLayout.NORTH);
@@ -142,23 +136,11 @@ public class BattleshipServerGUI extends JFrame
 		south1.add(closeButton);
 		south1.add(quitButton);
 
-		// ==================== / Create GUI ====================
+		// ------------------------ / Create GUI ------------------------
 		
 		
 		
-		// =================== Server Instantiation ===================
-		
-		server = new BattleshipServer();
-//		server.setPort(8300);
-		server.setTimeout(500);
-		server.setLog(serverLogTextArea);
-		server.setStatus(connectionStatusLabel);
-		
-		// =================== / Server Instantiation ===================
-
-		
-		
-		// ==================== Event Handler ====================
+		// ------------------------ Event Handler ------------------------
 		
 		// Step 5: EventHandler
 		BattleshipServerControl eh = new BattleshipServerControl(jFrameBuffer, serverLogTextArea, connectionStatusLabel, server);
@@ -169,14 +151,14 @@ public class BattleshipServerGUI extends JFrame
 		this.setSize(500, 500);
 		setVisible(true);
 
-		// ==================== / Event Handler ====================
-
+		// ------------------------ / Event Handler ------------------------
+		
+		
 	}
 
-	public static void main(String[] args)
+	public static void main(String[] args) {
 
-	{
-//		System.out.println("Current JVM version - " + Runtime.version());
+		//		System.out.println("Current JVM version - " + Runtime.version());
 		new BattleshipServerGUI(); //args[0] represents the title of the GUI
 
 	}

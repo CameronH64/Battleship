@@ -63,7 +63,7 @@ public class BattleshipServerControl implements ActionListener
 				
 				// Default values.
 				server.setPort(8300);
-				server.setTimeout(500);
+//				server.setTimeout(500);
 				server.listen();
 				// Note: listen() runs both serverStarted() and setLog() methods.
 
@@ -87,6 +87,12 @@ public class BattleshipServerControl implements ActionListener
 				server.close();
 				// Note: server.close() invokes both serverClosed() and serverStopped() methods.
 
+				connectionStatusLabel.setForeground(Color.RED);
+				connectionStatusLabel.setText("Not Connected");
+
+				serverLogTextArea.append("Server closed.\n");
+//				server.setLog(serverLogTextArea);
+
 			} catch (Exception e) {
 				System.out.println("server.close() broke somehow. :/");
 				e.printStackTrace();
@@ -94,17 +100,17 @@ public class BattleshipServerControl implements ActionListener
 
 
 
-		} else if (command.equals("Stop")) {
-
-			if (!server.isListening()) {
-
-				serverLogTextArea.append("Stop invalid. Server is not currently running.\n");
-				server.setLog(serverLogTextArea);
-
-				return;
-			}
-
-			server.stopListening();
+//		} else if (command.equals("Stop")) {
+//
+//			if (!server.isListening()) {
+//
+//				serverLogTextArea.append("Stop invalid. Server is not currently running.\n");
+//				server.setLog(serverLogTextArea);
+//
+//				return;
+//			}
+//
+//			server.stopListening();
 
 
 

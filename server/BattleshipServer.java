@@ -45,7 +45,6 @@ public class BattleshipServer extends AbstractServer
 	}
 
 	public void setLog(JTextArea log) { this.log = log;	}
-
 	public void setStatus(JLabel status) { this.status = status; }
 
 	@Override
@@ -57,9 +56,7 @@ public class BattleshipServer extends AbstractServer
 		Reminder to myself: This method is a big if-else ladder that checks what kind of data is being inputted.
 		
 		If login data, do server stuff
-		
 		If shot fired data, do confirmation stuff.
-		
 		If ship configuration data, assign it to the server's player configurations.
 		
 		Also, "ConnectionToClient arg1" is the connected client that send the message.
@@ -78,6 +75,7 @@ public class BattleshipServer extends AbstractServer
 			System.out.println("Received a LoginData object!");
 			System.out.println(username);
 			System.out.println(password);
+			
 			
 			
 		} else if (arg0 instanceof ShotFiredData) {
@@ -171,7 +169,7 @@ public class BattleshipServer extends AbstractServer
 		//log.append("Server Stopped Accepting New Clients - Press Listen to Start Accepting New Clients\n");
 	}
 
-	protected void serverClosed() 
+	protected void serverClosed()
 	{
 		System.out.println("Server and all current clients are closed - Press Listen to Restart");
 		//log.append("Server and all current clients are closed - Press Listen to Restart\n");
@@ -187,6 +185,12 @@ public class BattleshipServer extends AbstractServer
 		status.setText("Connected");
 		status.setForeground(Color.green);
 		//log.append("Client Connected\n");
+	}
+	
+	protected void clientDisconnected(ConnectionToClient client) {
+		
+		// This is run when a the server disconnects a client.
+		
 	}
 	
 }
