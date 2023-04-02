@@ -26,13 +26,10 @@ public class BattleshipServerGUI extends JFrame
 	// Declare JComponents
 	private JLabel 		statusLabel;
 	private JLabel 		connectionStatusLabel;
-	private JLabel		portLabel;
-	private JLabel		timeoutLabel;
 	private JLabel		serverLogLabel;
 	
 	private JButton 	listenButton;
 	private JButton 	closeButton;
-	private JButton 	stopButton;
 	private JButton 	quitButton;
 	
 	private JTextField 	portNumberTextField;
@@ -57,18 +54,14 @@ public class BattleshipServerGUI extends JFrame
 		connectionStatusLabel.setForeground(Color.RED);
 
 		statusLabel		= new JLabel("Status: ");
-		portLabel		= new JLabel("Port #");
-		timeoutLabel	= new JLabel("Timeout");
 		serverLogLabel	= new JLabel("Server Log: ");
 		
 		listenButton	= new JButton("Listen");
 		closeButton		= new JButton("Close");
-		stopButton		= new JButton("Stop");
 		quitButton		= new JButton("Quit");
 
 		portNumberTextField = new JTextField("");
 		portNumberTextField.setColumns(10);
-//		portNumberTextField.setEnabled(false);
 
 		timeoutTextField = new JTextField("");
 		timeoutTextField.setColumns(10);
@@ -134,11 +127,9 @@ public class BattleshipServerGUI extends JFrame
 		north1.add(connectionStatusLabel);
 
 		// Add north JComponents.
-		clientIDPanel.add(portLabel);
 		clientIDPanel.add(portNumberTextField);
 		centerNorth.add(clientIDPanel, BorderLayout.NORTH);
 
-		serverURLPanel.add(timeoutLabel);
 		serverURLPanel.add(timeoutTextField);
 		centerNorth.add(serverURLPanel, BorderLayout.CENTER);
 
@@ -149,7 +140,6 @@ public class BattleshipServerGUI extends JFrame
 
 		south1.add(listenButton);
 		south1.add(closeButton);
-		south1.add(stopButton);
 		south1.add(quitButton);
 
 		// ==================== / Create GUI ====================
@@ -174,7 +164,6 @@ public class BattleshipServerGUI extends JFrame
 		BattleshipServerControl eh = new BattleshipServerControl(jFrameBuffer, serverLogTextArea, connectionStatusLabel, server);
 		listenButton.addActionListener(eh);
 		closeButton.addActionListener(eh);
-		stopButton.addActionListener(eh);
 		quitButton.addActionListener(eh);
 		
 		this.setSize(500, 500);

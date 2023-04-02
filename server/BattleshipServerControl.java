@@ -3,6 +3,7 @@ package server;
 import javax.swing.*;
 
 import java.awt.CardLayout;
+import java.awt.Color;
 import java.awt.event.*;
 import java.io.IOException;
 import java.io.Serializable;
@@ -53,15 +54,17 @@ public class BattleshipServerControl implements ActionListener
 			// As of now, assume the correct values are being entered. This can be improved later.
 //			int portNumber = Integer.parseInt(portNumberText);
 //			int timeout = Integer.parseInt(timeoutText);	
-
+			
 			// In a try catch because a non-Java connection will crash the program.
 			try {
-
-				// Default values.
-				server.setPort(8333);
-				server.setTimeout(500);
-				server.listen();					// Then, the server can listen.					
 				
+				connectionStatusLabel.setForeground(Color.GREEN);
+				connectionStatusLabel.setText("Connected");
+				
+				// Default values.
+				server.setPort(8300);
+				server.setTimeout(500);
+				server.listen();
 				// Note: listen() runs both serverStarted() and setLog() methods.
 
 			} catch (IOException e) {

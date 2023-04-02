@@ -15,7 +15,7 @@ public class BattleshipClientGUI extends JFrame {
 		
 		// Instantiate the client.
 		BattleshipClient battleshipClient = new BattleshipClient();
-		
+
 		// Initialize JFrame settings.
 		this.setTitle("Battleship GUI");
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

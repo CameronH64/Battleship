@@ -1,6 +1,8 @@
 package dataclasses;
 
-public class ShotFiredData {
+import java.io.Serializable;
+
+public class ShotFiredData implements Serializable {
 	
 	private int x;
 	private int y;

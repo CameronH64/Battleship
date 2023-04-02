@@ -62,29 +62,27 @@ public class BattleshipServer extends AbstractServer
 		
 		If ship configuration data, assign it to the server's player configurations.
 		
+		Also, "ConnectionToClient arg1" is the connected client that send the message.
 		
 		*/
 		
-		LoginData data = (LoginData)arg0;
-		
-		// Cycle through users (separated by commas)
-		// When you hit a user with the same name, check the password after that.
-		// If completely cycled and nothing is found, return false or something.
-		
-		if (validateUser(data)) {
+//		LoginData data = (LoginData)arg0;
+				
+		if (arg0 instanceof LoginData) {
 			
 //			System.out.println("Valid!");
-			sendToAllClients(true);
 			
-		} else {
+			System.out.println("Received a LoginData object!");
 			
-//			System.out.println("Invalid!");
-			sendToAllClients(false);
-			
-		}
+		} // else {
+//			
+////			System.out.println("Invalid!");
+//			sendToAllClients(false);
+//			
+//		}
 		
 		// Server-side debugging
-		log.append("Debugging: " + data.getUsername() + " " + data.getPassword() + " " + arg1.toString() + "\n");
+//		log.append("Debugging: " + data.getUsername() + " " + data.getPassword() + " " + arg1.toString() + "\n");
 
 	}
 	
