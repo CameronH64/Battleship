@@ -5,20 +5,21 @@ import javax.swing.*;
 import client.BattleshipClient;
 import dataclasses.LoginData;
 import dataclasses.ShotFiredData;
+import gameplaypanel.TestingIPAddressPanel;
 
 import java.awt.CardLayout;
 import java.awt.event.*;
 import java.io.IOException;
 import java.io.Serializable;
 
-public class GameplayControl implements ActionListener
+public class TestingIPAddressControl implements ActionListener
 {
 	// Private data fields.
 	private JPanel container;
 	private BattleshipClient battleshipClient;
 	
 	// This constructor connects the outside components so that the control panel can affect things.
-	public GameplayControl(JPanel container, BattleshipClient battleshipClient)
+	public TestingIPAddressControl(JPanel container, BattleshipClient battleshipClient)
 	{
 		this.container = container;
 		this.battleshipClient = battleshipClient;
@@ -35,38 +36,37 @@ public class GameplayControl implements ActionListener
 		
 		
 		// The Cancel button takes the user back to the initial panel.
+		if (command == "Quit")
+		{	
+			System.exit(0);
 			
-		if (command == "Send LoginData") {
+		} else if (command == "Connect") {
 			
-			LoginData testLoginData = new LoginData("Cameron", "password");
-
+			// Set the port
+			battleshipClient.setPort(8300);
+			battleshipClient.setHost("localhost");
+			
+			// Set the hostname
+//			TestingIPAddressPanel testingIPAddressPanel = (TestingIPAddressPanel)container.getComponent(1);
+//			String hostname = testingIPAddressPanel.getHostname();
+//			battleshipClient.setHost(hostname);
+			
+			
 			try {
-				battleshipClient.sendToServer(testLoginData);
+				battleshipClient.openConnection();
 			} catch (IOException e) {
+				// TODO Auto-generated catch block
 				e.printStackTrace();
+				System.out.println("Invalid hostname.");
 			}
 			
-			System.out.println("Client-side: Sent LoginData.");
-			
-			
-			
-		} else if (command == "Send ShotFiredData") {
-			
-			ShotFiredData testShotFiredData = new ShotFiredData(10, 15);
-
-			try {
-				battleshipClient.sendToServer(testShotFiredData);
-			} catch (IOException e) {
-				e.printStackTrace();
+			if (battleshipClient.isConnected()){
+				CardLayout cardLayout = (CardLayout)container.getLayout();
+				cardLayout.show(container, "7");
 			}
 			
-			System.out.println("Client-side: Sent ShotFiredData.");
 			
-		}
-		
-		
-		
-		// Testing code. Use this code to switch to another JPanel. (Make a new JPanel for yourself for testing.
+		}		// Testing code. Use this code to switch to another JPanel. (Make a new JPanel for yourself for testing.
 		
 //		CardLayout cardLayout = (CardLayout)container.getLayout();
 //		cardLayout.show(container, "1");

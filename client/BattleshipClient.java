@@ -13,19 +13,20 @@ import javax.swing.JTextField;
 import ocsf.client.AbstractClient;
 
 import dataclasses.LoginData;
+import dataclasses.ShotFiredData;
 
 public class BattleshipClient extends AbstractClient{
 	
-	private JPanel container;
+//	private JPanel container;
 
 	public BattleshipClient() {
 		super("localhost", 8300);
 	}
 	
-	public void setContainer(JPanel container) { this.container = container; }
+//	public void setContainer(JPanel container) { this.container = container; }
 	
 	public void connectionEstablished() {
-		System.out.println("Client-side: Client connected. (runs when client connects to a server).");
+		System.out.println("Client-side: Client connected. ");
 	}
 		
 	public void handleMessageFromServer(Object arg0) {
@@ -39,11 +40,11 @@ public class BattleshipClient extends AbstractClient{
 		
 		if (arg0 instanceof LoginData) {
 			
-//			System.out.println("Can now display contact panel.");		// Debuggin
+			System.out.println("Client-side: Received LoginData.");
 			
-			CardLayout cardLayout = (CardLayout)container.getLayout();
-			cardLayout.show(container, "4");
-
+		} else if (arg0 instanceof ShotFiredData) {
+			
+			System.out.println("Client-side: Received ShotFiredData.");
 			
 		}
 		

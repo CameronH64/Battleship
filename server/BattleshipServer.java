@@ -29,7 +29,7 @@ public class BattleshipServer extends AbstractServer
 	
 	
 	public BattleshipServer()
-	{		
+	{
 		super(8300);
 		
 		player1Ships = new ArrayList<String>();
@@ -63,19 +63,23 @@ public class BattleshipServer extends AbstractServer
 		
 		*/
 		
+		sendToAllClients(arg0);
+		
 //		LoginData data = (LoginData)arg0;
-				
+		
+		System.out.println("I just received some data here!");
+		
 		if (arg0 instanceof LoginData) {
-			
-//			System.out.println("Valid!");
 			
 			String username = ((LoginData) arg0).getUsername();
 			String password = ((LoginData) arg0).getPassword();
 			
-			System.out.println("Received a LoginData object!");
-			System.out.println(username);
-			System.out.println(password);
+			System.out.println(username + password);
 			
+			System.out.println("Server-side: Received a LoginData object!");
+//			System.out.println(username);
+//			System.out.println(password);
+//			
 			
 			
 		} else if (arg0 instanceof ShotFiredData) {
@@ -83,9 +87,13 @@ public class BattleshipServer extends AbstractServer
 			int x = ((ShotFiredData) arg0).getX();
 			int y = ((ShotFiredData) arg0).getY();
 			
-			System.out.println("Received a ShotFiredData object!");
-			System.out.println(x);
+			System.out.print(x);
+			System.out.print(" ");
 			System.out.println(y);
+			
+			System.out.println("Server-side: Received a ShotFiredData object!");
+//			System.out.println(x);
+//			System.out.println(y);
 			
 		}
 		
@@ -178,7 +186,13 @@ public class BattleshipServer extends AbstractServer
 
 	protected void clientConnected(ConnectionToClient client) 
 	{
-
+		
+		// Will have player connection stuff here.
+		// Probably have an array of two ConnectionToClient objects to 
+		// keep track of the players (only two are allowed).
+		// Will need an if statement to check that there are only two players.
+		// Heck, I could write a method to do that.
+		
 		// Debugging
 		System.out.println("Client Connected");
 

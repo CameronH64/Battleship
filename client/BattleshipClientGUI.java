@@ -6,12 +6,19 @@ import java.awt.CardLayout;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import gameplaycontrol.GameplayControl;
 import gameplaypanel.GameplayPanel;
+import gameplaycontrol.GameplayControl;
+import gameplaypanel.TestingIPAddressPanel;
+import gameplaycontrol.TestingIPAddressControl;
 
 public class BattleshipClientGUI extends JFrame {
 
-	BattleshipClientGUI(){
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	public BattleshipClientGUI(){
 		
 		// Instantiate the client.
 		BattleshipClient battleshipClient = new BattleshipClient();
@@ -27,13 +34,16 @@ public class BattleshipClientGUI extends JFrame {
 		
 		
 		// This will be extended to include all of the JPanels.
+		TestingIPAddressControl testingIPAddressControl = new TestingIPAddressControl(buffer, battleshipClient);
+		TestingIPAddressPanel testClientLoginPanel = new TestingIPAddressPanel(testingIPAddressControl);
 		GameplayControl gameplayControl = new GameplayControl(buffer, battleshipClient);
 		GameplayPanel gameplayPanel = new GameplayPanel(gameplayControl);
 		
-		
-		
 		// Add the panels to CardLayout
-		buffer.add(gameplayPanel, "6");
+		buffer.add(gameplayPanel, "7");
+		buffer.add(testClientLoginPanel, "1");
+		
+		
 		
 		// Add the CardLayout container to the JFrame.
 		this.add(buffer, BorderLayout.CENTER);
@@ -41,10 +51,10 @@ public class BattleshipClientGUI extends JFrame {
 		// Show the JFrame
 		this.setSize(500, 500);
 		this.setVisible(true);
-		
+		this.setResizable(true);
 		
 		// Kick off the GUI with the first JPanel.
-		cardLayout.show(buffer, "6");
+		cardLayout.show(buffer, "1");
 		
 	}
 	

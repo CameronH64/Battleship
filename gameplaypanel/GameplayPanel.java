@@ -17,31 +17,26 @@ public class GameplayPanel extends JPanel {
 	// Private Data Fields and JComponents.
 	// Generally, it's better to have these explicitly declared here so that it's easier to debug the code.
 	
-	JLabel listenLabel;
 	JButton sendMessageButton;
 	JButton sendShotFiredButton;
-	JButton connectButton;
 	
 	// Constructor
 	public GameplayPanel(GameplayControl gameplayControl){
 		
-		// Make the GUI using JComponents.
-		listenLabel = new JLabel("Hey, listen! Press the button!");
-
-		connectButton = new JButton("Connect");
-		connectButton.addActionListener(gameplayControl);
 		
-		sendMessageButton = new JButton("Send Message");
+		
+		// Make the GUI using JComponents.
+		sendMessageButton = new JButton("Send LoginData");
 		sendMessageButton.addActionListener(gameplayControl);
 		
-		sendShotFiredButton = new JButton("Send Shot");
+		sendShotFiredButton = new JButton("Send ShotFiredData");
 		sendShotFiredButton.addActionListener(gameplayControl);
 		
 		// Add components to JPanel.
-		add(listenLabel, BorderLayout.CENTER);
 		add(sendMessageButton, BorderLayout.CENTER);
-		add(connectButton, BorderLayout.CENTER);
 		add(sendShotFiredButton, BorderLayout.CENTER);
+		
+		
 		
 		// Show the JPanel.
 		setSize(500, 500);
