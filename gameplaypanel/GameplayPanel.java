@@ -19,6 +19,7 @@ public class GameplayPanel extends JPanel {
 	
 	JButton sendMessageButton;
 	JButton sendShotFiredButton;
+	JButton connectButton;
 	
 	// Constructor
 	public GameplayPanel(GameplayControl gameplayControl){
@@ -32,9 +33,15 @@ public class GameplayPanel extends JPanel {
 		sendShotFiredButton = new JButton("Send ShotFiredData");
 		sendShotFiredButton.addActionListener(gameplayControl);
 		
+		connectButton = new JButton("Connect");
+		connectButton.addActionListener(gameplayControl);
+		
+		
+		
 		// Add components to JPanel.
 		add(sendMessageButton, BorderLayout.CENTER);
 		add(sendShotFiredButton, BorderLayout.CENTER);
+		add(connectButton, BorderLayout.CENTER);
 		
 		
 		

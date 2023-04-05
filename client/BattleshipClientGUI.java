@@ -8,8 +8,6 @@ import javax.swing.JPanel;
 
 import gameplaypanel.GameplayPanel;
 import gameplaycontrol.GameplayControl;
-import gameplaypanel.TestingIPAddressPanel;
-import gameplaycontrol.TestingIPAddressControl;
 
 public class BattleshipClientGUI extends JFrame {
 
@@ -22,7 +20,10 @@ public class BattleshipClientGUI extends JFrame {
 		
 		// Instantiate the client.
 		BattleshipClient battleshipClient = new BattleshipClient();
-
+		
+		battleshipClient.setHost("localhost");
+		battleshipClient.setPort(8300);
+		
 		// Initialize JFrame settings.
 		this.setTitle("Battleship GUI");
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -34,14 +35,11 @@ public class BattleshipClientGUI extends JFrame {
 		
 		
 		// This will be extended to include all of the JPanels.
-		TestingIPAddressControl testingIPAddressControl = new TestingIPAddressControl(buffer, battleshipClient);
-		TestingIPAddressPanel testClientLoginPanel = new TestingIPAddressPanel(testingIPAddressControl);
 		GameplayControl gameplayControl = new GameplayControl(buffer, battleshipClient);
 		GameplayPanel gameplayPanel = new GameplayPanel(gameplayControl);
 		
 		// Add the panels to CardLayout
-		buffer.add(gameplayPanel, "7");
-		buffer.add(testClientLoginPanel, "1");
+		buffer.add(gameplayPanel, "6");
 		
 		
 		
@@ -54,7 +52,7 @@ public class BattleshipClientGUI extends JFrame {
 		this.setResizable(true);
 		
 		// Kick off the GUI with the first JPanel.
-		cardLayout.show(buffer, "1");
+		cardLayout.show(buffer, "6");
 		
 	}
 	

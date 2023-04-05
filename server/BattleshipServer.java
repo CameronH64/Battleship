@@ -36,7 +36,7 @@ public class BattleshipServer extends AbstractServer
 		player2Ships = new ArrayList<String>();
 		player1Win = false;
 		player2Win = false;
-	
+			
 	}
 
 	public BattleshipServer(int port)
@@ -63,13 +63,11 @@ public class BattleshipServer extends AbstractServer
 		
 		*/
 		
-		sendToAllClients(arg0);
-		
-//		LoginData data = (LoginData)arg0;
-		
 		System.out.println("I just received some data here!");
 		
 		if (arg0 instanceof LoginData) {
+			
+//			log.append("Server-side: Recieved a LoginData object!");
 			
 			String username = ((LoginData) arg0).getUsername();
 			String password = ((LoginData) arg0).getPassword();

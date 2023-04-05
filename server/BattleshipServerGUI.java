@@ -44,7 +44,7 @@ public class BattleshipServerGUI extends JFrame
 		// --------------------- Server Instantiation ---------------------
 		
 		server = new BattleshipServer();
-//		server.setPort(8300);
+		server.setPort(8300);
 		server.setTimeout(500);
 		server.setLog(serverLogTextArea);
 		server.setStatus(connectionStatusLabel);

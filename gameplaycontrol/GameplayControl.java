@@ -62,6 +62,15 @@ public class GameplayControl implements ActionListener
 			
 			System.out.println("Client-side: Sent ShotFiredData.");
 			
+		} else if (command == "Connect") {
+			
+			try {
+				battleshipClient.openConnection();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
 		}
 		
 		
