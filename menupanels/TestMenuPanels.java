@@ -1,3 +1,5 @@
+//Jared Bratton
+
 package menupanels;
 
 import java.awt.BorderLayout;
@@ -16,6 +18,9 @@ public class TestMenuPanels extends JFrame {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	//Constant values height and width of this gui
+	private static final int windowHeight = 500;
+	private static final int windowWidth = 500;
 
 	TestMenuPanels(){
 
@@ -46,7 +51,7 @@ public class TestMenuPanels extends JFrame {
 		this.add(buffer, BorderLayout.CENTER);
 		
 		// Show the JFrame.
-		this.setSize(500, 500);
+		setSize(windowWidth, windowHeight);
 		this.setVisible(true);
 
 		cardLayout.show(buffer, "1");		// Default screen.
