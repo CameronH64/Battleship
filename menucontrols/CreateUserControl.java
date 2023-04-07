@@ -1,3 +1,5 @@
+//Jared Bratton
+
 package menucontrols;
 
 import javax.swing.*;
@@ -33,21 +35,18 @@ public class CreateUserControl implements ActionListener
 		{
 			System.out.println("Test");
 			
-		} else if (command == "Main Menu") {
-			
+		} else if (command == "Main Menu") 
+		{
 			CardLayout cardLayout = (CardLayout)container.getLayout();
 			cardLayout.show(container, "1");
 			
-			
-		} else if (command == "Create User") {
-			
+		} else if (command == "Create User") 
+		{
 			System.out.println("User created!");
 			
-			
-		} else if (command == "Quit") {
-		
+		} else if (command == "Quit") 
+		{
 			System.exit(0);
-		
 		
 		}
 		
