@@ -22,7 +22,7 @@ package accountdatabase;
         
         */
         
-public class TestAccountDatabase {
+public class TestDatabaseControl {
     
     public static void main(String[] args) {
         

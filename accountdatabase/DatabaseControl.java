@@ -5,10 +5,10 @@ import java.io.IOException;
 import java.sql.*;
 import java.util.Properties;
 
-public class AccountDatabase {
+public class DatabaseControl {
     private Connection conn;
 
-    public AccountDatabase() throws IOException {
+    public DatabaseControl() throws IOException {
     	
     	Properties properties = new Properties();
 		FileInputStream fileInputStream = new FileInputStream("lab7out/db.properties");
