@@ -39,19 +39,7 @@ public class BattleshipServerGUI extends JFrame
 	
 	
 	public BattleshipServerGUI()
-	{
-
-		// --------------------- Server Instantiation ---------------------
-		
-		server = new BattleshipServer();
-		server.setPort(8300);
-		server.setTimeout(500);
-		server.setLog(serverLogTextArea);
-		server.setStatus(connectionStatusLabel);
-		
-		// --------------------- / Server Instantiation ---------------------
-
-		
+	{	
 		
 		// ------------------------ Create GUI ------------------------
 
@@ -138,6 +126,18 @@ public class BattleshipServerGUI extends JFrame
 
 		// ------------------------ / Create GUI ------------------------
 		
+		
+		
+		// --------------------- Server Instantiation ---------------------
+		
+		server = new BattleshipServer();
+		server.setPort(8300);
+		server.setTimeout(500);
+		server.setLog(serverLogTextArea);
+		server.setStatus(connectionStatusLabel);
+		
+		// --------------------- / Server Instantiation ---------------------
+
 		
 		
 		// ------------------------ Event Handler ------------------------
