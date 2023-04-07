@@ -3,16 +3,16 @@
 package menucontrols;
 
 import javax.swing.*;
-
-import java.awt.CardLayout;
+import java.awt.*;
 import java.awt.event.*;
-import java.io.IOException;
-import java.io.Serializable;
+import java.io.*;
+import menupanels.MainMenuPanel;
 
 public class MainMenuControl implements ActionListener
 {
 	// Private data fields.
 	private JPanel container;
+	private MainMenuPanel mainMenu;
 
 	// This constructor connects the outside components so that the control panel can affect things.
 	public MainMenuControl(JPanel container)
@@ -55,6 +55,25 @@ public class MainMenuControl implements ActionListener
 		else if (command == "Connect")
 		{
 			System.out.println("Client attempting to connect to server");
+			/*
+			 * The buttons and text fields should only be enabled 
+			 * once the user is connected to a server. For now, 
+			 * just setting them to enabled when connect is pressed 
+			 * will allow debugging display on other panels
+			 */
+			//Get stuff to modify enabled-ness
+			JButton buttonGoToCreateUser = mainMenu.getButtonGoToCreateUser();
+			JButton buttonGoToDeleteUser = mainMenu.getButtonGoToDeleteUser();
+			JTextField fieldUsername = mainMenu.getFieldUsername();
+			JTextField fieldPassword = mainMenu.getFieldPassword();
+			JLabel labelStatusResponse = mainMenu.getLabelStatusResponse();
+			//Set them to enabled and editable as appropriate 
+			buttonGoToCreateUser.setEnabled(true);
+			buttonGoToDeleteUser.setEnabled(true);
+			fieldUsername.setEditable(true);
+			fieldPassword.setEditable(true);
+			labelStatusResponse.setText("Connected!");
+			labelStatusResponse.setForeground(Color.GREEN);
 		}
 
 
@@ -62,6 +81,14 @@ public class MainMenuControl implements ActionListener
 
 
 
+	}
+
+	public MainMenuPanel getMainMenu() {
+		return mainMenu;
+	}
+
+	public void setMainMenu(MainMenuPanel mainMenu) {
+		this.mainMenu = mainMenu;
 	}
 
 }

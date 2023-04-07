@@ -3,16 +3,16 @@
 package menucontrols;
 
 import javax.swing.*;
-
 import java.awt.CardLayout;
 import java.awt.event.*;
-import java.io.IOException;
-import java.io.Serializable;
+import java.io.*;
+import menupanels.CreateUserPanel;
 
 public class CreateUserControl implements ActionListener
 {
 	// Private data fields.
 	private JPanel container;
+	private CreateUserPanel createUserMenu;
 	
 	// This constructor connects the outside components so that the control panel can affect things.
 	public CreateUserControl(JPanel container)
@@ -55,6 +55,14 @@ public class CreateUserControl implements ActionListener
 		
 		
 		
+	}
+
+	public CreateUserPanel getCreateUserMenu() {
+		return createUserMenu;
+	}
+
+	public void setCreateUserMenu(CreateUserPanel createUserMenu) {
+		this.createUserMenu = createUserMenu;
 	}
 
 }

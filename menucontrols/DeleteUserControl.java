@@ -3,16 +3,16 @@
 package menucontrols;
 
 import javax.swing.*;
-
 import java.awt.CardLayout;
 import java.awt.event.*;
-import java.io.IOException;
-import java.io.Serializable;
+import java.io.*;
+import menupanels.DeleteUserPanel;
 
 public class DeleteUserControl implements ActionListener
 {
 	// Private data fields.
 	private JPanel container;
+	private DeleteUserPanel deleteUserMenu;
 
 	// This constructor connects the outside components so that the control panel can affect things.
 	public DeleteUserControl(JPanel container)
@@ -56,6 +56,14 @@ public class DeleteUserControl implements ActionListener
 
 
 
+	}
+
+	public DeleteUserPanel getDeleteUserMenu() {
+		return deleteUserMenu;
+	}
+
+	public void setDeleteUserMenu(DeleteUserPanel deleteUserMenu) {
+		this.deleteUserMenu = deleteUserMenu;
 	}
 
 }

@@ -18,7 +18,7 @@ public class TestMenuPanels extends JFrame {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	//Constant values height and width of this gui
+	//Constant values height and width of this GUI
 	private static final int windowHeight = 500;
 	private static final int windowWidth = 500;
 
@@ -35,12 +35,15 @@ public class TestMenuPanels extends JFrame {
 		// Instantiate panels and their control classes.
 		MainMenuControl mainMenuControl = new MainMenuControl(buffer);
 		MainMenuPanel mainMenuPanel = new MainMenuPanel(mainMenuControl);
+		mainMenuControl.setMainMenu(mainMenuPanel);
 		
 		CreateUserControl createUserControl = new CreateUserControl(buffer);
 		CreateUserPanel createUserPanel = new CreateUserPanel(createUserControl);
+		createUserControl.setCreateUserMenu(createUserPanel);
 		
 		DeleteUserControl deleteUserControl = new DeleteUserControl(buffer);
 		DeleteUserPanel deleteUserPanel = new DeleteUserPanel(deleteUserControl);
+		deleteUserControl.setDeleteUserMenu(deleteUserPanel);
 		
 		// Add the JPanels to the buffer JPanel.
 		buffer.add(mainMenuPanel, "1");
