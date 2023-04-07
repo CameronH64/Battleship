@@ -1,13 +1,6 @@
 package accountdatabase;
 
-public class TestAccountDatabase {
 
-	public static void main(String[] args) {
-		
-		AccountDatabase database = new AccountDatabase();
-		
-		
-		
 		/*
 		
 		Grant:
@@ -16,8 +9,6 @@ public class TestAccountDatabase {
 		
 		username (String)
 		password (String, encrypted)
-		player wins (integer)
-		player losses (intger)
 		
 		I must be able to instantiate this class in the BattleshipServer class.
 		(If you can instantiate it in this very class, then I can instantiate in the BattleshipServer class).
@@ -33,4 +24,4 @@ public class TestAccountDatabase {
 		
 	}
 
-}
+
