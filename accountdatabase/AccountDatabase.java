@@ -1,13 +1,24 @@
 package accountdatabase;
 
+import java.io.FileInputStream;
 import java.sql.*;
+import java.util.Properties;
 
 public class AccountDatabase {
     private Connection conn;
 
-    public AccountDatabase(String url, String username, String password) {
+    public AccountDatabase() {
+    	
+    	Properties properties = new Properties();
+		FileInputStream fileInputStream = new FileInputStream("lab7out/db.properties");
+		properties.load(fileInputStream);
+		
+		String url = properties.getProperty("url");
+		String user = properties.getProperty("user");
+		String pass = properties.getProperty("password");
+		
         try {
-            this.conn = DriverManager.getConnection(url, username, password);
+            this.conn = DriverManager.getConnection(url, user, pass);
             Statement stmt = this.conn.createStatement();
             stmt.execute("CREATE TABLE IF NOT EXISTS accounts (username VARCHAR(255) PRIMARY KEY, password VARCHAR(255))");
             stmt.close();
