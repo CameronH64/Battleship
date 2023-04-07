@@ -1,15 +1,13 @@
 package accountdatabase;
 
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.sql.*;
 import java.util.Properties;
 
 public class AccountDatabase {
     private Connection conn;
 
-    public AccountDatabase() throws IOException {
+    public AccountDatabase() {
     	
     	Properties properties = new Properties();
 		FileInputStream fileInputStream = new FileInputStream("lab7out/db.properties");
