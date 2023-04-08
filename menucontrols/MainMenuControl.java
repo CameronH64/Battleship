@@ -7,12 +7,15 @@ import java.awt.*;
 import java.awt.event.*;
 import java.io.*;
 import menupanels.MainMenuPanel;
+import dataclasses.LoginData;
+import client.BattleshipClient;
 
 public class MainMenuControl implements ActionListener
 {
 	// Private data fields.
-	private JPanel container;
-	private MainMenuPanel mainMenu;
+	private JPanel container; 
+	private MainMenuPanel mainMenu; 
+	private BattleshipClient client; 
 
 	// This constructor connects the outside components so that the control panel can affect things.
 	public MainMenuControl(JPanel container)
@@ -24,15 +27,20 @@ public class MainMenuControl implements ActionListener
 	public void actionPerformed(ActionEvent ae)
 	{
 
-
 		// Get the name of the button clicked.
 		String command = ae.getActionCommand();
 
-
-
-		// The Cancel button takes the user back to the initial panel.
+		// Buttons
 		if (command == "Log In")
 		{
+			JTextField fieldUsername = mainMenu.getFieldUsername();
+			JTextField fieldPassword = mainMenu.getFieldPassword();
+			JLabel labelStatusResponse = mainMenu.getLabelStatusResponse();
+			LoginData credentials = new LoginData(fieldUsername.getText(), fieldPassword.getText());
+			//client.sendToServer(credentials);
+
+			labelStatusResponse.setForeground(Color.black);
+			labelStatusResponse.setText("Sent credentials to server. Waiting on response...");
 			System.out.println("Client attempting to log in");
 
 		} 
@@ -54,41 +62,53 @@ public class MainMenuControl implements ActionListener
 		}
 		else if (command == "Connect")
 		{
-			System.out.println("Client attempting to connect to server");
 			/*
 			 * The buttons and text fields should only be enabled 
 			 * once the user is connected to a server. For now, 
 			 * just setting them to enabled when connect is pressed 
 			 * will allow debugging display on other panels
 			 */
+
 			//Get stuff to modify enabled-ness
 			JButton buttonGoToCreateUser = mainMenu.getButtonGoToCreateUser();
 			JButton buttonGoToDeleteUser = mainMenu.getButtonGoToDeleteUser();
 			JTextField fieldUsername = mainMenu.getFieldUsername();
 			JTextField fieldPassword = mainMenu.getFieldPassword();
+			JTextField fieldIPAddress = mainMenu.getFieldIPAddress();
 			JLabel labelStatusResponse = mainMenu.getLabelStatusResponse();
 			//Set them to enabled and editable as appropriate 
 			buttonGoToCreateUser.setEnabled(true);
 			buttonGoToDeleteUser.setEnabled(true);
 			fieldUsername.setEditable(true);
 			fieldPassword.setEditable(true);
-			labelStatusResponse.setText("Connected!");
-			labelStatusResponse.setForeground(Color.GREEN);
+			labelStatusResponse.setForeground(Color.black);
+			labelStatusResponse.setText("Sent connection request. Waiting on response...");
+
+
+			System.out.println("Client attempting to connect to server");
+			//client.openConnection(fieldIPAddress.getText());
 		}
-
-
-		// Have more if-else statements here for every action that happens (buttons, etc).
-
-
 
 	}
 
+
+	/*
+	 * Setters and Getters beyond this point
+	 */
 	public MainMenuPanel getMainMenu() {
 		return mainMenu;
 	}
 
 	public void setMainMenu(MainMenuPanel mainMenu) {
 		this.mainMenu = mainMenu;
+	}
+
+	public BattleshipClient getClient() {
+		return client;
+	}
+
+	public void setClient(BattleshipClient client) {
+		this.client = client;
 	}
 
 }

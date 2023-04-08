@@ -121,7 +121,7 @@ public class CreateUserPanel extends JPanel {
 		//Add the inner buffer to the outer buffer 
 		panelBufferCenter.add(panelBufferCenterCenter, BorderLayout.CENTER);
 		//Add the Log In Button to the center of the screen 
-		
+
 		panelBufferCreateUser.add(buttonCreateUser);
 		panelBufferCenter.add(panelBufferCreateUser, BorderLayout.SOUTH);	
 
@@ -145,15 +145,15 @@ public class CreateUserPanel extends JPanel {
 		panelGeneralBuffer.add(panelBufferCenter, BorderLayout.CENTER);
 		panelGeneralBuffer.add(panelBufferBottom, BorderLayout.SOUTH);
 		this.add(panelGeneralBuffer);
-		
-		
+
+
 		// Show the JPanel.
 		setSize(windowWidth, windowHeight);
 		setVisible(true);
 
 	}
 
-	
+
 	/*
 	 * Setters and Getters beyond this point
 	 */

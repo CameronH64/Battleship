@@ -260,4 +260,44 @@ public class DeleteUserPanel extends JPanel {
 		this.logoLabel = logoLabel;
 	}
 
+
+	public JTextField getFieldUsername() {
+		return fieldUsername;
+	}
+
+
+	public void setFieldUsername(JTextField fieldUsername) {
+		this.fieldUsername = fieldUsername;
+	}
+
+
+	public JTextField getFieldPassword() {
+		return fieldPassword;
+	}
+
+
+	public void setFieldPassword(JTextField fieldPassword) {
+		this.fieldPassword = fieldPassword;
+	}
+
+
+	public JPanel getPanelGeneralBuffer() {
+		return panelGeneralBuffer;
+	}
+
+
+	public void setPanelGeneralBuffer(JPanel panelGeneralBuffer) {
+		this.panelGeneralBuffer = panelGeneralBuffer;
+	}
+
+
+	public JPanel getPanelBufferDeleteUser() {
+		return panelBufferDeleteUser;
+	}
+
+
+	public void setPanelBufferDeleteUser(JPanel panelBufferDeleteUser) {
+		this.panelBufferDeleteUser = panelBufferDeleteUser;
+	}
+
 }

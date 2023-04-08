@@ -58,20 +58,24 @@ public class MainMenuPanel extends JPanel {
 		fieldIPAddress = new JTextField("");
 		fieldUsername = new JTextField("");
 		fieldPassword = new JTextField("");
-		fieldUsername.setEditable(false);
-		fieldPassword.setEditable(false);
 		buttonQuit = new JButton("Quit");
 		buttonQuit.addActionListener(mainMenuControl);
 		buttonGoToCreateUser = new JButton("Create User");
 		buttonGoToCreateUser.addActionListener(mainMenuControl);
-		buttonGoToCreateUser.setEnabled(false);
 		buttonGoToDeleteUser = new JButton("Delete User");
 		buttonGoToDeleteUser.addActionListener(mainMenuControl);
-		buttonGoToDeleteUser.setEnabled(false);
 		buttonConnect = new JButton("Connect");
 		buttonConnect.addActionListener(mainMenuControl);
 		buttonLogIn = new JButton("Log In");
 		buttonLogIn.addActionListener(mainMenuControl);
+
+
+		//Set certain fields to only be accessible once connected to server
+		fieldUsername.setEditable(false);
+		fieldPassword.setEditable(false);
+		buttonGoToCreateUser.setEnabled(false);
+		buttonGoToDeleteUser.setEnabled(false);
+		buttonLogIn.setEnabled(false);
 
 
 		//Make the logo image a swing component 
@@ -130,13 +134,13 @@ public class MainMenuPanel extends JPanel {
 		//Add the Log In Button to the center of the screen 
 		panelBufferLogIn.add(buttonLogIn);
 		panelBufferCenter.add(panelBufferLogIn, BorderLayout.SOUTH);		
-		
-		
+
+
 		//Make bottom buffer panel
 		panelBufferBottom = new JPanel(new BorderLayout());
 		panelBufferBottomButtons = new JPanel(new GridLayout(1,4));
 		panelBufferStatus = new JPanel();
-		
+
 		//Add the buttons at the bottom of the window and status bar
 		panelBufferStatus.add(labelStatusResponse);
 		panelBufferBottom.add(panelBufferStatus, BorderLayout.NORTH);
@@ -144,7 +148,7 @@ public class MainMenuPanel extends JPanel {
 		panelBufferBottomButtons.add(buttonGoToDeleteUser);
 		panelBufferBottomButtons.add(buttonGoToCreateUser);
 		panelBufferBottomButtons.add(buttonConnect);
-		
+
 		//Put the buttons buffer panel on the outer buffer panel
 		panelBufferBottom.add(panelBufferBottomButtons, BorderLayout.SOUTH);
 
@@ -161,7 +165,7 @@ public class MainMenuPanel extends JPanel {
 
 	}
 
-	
+
 	/*
 	 * Setters and Getters beyond this point 
 	 */
