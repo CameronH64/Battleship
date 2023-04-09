@@ -14,7 +14,7 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-public class GameplayControl implements MouseListener
+public class GameplayControl implements ActionListener
 {
 	// Private data fields.
 	private JPanel container;
@@ -34,38 +34,29 @@ public class GameplayControl implements MouseListener
 		
 	}
 	
-	@Override
-	public void mouseClicked(MouseEvent e) {
-		// TODO Auto-generated method stub
+	public void actionPerformed(ActionEvent ae)
+	{
+		
+		
+		// Get the name of the button clicked.
+		String command = ae.getActionCommand();
+		
+		
+		
+		// The Cancel button takes the user back to the initial panel.
+		if (command == "test")
+		{
+			System.out.println("test pressed.");
+			
+		}
+		
+		// Testing code. Use this code to switch to another JPanel. (Make a new JPanel for yourself for testing.
+		
+//		CardLayout cardLayout = (CardLayout)container.getLayout();
+//		cardLayout.show(container, "1");
 
-	}
-
-	@Override
-	public void mousePressed(MouseEvent e) {
-		// TODO Auto-generated method stub
-
-		System.out.println("Mouse Pressed.");
-
-		gameplayCellLabels.get(0);
 		
 	}
 
-	@Override
-	public void mouseReleased(MouseEvent e) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void mouseEntered(MouseEvent e) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void mouseExited(MouseEvent e) {
-		// TODO Auto-generated method stub
-
-	}
 
 }
