@@ -9,30 +9,26 @@ import dataclasses.ShotFiredData;
 import gameplaypanel.GameplayPanel;
 
 import java.awt.CardLayout;
+import java.awt.Color;
 import java.awt.event.*;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-public class GameplayControl implements MouseListener
+public class CellLabelControl implements MouseListener
 {
 	// Private data fields.
-	private JPanel container;
-	private BattleshipClient battleshipClient;
-	private ArrayList<CellLabel> gameplayCellLabels;
+	private CellLabel cellLabel;
+
+	
 	
 	// This constructor connects the outside components so that the control panel can affect things.
-	public GameplayControl(JPanel container, BattleshipClient battleshipClient)
+	public CellLabelControl(CellLabel cellLabel)
 	{
-		this.container = container;
-		this.battleshipClient = battleshipClient;
+		this.cellLabel = cellLabel;
 	}
 	
-	public void setCellLabels(ArrayList<CellLabel> gameplayCellLabels) {
-		
-		this.gameplayCellLabels = gameplayCellLabels;
-		
-	}
+	
 	
 	@Override
 	public void mouseClicked(MouseEvent e) {
@@ -45,8 +41,8 @@ public class GameplayControl implements MouseListener
 		// TODO Auto-generated method stub
 
 		System.out.println("Mouse Pressed.");
-
-		gameplayCellLabels.get(0);
+		
+		cellLabel.setBackground(Color.RED);
 		
 	}
 

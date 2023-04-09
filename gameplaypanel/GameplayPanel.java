@@ -6,6 +6,7 @@ import javax.swing.border.MatteBorder;
 import client.BattleshipClient;
 import dataclasses.CellButton;
 import dataclasses.CellLabel;
+import gameplaycontrol.CellLabelControl;
 import gameplaycontrol.GameplayControl;
 
 import java.awt.*;
@@ -17,13 +18,17 @@ public class GameplayPanel extends JPanel {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private int[][] grid;
-	private CellLabel[][] labels;
 
 	// Private Data Fields and JComponents.
 	// Generally, it's better to have these explicitly declared here so that it's easier to debug the code.
 	
 	private ArrayList<CellLabel> gameplayCellLabels;
+	
+	public void getTest() {
+		
+		System.out.println("test");
+		
+	}
 	
 	// Constructor
 	public GameplayPanel(GameplayControl gameplayControl){
@@ -32,8 +37,6 @@ public class GameplayPanel extends JPanel {
 		
 		// create the game board UI
 		JPanel gameBoard = new JPanel(new GridLayout(10, 10));
-		
-		labels = new CellLabel[10][10];
 		
 		int count = 0;
 		
@@ -52,7 +55,8 @@ public class GameplayPanel extends JPanel {
 				int fontSize = 20; // set the font size to 20
 				cellLabel.setFont(new Font(font.getName(), Font.PLAIN, fontSize));
 
-				cellLabel.addMouseListener(gameplayControl);
+				cellLabel.addMouseListener(new CellLabelControl(cellLabel));
+//				cellLabel.addMouseListener(gameplayControl);
 				
 				gameBoard.add(cellLabel);
 //				gameplayCellLabels.add(cellLabel);
