@@ -45,10 +45,9 @@ public class CellLabelControl implements MouseListener
 		System.out.println("Position: " + cellLabel.getPosition());
 		
 		// Remove the mouse listener so that the user can't press the same cell twice.
-		// This also double has turn checking!
 		cellLabel.removeMouseListener(this);
 		
-		
+		cellLabel.getShipCharacter();
 		
 	}
 

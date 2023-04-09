@@ -10,6 +10,7 @@ public class CellLabel extends JLabel {
 	public CellLabel(int position) {
 		
 		this.position = position;
+		shipCharacter = "";
 		
 	}
 

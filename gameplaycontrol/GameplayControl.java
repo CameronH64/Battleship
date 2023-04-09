@@ -34,6 +34,24 @@ public class GameplayControl implements ActionListener
 		
 	}
 	
+	
+	
+	public JPanel getContainer() {
+		return container;
+	}
+
+	public void setContainer(JPanel container) {
+		this.container = container;
+	}
+
+	public BattleshipClient getBattleshipClient() {
+		return battleshipClient;
+	}
+
+	public void setBattleshipClient(BattleshipClient battleshipClient) {
+		this.battleshipClient = battleshipClient;
+	}
+
 	public void actionPerformed(ActionEvent ae)
 	{
 		
@@ -44,9 +62,18 @@ public class GameplayControl implements ActionListener
 		
 		
 		// The Cancel button takes the user back to the initial panel.
-		if (command == "test")
+		if (command == "Connect")
 		{
-			System.out.println("test pressed.");
+			System.out.println("Client-side: Connect pressed.");
+			
+			battleshipClient.setPort(8300);
+			
+			try {
+				battleshipClient.openConnection();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			
 		}
 		

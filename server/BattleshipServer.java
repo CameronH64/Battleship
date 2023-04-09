@@ -25,6 +25,8 @@ public class BattleshipServer extends AbstractServer
 	private ArrayList<String> player1Reference;
 	private ArrayList<String> player2Reference;
 	
+	
+	
 	private boolean player1Win;
 	private boolean player2Win;
 	
@@ -35,11 +37,61 @@ public class BattleshipServer extends AbstractServer
 		
 		player1Reference = new ArrayList<String>();
 		player2Reference = new ArrayList<String>();
+				
 		player1Win = false;
 		player2Win = false;
-			
+				
 	}
+	
+	public void testingSetUp() {
+		
+		String player1FleetArray[][] = {{"0","C","C","C","C","C","0","0","0","0"},
+				{"0","0","0","P","P","0","0","0","0","0"},
+				{"0","0","0","0","0","0","0","0","0","0"},
+				{"0","0","0","0","B","B","B","B","0","0"},
+				{"0","0","0","0","0","0","0","0","0","0"},
+				{"0","0","0","0","0","0","0","0","0","0"},
+				{"0","0","0","0","D","0","S","0","0","0"},
+				{"0","0","0","0","D","0","S","0","0","0"},
+				{"0","0","0","0","D","0","S","0","0","0"},
+				{"0","0","0","0","0","0","0","0","0","0"}};
+		
+		ArrayList<String> player1FlatFleet = new ArrayList<String>();
 
+		// First, flatten the array into a 1D array.
+		for(int i = 0; i < 10; i++) {				// Check each row.
+			for(int j = 0; j < 10; j++) {			// Check each column.
+				player1FlatFleet.add(player1FleetArray[i][j]);
+			}
+		}
+		
+		// Now have a flat fleet for player 1.
+
+		String player2FleetArray[][] = {{"0","C","C","C","C","C","0","0","0","0"},
+				{"0","0","0","P","P","0","0","0","0","0"},
+				{"0","0","0","0","0","0","0","0","0","0"},
+				{"0","0","0","0","B","B","B","B","0","0"},
+				{"0","0","0","0","0","0","0","0","0","0"},
+				{"0","0","0","0","0","0","0","0","0","0"},
+				{"0","0","0","0","D","0","S","0","0","0"},
+				{"0","0","0","0","D","0","S","0","0","0"},
+				{"0","0","0","0","D","0","S","0","0","0"},
+				{"0","0","0","0","0","0","0","0","0","0"}};
+		
+		ArrayList<String> player2FlatFleet = new ArrayList<String>();
+
+		// First, flatten the array into a 1D array.
+		for(int i = 0; i < 10; i++) {				// Check each row.
+			for(int j = 0; j < 10; j++) {			// Check each column.
+				player2FlatFleet.add(player2FleetArray[i][j]);
+			}
+		}
+		
+		// Now have a flat fleet for player 2.
+		
+		
+	}
+	
 	public BattleshipServer(int port)
 	{
 		super(port);
@@ -209,6 +261,8 @@ public class BattleshipServer extends AbstractServer
 	protected void clientDisconnected(ConnectionToClient client) {
 		
 		// This is run when a the server disconnects a client.
+		
+		log.append(client + ": disconnected.");
 		
 	}
 	

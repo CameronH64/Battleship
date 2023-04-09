@@ -22,22 +22,27 @@ public class GameplayPanel extends JPanel {
 	// Private Data Fields and JComponents.
 	// Generally, it's better to have these explicitly declared here so that it's easier to debug the code.
 	
+	private JButton connectButton;
 	private ArrayList<CellLabel> gameplayCellLabels;
-		
+	
 	// Constructor
 	public GameplayPanel(GameplayControl gameplayControl){
 		
+		connectButton = new JButton("Connect");
+		connectButton.addActionListener(gameplayControl);
 		
-		
-		// create the game board UI
+		// Create the gameboard, a 10x10 GridLayout JPanel
 		JPanel gameBoard = new JPanel(new GridLayout(10, 10));
 		
+		// Incrementing for placing each CellLabel in place.
 		int count = 0;
 		
+		// For each cell in the GridLayout, place a CellLabel in it.
 		for (int row = 0; row < 10; row++) {
 			for (int col = 0; col < 10; col++) {
 				
 				CellLabel cellLabel = new CellLabel(count);
+				
 				cellLabel.setOpaque(true);
 				cellLabel.setPreferredSize(new Dimension(40, 40));
 				cellLabel.setBackground(Color.BLUE);
@@ -48,17 +53,21 @@ public class GameplayPanel extends JPanel {
 				Font font = cellLabel.getFont();
 				int fontSize = 20; // set the font size to 20
 				cellLabel.setFont(new Font(font.getName(), Font.PLAIN, fontSize));
-
+				
+				// Add the MouseListener to cellLabel so it will be able to do stuff.
 				cellLabel.addMouseListener(new CellLabelControl(cellLabel));
 				
+				// Add the cellLabel to the gameboard, the 10x10 GridLayout
 				gameBoard.add(cellLabel);
 				
-				count++;
+				count++;	// Increment the count so that the next CellLabel will have the correct position.
 				
 			}
 		}
 
-
+		
+		// Add the components to the GameplayPanel
+		add(connectButton);
 		add(gameBoard);		
 		
 		
