@@ -21,9 +21,10 @@ public class BattleshipServer extends AbstractServer
 {
 	private JTextArea log;
 	private JLabel status;
+
+	private ArrayList<String> player1Reference;
+	private ArrayList<String> player2Reference;
 	
-	private ArrayList<String> player1Ships;
-	private ArrayList<String> player2Ships;
 	private boolean player1Win;
 	private boolean player2Win;
 	
@@ -32,8 +33,8 @@ public class BattleshipServer extends AbstractServer
 	{
 		super(8300);
 		
-		player1Ships = new ArrayList<String>();
-		player2Ships = new ArrayList<String>();
+		player1Reference = new ArrayList<String>();
+		player2Reference = new ArrayList<String>();
 		player1Win = false;
 		player2Win = false;
 			
@@ -99,8 +100,21 @@ public class BattleshipServer extends AbstractServer
 	// More game logic methods go here.
 	
 	
+	// Check if only 2 clients are connected.
+	// Show when they connect on the BattleshipServerGUI.
+	// Use an array or something for logic checking.
+	// When two clients connected and on the gameplay screen, randomize first move.
+	// If a user exits mid-game, run code to show the winner on the other screen.
 	
 	
+	// Check if a hit.
+	// Compare the reference ArrayList<CellLabel> to gameplay ArrayList for both players.
+	
+	// Check if a ship is sunk
+	// Count how many of a certain ship letter there is.
+	
+	// Check if a whole fleet is sunk
+	// Count how many ship letters there are (17 means sunk).
 	
 	
 	

@@ -18,8 +18,9 @@ import java.util.ArrayList;
 public class CellLabelControl implements MouseListener
 {
 	// Private data fields.
+	private JPanel container;
+	private BattleshipClient battleshipClient;
 	private CellLabel cellLabel;
-
 	
 	
 	// This constructor connects the outside components so that the control panel can affect things.
@@ -46,6 +47,8 @@ public class CellLabelControl implements MouseListener
 		// Remove the mouse listener so that the user can't press the same cell twice.
 		// This also double has turn checking!
 		cellLabel.removeMouseListener(this);
+		
+		
 		
 	}
 

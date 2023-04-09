@@ -23,13 +23,7 @@ public class GameplayPanel extends JPanel {
 	// Generally, it's better to have these explicitly declared here so that it's easier to debug the code.
 	
 	private ArrayList<CellLabel> gameplayCellLabels;
-	
-	public void getTest() {
 		
-		System.out.println("test");
-		
-	}
-	
 	// Constructor
 	public GameplayPanel(GameplayControl gameplayControl){
 		
@@ -56,10 +50,8 @@ public class GameplayPanel extends JPanel {
 				cellLabel.setFont(new Font(font.getName(), Font.PLAIN, fontSize));
 
 				cellLabel.addMouseListener(new CellLabelControl(cellLabel));
-//				cellLabel.addMouseListener(gameplayControl);
 				
 				gameBoard.add(cellLabel);
-//				gameplayCellLabels.add(cellLabel);
 				
 				count++;
 				
