@@ -39,10 +39,13 @@ public class CellLabelControl implements MouseListener
 	@Override
 	public void mousePressed(MouseEvent e) {
 		// TODO Auto-generated method stub
-
-		System.out.println("Mouse Pressed.");
 		
 		cellLabel.setBackground(Color.RED);
+		System.out.println("Position: " + cellLabel.getPosition());
+		
+		// Remove the mouse listener so that the user can't press the same cell twice.
+		// This also double has turn checking!
+		cellLabel.removeMouseListener(this);
 		
 	}
 

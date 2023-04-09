@@ -45,8 +45,8 @@ public class GameplayPanel extends JPanel {
 				
 				CellLabel cellLabel = new CellLabel(count);
 				cellLabel.setOpaque(true);
-				cellLabel.setPreferredSize(new Dimension(30, 30));
-				cellLabel.setBackground(Color.WHITE);
+				cellLabel.setPreferredSize(new Dimension(40, 40));
+				cellLabel.setBackground(Color.BLUE);
 				cellLabel.setBorder(new MatteBorder(1, 1, (row == 9 ? 1 : 0), (col == 9 ? 1 : 0), Color.BLACK));
 				
 				cellLabel.setVerticalAlignment(CellLabel.CENTER);
@@ -67,32 +67,7 @@ public class GameplayPanel extends JPanel {
 		}
 
 
-		add(gameBoard);
-		
-		
-//		setLayout(new GridLayout(10, 10));
-//		
-//		int count = 0;
-//		
-//		for(int row = 0; row < 10; row++) {
-//			for(int col = 0; col < 10; col++) {
-//				
-//				CellLabel button = new CellLabel(count);
-//				JPanel panel = new JPanel();
-//				
-//				
-//				
-//				// Add the CellButton to the JPanel in the GridLayout
-//				gameplayCellLabels.add(button);				
-//				
-//				
-//				
-//				count++;
-//				
-//			}
-//			
-//		}
-		
+		add(gameBoard);		
 		
 		
 		
