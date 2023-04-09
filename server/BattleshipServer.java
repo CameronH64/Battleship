@@ -82,13 +82,6 @@ public class BattleshipServer extends AbstractServer
 			
 		} else if (arg0 instanceof ShotFiredData) {
 			
-			int x = ((ShotFiredData) arg0).getX();
-			int y = ((ShotFiredData) arg0).getY();
-			
-			System.out.print(x);
-			System.out.print(" ");
-			System.out.println(y);
-			
 			System.out.println("Server-side: Received a ShotFiredData object!");
 //			System.out.println(x);
 //			System.out.println(y);
