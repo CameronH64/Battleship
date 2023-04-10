@@ -62,22 +62,33 @@ public class GameplayControl implements ActionListener
 		
 		
 		// The Cancel button takes the user back to the initial panel.
-		if (command == "Connect")
+		if (command == "New Game")
 		{
-			System.out.println("Client-side: Connect pressed.");
+			System.out.println("Client-side: New Game pressed.");
 			
-			battleshipClient.setPort(8300);
 			
-			try {
-				battleshipClient.openConnection();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			
+		} else if (command == "Quit") {
+			
+			System.out.println("Client-side: Quit pressed.");
+			
+			GameplayPanel panel = (GameplayPanel)container.getComponent(1);
+			JButton temp = panel.getNewGameButton();
+			
+			temp.setVisible(true);
+			
 			
 		}
 		
 		// Testing code. Use this code to switch to another JPanel. (Make a new JPanel for yourself for testing.
+
+		// Can set the New Game button to be visible!
+		
+//		GameplayPanel panel = (GameplayPanel)container.getComponent(1);
+//		JButton temp = panel.getNewGameButton();
+//		
+//		temp.setVisible(true);
+
 		
 //		CardLayout cardLayout = (CardLayout)container.getLayout();
 //		cardLayout.show(container, "1");

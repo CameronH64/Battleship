@@ -13,7 +13,7 @@ import java.awt.*;
 import java.util.ArrayList;
 
 public class GameplayPanel extends JPanel {
-	
+
 	/**
 	 * 
 	 */
@@ -21,85 +21,185 @@ public class GameplayPanel extends JPanel {
 
 	// Private Data Fields and JComponents.
 	// Generally, it's better to have these explicitly declared here so that it's easier to debug the code.
-	
+
 	private ArrayList<CellLabel> gameplayCellLabels;
+	JButton newGameButton;
 	
 	// Constructor
 	public GameplayPanel(GameplayControl gameplayControl){
-		
-		
-		// Initialize the primary BorderLayouts.
-		setLayout(new BorderLayout());
+
+
+		// Initialize the primary BorderLayouts and place them, ready for adding stuff into them.
+		JPanel bufferBorderLayout = new JPanel(new BorderLayout());
+
 		JPanel northBorderLayout = new JPanel(new BorderLayout());
 		JPanel centerBorderLayout = new JPanel(new BorderLayout());
+		JPanel southBorderLayout = new JPanel(new BorderLayout());
+
+		bufferBorderLayout.add(northBorderLayout, BorderLayout.NORTH);
+		bufferBorderLayout.add(centerBorderLayout, BorderLayout.CENTER);
+		bufferBorderLayout.add(southBorderLayout, BorderLayout.SOUTH);
+
+
+
+		// 1. North Game Section
+		JLabel targetGridLabel = new JLabel("Firing Grid");
+		targetGridLabel.setHorizontalAlignment(JLabel.CENTER);
+		JPanel targetGrid = createTargetGrid();
+
+		northBorderLayout.add(targetGridLabel, BorderLayout.NORTH);
+		northBorderLayout.add(targetGrid, BorderLayout.CENTER);
+
+
+
+		// 2. Center Game Section
+
+		// Declare panels
+		JPanel northPanel = new JPanel();
+		JPanel centerPanel = new JPanel();
+		JPanel southPanel = new JPanel();
+
+		// North panel
+		JLabel youLabel = new JLabel("You: ");
+		JLabel winLoseLabel = new JLabel("temp");
+		JLabel opponentLabel = new JLabel("Opponent: ");
+		northPanel.add(youLabel);
+		northPanel.add(winLoseLabel);
+		northPanel.add(opponentLabel);
+
+		// Center panel
+		JLabel errorMessageLabel = new JLabel("temp");
+		centerPanel.add(errorMessageLabel);
+
+		// South panel
+		newGameButton = new JButton("New Game");
+		newGameButton.addActionListener(gameplayControl);
+		newGameButton.setVisible(false);
+		JButton quitButton = new JButton("Quit");
+		quitButton.addActionListener(gameplayControl);
+		southPanel.add(newGameButton);
+		southPanel.add(quitButton);
+
+		centerBorderLayout.add(northPanel, BorderLayout.NORTH);
+		centerBorderLayout.add(centerPanel, BorderLayout.CENTER);
+		centerBorderLayout.add(southPanel, BorderLayout.SOUTH);
+
+
+
+		// 3. South Game Section
+		JLabel oceanGridLabel = new JLabel("Ocean Grid");
+		oceanGridLabel.setHorizontalAlignment(JLabel.CENTER);
+		JPanel oceanGrid = createOceanGrid();
+
+		southBorderLayout.add(oceanGridLabel, BorderLayout.NORTH);
+		southBorderLayout.add(oceanGrid, BorderLayout.CENTER);
+
+
+
+
+		// Finally, add the buffer BorderLayout
+		add(bufferBorderLayout);
+
+		setSize(500, 500);
+		setVisible(true);
+
+	}
+
+
+	public JButton getNewGameButton() {
 		
-		add(northBorderLayout, BorderLayout.NORTH);
-		add(centerBorderLayout, BorderLayout.CENTER);
+		return newGameButton;
 		
-		
-		
-		// Make the north BorderLayout panels.
-		JLabel firingGridLabel = new JLabel("Firing Grid");
-		
+	}
+
+	private JPanel createTargetGrid() {
+
+		// Variables
+		Color gridColor = new Color(0, 0, 220);
+		int cellSize = 36;
+
+
+
 		// Create the gameboard, a 10x10 GridLayout JPanel
 		JPanel gameBoard = new JPanel(new GridLayout(10, 10));
-		
+		//		gameBoard.setPreferredSize(new Dimension(200, 200));
+
 		// Incrementing for placing each CellLabel in place.
 		int count = 0;
-		
+
 		// For each cell in the GridLayout, place a CellLabel in it.
 		for (int row = 0; row < 10; row++) {
 			for (int col = 0; col < 10; col++) {
-				
+
 				CellLabel cellLabel = new CellLabel(count);
-				
+
 				cellLabel.setOpaque(true);
-				cellLabel.setPreferredSize(new Dimension(40, 40));
-				cellLabel.setBackground(Color.BLUE);
+				cellLabel.setPreferredSize(new Dimension(cellSize, cellSize));
+				cellLabel.setBackground(gridColor);
 				cellLabel.setBorder(new MatteBorder(1, 1, (row == 9 ? 1 : 0), (col == 9 ? 1 : 0), Color.BLACK));
-				
+
 				cellLabel.setVerticalAlignment(CellLabel.CENTER);
 				cellLabel.setHorizontalAlignment(CellLabel.CENTER);
 				Font font = cellLabel.getFont();
 				int fontSize = 20; // set the font size to 20
 				cellLabel.setFont(new Font(font.getName(), Font.PLAIN, fontSize));
-				
+
 				// Add the MouseListener to cellLabel so it will be able to do stuff.
 				cellLabel.addMouseListener(new CellLabelControl(cellLabel));
-				
+
 				// Add the cellLabel to the gameboard, the 10x10 GridLayout
 				gameBoard.add(cellLabel);
-				
+
 				count++;	// Increment the count so that the next CellLabel will have the correct position.
-				
+
 			}
 		}
-		
-		JPanel firingGridPanel = new JPanel(new GridLayout(2, 2));		// (Can also have spacing between)
-		
-		firingGridPanel.add(new JLabel());								// Add nothing
-		
-		JLabel numberRow = new JLabel("1 2 3 4 5 6 7 8 9 10");
-		numberRow.setSize(new Dimension(10, 10));
-		firingGridPanel.add(numberRow);		// Add the top numbers
-		
-		
-		firingGridPanel.add(new JLabel("A\nB\nC\nD\nE\nF\nG\nH\nI\nJ"));
-		
-		firingGridPanel.add(gameBoard);
-		
-		
-		
-		
-		// Add the components to the GameplayPanel
-		add(firingGridPanel);		
-		
-		
-		
-		// Show the JPanel.
-		setSize(1000, 500);
-		setVisible(true);
-		
+		return gameBoard;
 	}
-	
+
+
+	private JPanel createOceanGrid() {
+		
+		// Variables
+		Color gridColor = new Color(0, 0, 220);
+		int cellSize = 36;
+		
+
+		// Create the gameboard, a 10x10 GridLayout JPanel
+		JPanel gameBoard = new JPanel(new GridLayout(10, 10));
+		//		gameBoard.setPreferredSize(new Dimension(200, 200));
+
+		// Incrementing for placing each CellLabel in place.
+		int count = 0;
+
+		// For each cell in the GridLayout, place a CellLabel in it.
+		for (int row = 0; row < 10; row++) {
+			for (int col = 0; col < 10; col++) {
+
+				CellLabel cellLabel = new CellLabel(count);
+
+				cellLabel.setOpaque(true);
+				cellLabel.setPreferredSize(new Dimension(cellSize, cellSize));
+				cellLabel.setBackground(gridColor);
+				cellLabel.setBorder(new MatteBorder(1, 1, (row == 9 ? 1 : 0), (col == 9 ? 1 : 0), Color.BLACK));
+
+				cellLabel.setVerticalAlignment(CellLabel.CENTER);
+				cellLabel.setHorizontalAlignment(CellLabel.CENTER);
+				Font font = cellLabel.getFont();
+				int fontSize = 20; // set the font size to 20
+				cellLabel.setFont(new Font(font.getName(), Font.PLAIN, fontSize));
+
+				// Add the MouseListener to cellLabel so it will be able to do stuff.
+//				cellLabel.addMouseListener(new CellLabelControl(cellLabel));		// Commented out because this grid isn't touched by the user.
+
+				// Add the cellLabel to the gameboard, the 10x10 GridLayout
+				gameBoard.add(cellLabel);
+
+				count++;	// Increment the count so that the next CellLabel will have the correct position.
+
+			}
+		}
+		return gameBoard;
+	}
+
 }
