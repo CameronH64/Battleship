@@ -7,7 +7,9 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import gameplaypanel.GameplayPanel;
+import gameplaypanel.TestingPanelSwitchPanel;
 import gameplaycontrol.GameplayControl;
+import gameplaycontrol.TestingPanelSwitchControl;
 
 public class BattleshipClientGUI extends JFrame {
 
@@ -34,11 +36,20 @@ public class BattleshipClientGUI extends JFrame {
 		
 		
 		
+		// Testing
+		TestingPanelSwitchControl testingPanelSwitchControl= new TestingPanelSwitchControl(buffer, battleshipClient);
+		TestingPanelSwitchPanel testingPanelSwitchPanel = new TestingPanelSwitchPanel(testingPanelSwitchControl);
+		
+		
+		
+		
+		
 		// This will be extended to include all of the JPanels.
 		GameplayControl gameplayControl = new GameplayControl(buffer, battleshipClient);
 		GameplayPanel gameplayPanel = new GameplayPanel(gameplayControl);
 		
 		// Add the panels to CardLayout
+		buffer.add(testingPanelSwitchPanel, "1");
 		buffer.add(gameplayPanel, "6");
 		
 		
@@ -52,7 +63,7 @@ public class BattleshipClientGUI extends JFrame {
 		this.setResizable(true);
 		
 		// Kick off the GUI with the first JPanel.
-		cardLayout.show(buffer, "6");
+		cardLayout.show(buffer, "1");
 		
 	}
 	

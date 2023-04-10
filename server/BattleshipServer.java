@@ -40,7 +40,7 @@ public class BattleshipServer extends AbstractServer
 				
 		player1Win = false;
 		player2Win = false;
-				
+		
 	}
 	
 	public void testingSetUp() {

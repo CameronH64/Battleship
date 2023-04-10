@@ -22,14 +22,24 @@ public class GameplayPanel extends JPanel {
 	// Private Data Fields and JComponents.
 	// Generally, it's better to have these explicitly declared here so that it's easier to debug the code.
 	
-	private JButton connectButton;
 	private ArrayList<CellLabel> gameplayCellLabels;
 	
 	// Constructor
 	public GameplayPanel(GameplayControl gameplayControl){
 		
-		connectButton = new JButton("Connect");
-		connectButton.addActionListener(gameplayControl);
+		
+		// Initialize the primary BorderLayouts.
+		setLayout(new BorderLayout());
+		JPanel northBorderLayout = new JPanel(new BorderLayout());
+		JPanel centerBorderLayout = new JPanel(new BorderLayout());
+		
+		add(northBorderLayout, BorderLayout.NORTH);
+		add(centerBorderLayout, BorderLayout.CENTER);
+		
+		
+		
+		// Make the north BorderLayout panels.
+		JLabel firingGridLabel = new JLabel("Firing Grid");
 		
 		// Create the gameboard, a 10x10 GridLayout JPanel
 		JPanel gameBoard = new JPanel(new GridLayout(10, 10));
@@ -64,16 +74,30 @@ public class GameplayPanel extends JPanel {
 				
 			}
 		}
-
+		
+		JPanel firingGridPanel = new JPanel(new GridLayout(2, 2));		// (Can also have spacing between)
+		
+		firingGridPanel.add(new JLabel());								// Add nothing
+		
+		JLabel numberRow = new JLabel("1 2 3 4 5 6 7 8 9 10");
+		numberRow.setSize(new Dimension(10, 10));
+		firingGridPanel.add(numberRow);		// Add the top numbers
+		
+		
+		firingGridPanel.add(new JLabel("A\nB\nC\nD\nE\nF\nG\nH\nI\nJ"));
+		
+		firingGridPanel.add(gameBoard);
+		
+		
+		
 		
 		// Add the components to the GameplayPanel
-		add(connectButton);
-		add(gameBoard);		
+		add(firingGridPanel);		
 		
 		
 		
 		// Show the JPanel.
-		setSize(500, 500);
+		setSize(1000, 500);
 		setVisible(true);
 		
 	}
