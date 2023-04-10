@@ -4,6 +4,7 @@ import javax.swing.*;
 
 import client.BattleshipClient;
 import dataclasses.CellLabel;
+import dataclasses.ClientNumberRequest;
 import dataclasses.LoginData;
 import dataclasses.ShotFiredData;
 import gameplaypanel.GameplayPanel;
@@ -38,9 +39,31 @@ public class TestingPanelSwitchControl implements ActionListener
 		
 		
 		
-		// The Cancel button takes the user back to the initial panel.
-		if (command == "Switch")
-		{
+		if (command == "Connect") {
+			
+//			ClientNumberRequest request = new ClientNumberRequest();
+//			
+//			try {
+//				battleshipClient.sendToServer(request);
+//			} catch (IOException e1) {
+//				// TODO Auto-generated catch block
+//				e1.printStackTrace();
+//			}
+			
+			
+			
+			battleshipClient.setPort(8300);
+			
+			try {
+				battleshipClient.openConnection();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+						
+		} else if (command == "Switch") {
+			
 			System.out.println("Switching panels...");
 			
 			CardLayout cardLayout = (CardLayout)container.getLayout();

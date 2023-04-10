@@ -43,11 +43,6 @@ public class BattleshipClientGUI extends JFrame {
 		TestingPanelSwitchControl testingPanelSwitchControl= new TestingPanelSwitchControl(buffer, battleshipClient);
 		TestingPanelSwitchPanel testingPanelSwitchPanel = new TestingPanelSwitchPanel(testingPanelSwitchControl);
 		
-		
-		
-		
-		
-		// This will be extended to include all of the JPanels.
 		GameplayControl gameplayControl = new GameplayControl(buffer, battleshipClient);
 		GameplayPanel gameplayPanel = new GameplayPanel(gameplayControl);
 		
