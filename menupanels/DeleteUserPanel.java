@@ -126,7 +126,7 @@ public class DeleteUserPanel extends JPanel {
 		panelBufferStatus.add(labelStatusResponse);
 		panelBufferBottom.add(panelBufferStatus, BorderLayout.NORTH);
 		panelBufferBottomButtons.add(buttonQuit);
-
+		panelBufferBottomButtons.add(buttonMainMenu);
 		//Put the buttons buffer panel on the outer buffer panel
 		panelBufferBottom.add(panelBufferBottomButtons, BorderLayout.SOUTH);
 
