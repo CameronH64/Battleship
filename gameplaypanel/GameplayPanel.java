@@ -24,7 +24,7 @@ public class GameplayPanel extends JPanel {
 
 	private ArrayList<CellLabel> gameplayCellLabels;
 	JButton newGameButton;
-	
+
 	// Constructor
 	public GameplayPanel(GameplayControl gameplayControl){
 
@@ -43,16 +43,27 @@ public class GameplayPanel extends JPanel {
 
 
 		// 1. North Game Section
-		JLabel targetGridLabel = new JLabel("Firing Grid");
+		JLabel targetGridLabel = new JLabel("Targeting Grid");
 		targetGridLabel.setHorizontalAlignment(JLabel.CENTER);
 		JPanel targetGrid = createTargetGrid();
 
-		northBorderLayout.add(targetGridLabel, BorderLayout.NORTH);
-		northBorderLayout.add(targetGrid, BorderLayout.CENTER);
+		northBorderLayout.add(targetGrid, BorderLayout.NORTH);
+		northBorderLayout.add(targetGridLabel, BorderLayout.CENTER);
 
 
 
 		// 2. Center Game Section
+
+		JLabel oceanGridLabel = new JLabel("Ocean Grid");
+		oceanGridLabel.setHorizontalAlignment(JLabel.CENTER);
+		JPanel oceanGrid = createOceanGrid();
+
+		centerBorderLayout.add(oceanGridLabel, BorderLayout.NORTH);
+		centerBorderLayout.add(oceanGrid, BorderLayout.CENTER);
+
+
+
+		// 3. South Game Section
 
 		// Declare panels
 		JPanel northPanel = new JPanel();
@@ -68,7 +79,7 @@ public class GameplayPanel extends JPanel {
 		northPanel.add(opponentLabel);
 
 		// Center panel
-		JLabel errorMessageLabel = new JLabel("temp");
+		JLabel errorMessageLabel = new JLabel("Messages: ");
 		centerPanel.add(errorMessageLabel);
 
 		// South panel
@@ -80,20 +91,9 @@ public class GameplayPanel extends JPanel {
 		southPanel.add(newGameButton);
 		southPanel.add(quitButton);
 
-		centerBorderLayout.add(northPanel, BorderLayout.NORTH);
-		centerBorderLayout.add(centerPanel, BorderLayout.CENTER);
-		centerBorderLayout.add(southPanel, BorderLayout.SOUTH);
-
-
-
-		// 3. South Game Section
-		JLabel oceanGridLabel = new JLabel("Ocean Grid");
-		oceanGridLabel.setHorizontalAlignment(JLabel.CENTER);
-		JPanel oceanGrid = createOceanGrid();
-
-		southBorderLayout.add(oceanGridLabel, BorderLayout.NORTH);
-		southBorderLayout.add(oceanGrid, BorderLayout.CENTER);
-
+		southBorderLayout.add(northPanel, BorderLayout.NORTH);
+		southBorderLayout.add(centerPanel, BorderLayout.CENTER);
+		southBorderLayout.add(southPanel, BorderLayout.SOUTH);
 
 
 
@@ -107,9 +107,9 @@ public class GameplayPanel extends JPanel {
 
 
 	public JButton getNewGameButton() {
-		
+
 		return newGameButton;
-		
+
 	}
 
 	private JPanel createTargetGrid() {
@@ -159,11 +159,11 @@ public class GameplayPanel extends JPanel {
 
 
 	private JPanel createOceanGrid() {
-		
+
 		// Variables
 		Color gridColor = new Color(0, 0, 220);
 		int cellSize = 32;
-		
+
 
 		// Create the gameboard, a 10x10 GridLayout JPanel
 		JPanel gameBoard = new JPanel(new GridLayout(10, 10));
@@ -190,7 +190,7 @@ public class GameplayPanel extends JPanel {
 				cellLabel.setFont(new Font(font.getName(), Font.PLAIN, fontSize));
 
 				// Add the MouseListener to cellLabel so it will be able to do stuff.
-//				cellLabel.addMouseListener(new CellLabelControl(cellLabel));		// Commented out because this grid isn't touched by the user.
+				//				cellLabel.addMouseListener(new CellLabelControl(cellLabel));		// Commented out because this grid isn't touched by the user.
 
 				// Add the cellLabel to the gameboard, the 10x10 GridLayout
 				gameBoard.add(cellLabel);
