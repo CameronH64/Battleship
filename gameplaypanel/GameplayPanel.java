@@ -116,7 +116,7 @@ public class GameplayPanel extends JPanel {
 
 		// Variables
 		Color gridColor = new Color(0, 0, 220);
-		int cellSize = 36;
+		int cellSize = 32;
 
 
 
@@ -162,7 +162,7 @@ public class GameplayPanel extends JPanel {
 		
 		// Variables
 		Color gridColor = new Color(0, 0, 220);
-		int cellSize = 36;
+		int cellSize = 32;
 		
 
 		// Create the gameboard, a 10x10 GridLayout JPanel

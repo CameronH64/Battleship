@@ -40,8 +40,8 @@ public class BattleshipClientGUI extends JFrame {
 		
 		
 		// 1. Instantiate the Panel/Control pairs (six total).
-		TestingPanelSwitchControl testingPanelSwitchControl= new TestingPanelSwitchControl(buffer, battleshipClient);
-		TestingPanelSwitchPanel testingPanelSwitchPanel = new TestingPanelSwitchPanel(testingPanelSwitchControl);
+//		TestingPanelSwitchControl testingPanelSwitchControl= new TestingPanelSwitchControl(buffer, battleshipClient);
+//		TestingPanelSwitchPanel testingPanelSwitchPanel = new TestingPanelSwitchPanel(testingPanelSwitchControl);
 		
 		GameplayControl gameplayControl = new GameplayControl(buffer, battleshipClient);
 		GameplayPanel gameplayPanel = new GameplayPanel(gameplayControl);
@@ -49,7 +49,7 @@ public class BattleshipClientGUI extends JFrame {
 		
 		
 		// 2. Add the panels to cardLayout (six total).
-		buffer.add(testingPanelSwitchPanel, "1");
+//		buffer.add(testingPanelSwitchPanel, "1");
 		buffer.add(gameplayPanel, "6");
 		
 		
@@ -64,7 +64,7 @@ public class BattleshipClientGUI extends JFrame {
 		setResizable(true);
 		
 		// Kick off the GUI with the first JPanel.
-		cardLayout.show(buffer, "1");
+		cardLayout.show(buffer, "6");
 		
 	}
 	

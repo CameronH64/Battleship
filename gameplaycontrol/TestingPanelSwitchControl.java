@@ -4,7 +4,6 @@ import javax.swing.*;
 
 import client.BattleshipClient;
 import dataclasses.CellLabel;
-import dataclasses.ClientNumberRequest;
 import dataclasses.LoginData;
 import dataclasses.ShotFiredData;
 import gameplaypanel.GameplayPanel;
