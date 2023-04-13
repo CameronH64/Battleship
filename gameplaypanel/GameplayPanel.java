@@ -86,11 +86,17 @@ public class GameplayPanel extends JPanel {
 		newGameButton = new JButton("New Game");
 		newGameButton.addActionListener(gameplayControl);
 		newGameButton.setVisible(false);
+		
 		JButton quitButton = new JButton("Quit");
 		quitButton.addActionListener(gameplayControl);
+		
+		JButton connectButton = new JButton("Connect");
+		connectButton.addActionListener(gameplayControl);
+		
 		southPanel.add(newGameButton);
 		southPanel.add(quitButton);
-
+		southPanel.add(connectButton);
+		
 		southBorderLayout.add(northPanel, BorderLayout.NORTH);
 		southBorderLayout.add(centerPanel, BorderLayout.CENTER);
 		southBorderLayout.add(southPanel, BorderLayout.SOUTH);

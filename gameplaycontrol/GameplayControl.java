@@ -72,11 +72,19 @@ public class GameplayControl implements ActionListener
 			
 			System.out.println("Client-side: Quit pressed.");
 			
-			GameplayPanel panel = (GameplayPanel)container.getComponent(1);
+			GameplayPanel panel = (GameplayPanel)container.getComponent(0);
 			JButton temp = panel.getNewGameButton();
 			
 			temp.setVisible(true);
 			
+			
+		} else if (command == "Connect") {
+			
+			try {
+				battleshipClient.openConnection();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 			
 		}
 		

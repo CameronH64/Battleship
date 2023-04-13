@@ -23,8 +23,11 @@ public class BattleshipServer extends AbstractServer
 	private JLabel status;
 
 	private ArrayList<String> player1Reference;
+	private ArrayList<String> player1Gameplay;
+	
 	private ArrayList<String> player2Reference;
-
+	private ArrayList<String> player2Gameplay;
+	
 	private ArrayList<ConnectionToClient> clientList;
 
 	private boolean player1Win;
@@ -170,7 +173,7 @@ public class BattleshipServer extends AbstractServer
 
 
 
-
+	// ------------------------- BATTLESHIP CLASSES -------------------------
 
 	protected boolean validateUser(LoginData data) {
 
@@ -205,7 +208,17 @@ public class BattleshipServer extends AbstractServer
 		return false;
 
 	}
+	
+	protected boolean checkTwoOrFewerClients() {
 
+		return true;
+
+	}
+	
+	
+	
+	// ------------------------- OCSF CLASSES -------------------------
+	
 	protected void listeningException(Throwable exception) 
 	{
 		//Display info about the exception
@@ -224,7 +237,7 @@ public class BattleshipServer extends AbstractServer
 
 	protected void serverStarted() 
 	{
-		System.out.println("Server-side: Server Started");
+		System.out.println("Server-side: Server Started\n");
 		//log.append("Server Started\n");
 	}
 
@@ -310,11 +323,6 @@ public class BattleshipServer extends AbstractServer
 		//log.append("Client Connected\n");
 	}
 
-	protected boolean checkTwoOrFewerClients() {
-
-		return true;
-
-	}
 
 	protected void clientDisconnected(ConnectionToClient client) {
 
