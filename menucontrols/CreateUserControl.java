@@ -15,12 +15,13 @@ public class CreateUserControl implements ActionListener
 	// Private data fields.
 	private JPanel container;
 	private CreateUserPanel createUserMenu;
-	private BattleshipClient client;
+	private BattleshipClient battleshipClient;
 
 	// This constructor connects the outside components so that the control panel can affect things.
-	public CreateUserControl(JPanel container)
+	public CreateUserControl(JPanel container, BattleshipClient battleshipClient)
 	{
 		this.container = container;
+		this.battleshipClient = battleshipClient;
 	}
 
 	// Handle button clicks.
@@ -71,11 +72,11 @@ public class CreateUserControl implements ActionListener
 	}
 
 	public BattleshipClient getClient() {
-		return client;
+		return battleshipClient;
 	}
 
 	public void setClient(BattleshipClient client) {
-		this.client = client;
+		this.battleshipClient = client;
 	}
 
 }

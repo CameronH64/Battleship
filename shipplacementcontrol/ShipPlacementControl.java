@@ -2,6 +2,8 @@ package shipplacementcontrol;
 
 import javax.swing.*;
 
+import client.BattleshipClient;
+
 import java.awt.CardLayout;
 import java.awt.event.*;
 import java.io.IOException;
@@ -11,11 +13,13 @@ public class ShipPlacementControl implements ActionListener
 {
 	// Private data fields.
 	private JPanel container;
+	private BattleshipClient battleshipClient;
 	
 	// This constructor connects the outside components so that the control panel can affect things.
-	public ShipPlacementControl(JPanel container)
+	public ShipPlacementControl(JPanel container, BattleshipClient battleshipClient)
 	{
 		this.container = container;
+		this.battleshipClient = battleshipClient;
 	}
 
 	// Handle button clicks.

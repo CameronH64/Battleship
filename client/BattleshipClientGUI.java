@@ -8,6 +8,16 @@ import javax.swing.JPanel;
 
 import gameplaypanel.GameplayPanel;
 import gameplaypanel.TestingPanelSwitchPanel;
+import instructioncontrol.InstructionControl;
+import instructionpanel.InstructionPanel;
+import menucontrols.CreateUserControl;
+import menucontrols.DeleteUserControl;
+import menucontrols.MainMenuControl;
+import menupanels.CreateUserPanel;
+import menupanels.DeleteUserPanel;
+import menupanels.MainMenuPanel;
+import shipplacementcontrol.ShipPlacementControl;
+import shipplacementpanel.ShipPlacementPanel;
 import gameplaycontrol.GameplayControl;
 import gameplaycontrol.TestingPanelSwitchControl;
 
@@ -40,8 +50,21 @@ public class BattleshipClientGUI extends JFrame {
 		
 		
 		// 1. Instantiate the Panel/Control pairs (six total).
-//		TestingPanelSwitchControl testingPanelSwitchControl= new TestingPanelSwitchControl(buffer, battleshipClient);
-//		TestingPanelSwitchPanel testingPanelSwitchPanel = new TestingPanelSwitchPanel(testingPanelSwitchControl);
+		
+		MainMenuControl mainMenuControl = new MainMenuControl(buffer, battleshipClient);		// Will probably need to take in the database object soon.
+		MainMenuPanel mainMenuPanel = new MainMenuPanel(mainMenuControl);
+		
+		DeleteUserControl deleteUserControl = new DeleteUserControl(buffer, battleshipClient);
+		DeleteUserPanel deleteUserPanel = new DeleteUserPanel(deleteUserControl);
+		
+		CreateUserControl createUserControl = new CreateUserControl(buffer, battleshipClient);
+		CreateUserPanel createUserPanel = new CreateUserPanel(createUserControl);
+		
+		InstructionControl instructionControl = new InstructionControl(buffer);
+		InstructionPanel instructionPanel = new InstructionPanel(instructionControl);
+		
+		ShipPlacementControl shipPlacementControl = new ShipPlacementControl(buffer, battleshipClient);
+		ShipPlacementPanel shipPlacementPanel = new ShipPlacementPanel(shipPlacementControl);
 		
 		GameplayControl gameplayControl = new GameplayControl(buffer, battleshipClient);
 		GameplayPanel gameplayPanel = new GameplayPanel(gameplayControl);
@@ -50,6 +73,11 @@ public class BattleshipClientGUI extends JFrame {
 		
 		// 2. Add the panels to cardLayout (six total).
 //		buffer.add(testingPanelSwitchPanel, "1");
+		buffer.add(mainMenuPanel, "1");
+		buffer.add(deleteUserPanel, "2");
+		buffer.add(createUserPanel, "3");
+		buffer.add(instructionPanel, "4");
+		buffer.add(shipPlacementPanel, "5");
 		buffer.add(gameplayPanel, "6");
 		
 		
@@ -64,7 +92,7 @@ public class BattleshipClientGUI extends JFrame {
 		setResizable(true);
 		
 		// Kick off the GUI with the first JPanel.
-		cardLayout.show(buffer, "6");
+		cardLayout.show(buffer, "1");
 		
 	}
 	

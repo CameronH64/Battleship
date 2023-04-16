@@ -15,12 +15,13 @@ public class MainMenuControl implements ActionListener
 	// Private data fields.
 	private JPanel container; 
 	private MainMenuPanel mainMenu; 
-	private BattleshipClient client; 
+	private BattleshipClient battleshipClient; 
 
 	// This constructor connects the outside components so that the control panel can affect things.
-	public MainMenuControl(JPanel container)
+	public MainMenuControl(JPanel container, BattleshipClient battleshipClient)
 	{
 		this.container = container;
+		this.battleshipClient = battleshipClient;
 	}
 
 	// Handle button clicks.
@@ -104,11 +105,11 @@ public class MainMenuControl implements ActionListener
 	}
 
 	public BattleshipClient getClient() {
-		return client;
+		return battleshipClient;
 	}
 
 	public void setClient(BattleshipClient client) {
-		this.client = client;
+		this.battleshipClient = client;
 	}
 
 }

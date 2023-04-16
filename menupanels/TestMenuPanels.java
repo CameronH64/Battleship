@@ -7,6 +7,7 @@ import java.awt.CardLayout;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import client.BattleshipClient;
 // Importing classes from other packages
 import menucontrols.MainMenuControl;
 import menucontrols.CreateUserControl;
@@ -23,7 +24,18 @@ public class TestMenuPanels extends JFrame {
 	private static final int windowWidth = 500;
 
 	TestMenuPanels(){
+		
 
+		
+		// Cameron: Had to add this to get rid of compilation errors
+		// ------------------ CLIENT -----------------------
+		
+		BattleshipClient battleshipClient = new BattleshipClient();
+		
+		// -------------------------------------------------
+		
+		
+		
 		// Set the title and default close operation.
 		this.setTitle("Client GUI");
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -33,15 +45,15 @@ public class TestMenuPanels extends JFrame {
 		JPanel buffer = new JPanel(cardLayout);
 
 		// Instantiate panels and their control classes.
-		MainMenuControl mainMenuControl = new MainMenuControl(buffer);
+		MainMenuControl mainMenuControl = new MainMenuControl(buffer, battleshipClient);
 		MainMenuPanel mainMenuPanel = new MainMenuPanel(mainMenuControl);
 		mainMenuControl.setMainMenu(mainMenuPanel);
 
-		CreateUserControl createUserControl = new CreateUserControl(buffer);
+		CreateUserControl createUserControl = new CreateUserControl(buffer, battleshipClient);
 		CreateUserPanel createUserPanel = new CreateUserPanel(createUserControl);
 		createUserControl.setCreateUserMenu(createUserPanel);
 
-		DeleteUserControl deleteUserControl = new DeleteUserControl(buffer);
+		DeleteUserControl deleteUserControl = new DeleteUserControl(buffer, battleshipClient);
 		DeleteUserPanel deleteUserPanel = new DeleteUserPanel(deleteUserControl);
 		deleteUserControl.setDeleteUserMenu(deleteUserPanel);
 
