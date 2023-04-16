@@ -1,8 +1,10 @@
 package dataclasses;
 
+import java.io.Serializable;
+
 import javax.swing.JLabel;
 
-public class CellLabel extends JLabel {
+public class CellLabel extends JLabel implements Serializable {
 	
 	private int position;
 	private String shipCharacter;

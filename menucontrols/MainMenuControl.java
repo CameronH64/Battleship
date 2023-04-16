@@ -36,13 +36,20 @@ public class MainMenuControl implements ActionListener
 		{
 			JTextField fieldUsername = mainMenu.getFieldUsername();
 			JTextField fieldPassword = mainMenu.getFieldPassword();
-			JLabel labelStatusResponse = mainMenu.getLabelStatusResponse();
+			
+//			JLabel labelStatusResponse = mainMenu.getLabelStatusResponse();
 			LoginData credentials = new LoginData(fieldUsername.getText(), fieldPassword.getText());
-			//client.sendToServer(credentials);
+			
+			try {
+				battleshipClient.sendToServer(credentials);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 
-			labelStatusResponse.setForeground(Color.black);
-			labelStatusResponse.setText("Sent credentials to server. Waiting on response...");
-			System.out.println("Client attempting to log in");
+//			labelStatusResponse.setForeground(Color.black);
+//			labelStatusResponse.setText("Sent credentials to server. Waiting on response...");
+			
 
 		} 
 		else if (command == "Create User") 
@@ -84,7 +91,10 @@ public class MainMenuControl implements ActionListener
 			fieldPassword.setEditable(true);
 			labelStatusResponse.setForeground(Color.black);
 			labelStatusResponse.setText("Connected to Battleship Server.");
-
+			
+			JButton loginButton = mainMenu.getButtonLogIn();
+			loginButton.setEnabled(true);
+			
 			battleshipClient.setHost(fieldIPAddress.getText());
 			try {
 				battleshipClient.openConnection();

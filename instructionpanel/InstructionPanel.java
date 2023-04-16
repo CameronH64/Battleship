@@ -3,6 +3,7 @@ package instructionpanel;
 import java.awt.Font;
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
@@ -27,7 +28,7 @@ public class InstructionPanel extends JPanel {
 		setBackground(new Color(255, 255, 255));
 //		setBorder(new EmptyBorder(5, 5, 5, 5));
 		
-		
+		setLayout(new BorderLayout());
 		
 		// Make the GUI using JComponents.
 		
@@ -44,13 +45,13 @@ public class InstructionPanel extends JPanel {
 		instructionText.setEditable(false);
 		
 		continueButton = new JButton("Continue");
-		continueButton.addActionListener(instructionControl);		
+		continueButton.addActionListener(instructionControl);
 		
 		
 		
 		// Add components to JPanel.
-		add(instructionText, BorderLayout.SOUTH);
-		add(continueButton, BorderLayout.CENTER);
+		add(instructionText, BorderLayout.NORTH);
+		add(continueButton, BorderLayout.SOUTH);
 
 		// Show the JPanel.
 		setSize(500, 500);

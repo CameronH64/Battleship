@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import dataclasses.LoginConfirmationData;
 // External imports
 import dataclasses.LoginData;
 import dataclasses.ShipPlacementData;
@@ -119,8 +120,6 @@ public class BattleshipServer extends AbstractServer
 
 		 */
 
-		System.out.println("I just received some data here!");
-
 		if (arg0 instanceof LoginData) {
 
 			//			log.append("Server-side: Recieved a LoginData object!");
@@ -128,14 +127,20 @@ public class BattleshipServer extends AbstractServer
 			String username = ((LoginData) arg0).getUsername();
 			String password = ((LoginData) arg0).getPassword();
 
-			System.out.println(username + password);
-
 			System.out.println("Server-side: Received a LoginData object!");
-			//			System.out.println(username);
-			//			System.out.println(password);
-			//			
-
-
+			System.out.println(username + ", " + password);
+			
+			LoginConfirmationData data = new LoginConfirmationData(true);
+			
+			try {
+				arg1.sendToClient(data);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			
+			
 		} else if (arg0 instanceof ShotFiredData) {
 
 			System.out.println("Server-side: Received a ShotFiredData object!");
@@ -285,7 +290,7 @@ public class BattleshipServer extends AbstractServer
 		
 		int numberOfClients = getClientConnections().length;
 		
-		if (numberOfClients >= 2) {
+		if (numberOfClients > 2) {
 			
 			System.out.println("Remove a client here.");
 			

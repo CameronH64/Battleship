@@ -1,8 +1,10 @@
 package dataclasses;
 
+import java.io.Serializable;
+
 import javax.swing.JButton;
 
-public class CellButton extends JButton {
+public class CellButton extends JButton implements Serializable {
 	
 	private int position;
 	

@@ -30,13 +30,6 @@ public class BattleshipClientGUI extends JFrame {
 
 	public BattleshipClientGUI(){
 		
-		// ---------------------- INSTANTIATE THE CLIENT ----------------------
-
-		BattleshipClient battleshipClient = new BattleshipClient();
-		battleshipClient.setPort(8300);
-		
-		// --------------------------------------------------------------------
-		
 		
 		
 		// Initialize JFrame settings.
@@ -46,6 +39,16 @@ public class BattleshipClientGUI extends JFrame {
 		// Make the CardLayout.
 		CardLayout cardLayout = new CardLayout();
 		JPanel buffer = new JPanel(cardLayout);
+		
+		
+		
+		// ---------------------- INSTANTIATE THE CLIENT ----------------------
+		
+		BattleshipClient battleshipClient = new BattleshipClient();
+		battleshipClient.setPort(8300);
+		battleshipClient.setContainer(buffer);
+		
+		// --------------------------------------------------------------------
 		
 		
 		
