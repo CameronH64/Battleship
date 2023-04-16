@@ -69,7 +69,7 @@ public class MainMenuControl implements ActionListener
 			 * just setting them to enabled when connect is pressed 
 			 * will allow debugging display on other panels
 			 */
-
+			
 			//Get stuff to modify enabled-ness
 			JButton buttonGoToCreateUser = mainMenu.getButtonGoToCreateUser();
 			JButton buttonGoToDeleteUser = mainMenu.getButtonGoToDeleteUser();
@@ -83,11 +83,19 @@ public class MainMenuControl implements ActionListener
 			fieldUsername.setEditable(true);
 			fieldPassword.setEditable(true);
 			labelStatusResponse.setForeground(Color.black);
-			labelStatusResponse.setText("Sent connection request. Waiting on response...");
+			labelStatusResponse.setText("Connected to Battleship Server.");
 
-
-			System.out.println("Client attempting to connect to server");
-			//client.openConnection(fieldIPAddress.getText());
+			battleshipClient.setHost(fieldIPAddress.getText());
+			try {
+				battleshipClient.openConnection();
+			} catch (IOException e) {
+				e.printStackTrace();
+				System.out.println("Error happened!");
+			}
+			
+			
+			
+//			System.out.println("Client attempting to connect to server");
 		}
 
 	}

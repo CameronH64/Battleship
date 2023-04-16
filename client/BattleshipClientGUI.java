@@ -53,6 +53,7 @@ public class BattleshipClientGUI extends JFrame {
 		
 		MainMenuControl mainMenuControl = new MainMenuControl(buffer, battleshipClient);		// Will probably need to take in the database object soon.
 		MainMenuPanel mainMenuPanel = new MainMenuPanel(mainMenuControl);
+		mainMenuControl.setMainMenu(mainMenuPanel);
 		
 		DeleteUserControl deleteUserControl = new DeleteUserControl(buffer, battleshipClient);
 		DeleteUserPanel deleteUserPanel = new DeleteUserPanel(deleteUserControl);
