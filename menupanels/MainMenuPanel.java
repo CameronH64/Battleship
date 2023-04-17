@@ -24,7 +24,7 @@ public class MainMenuPanel extends JPanel {
 	//Data fields for text fields on this screen
 	private JTextField fieldIPAddress;
 	private JTextField fieldUsername;
-	private JTextField fieldPassword;
+	private JPasswordField fieldPassword;
 	//Data fields for the buttons on this screen
 	private JButton buttonQuit;
 	private JButton buttonGoToCreateUser;
@@ -57,7 +57,7 @@ public class MainMenuPanel extends JPanel {
 		labelStatusResponse = new JLabel("Please connect before logging in!");
 		fieldIPAddress = new JTextField("");
 		fieldUsername = new JTextField("");
-		fieldPassword = new JTextField("");
+		fieldPassword = new JPasswordField("");
 		buttonQuit = new JButton("Quit");
 		buttonQuit.addActionListener(mainMenuControl);
 		buttonGoToCreateUser = new JButton("Create User");
@@ -221,7 +221,7 @@ public class MainMenuPanel extends JPanel {
 		return fieldPassword;
 	}
 
-	public void setFieldPassword(JTextField fieldPassword) {
+	public void setFieldPassword(JPasswordField fieldPassword) {
 		this.fieldPassword = fieldPassword;
 	}
 
