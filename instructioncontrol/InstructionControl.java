@@ -31,10 +31,7 @@ public class InstructionControl implements ActionListener
 		// The Cancel button takes the user back to the initial panel.
 		if (command == "Continue")
 		{
-			System.out.println("Continue pressed.");
-			
-			CardLayout cardLayout = (CardLayout)container.getLayout();
-			cardLayout.show(container, "5");
+			System.out.println("Continued pressed.");
 			
 		}
 		

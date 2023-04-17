@@ -5,7 +5,6 @@ import java.awt.CardLayout;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import client.BattleshipClient;
 // Importing classes from other packages
 import shipplacementcontrol.ShipPlacementControl;
 
@@ -17,15 +16,7 @@ public class TestShipPlacementPanel extends JFrame {
 	private static final long serialVersionUID = 1L;
 
 	TestShipPlacementPanel(){
-		
-		// Cameron: Had to add this to get rid of compilation errors
-		// ------------------ CLIENT -----------------------
-		
-		BattleshipClient battleshipClient = new BattleshipClient();
-		
-		// -------------------------------------------------
 
-		
 		// Set the title and default close operation.
 		this.setTitle("Client GUI");
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -35,7 +26,7 @@ public class TestShipPlacementPanel extends JFrame {
 		JPanel buffer = new JPanel(cardLayout);
 		
 		// Instantiate panels and their control classes.
-		ShipPlacementControl shipPlacementControl = new ShipPlacementControl(buffer, battleshipClient);
+		ShipPlacementControl shipPlacementControl = new ShipPlacementControl(buffer);
 		ShipPlacementPanel shipPlacementPanel = new ShipPlacementPanel(shipPlacementControl);
 		
 		// Add the JPanels to the buffer JPanel.

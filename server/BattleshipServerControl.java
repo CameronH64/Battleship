@@ -36,7 +36,7 @@ public class BattleshipServerControl implements ActionListener
 
 
 		// The Cancel button takes the user back to the initial panel.
-		if (command.equals("Start Server")) {
+		if (command.equals("Listen")) {
 
 //			String portNumberText = portNumberTextField.getText();		// Get the text from the JTextFields.
 //			String timeoutText = timeoutTextField.getText();

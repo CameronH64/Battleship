@@ -43,7 +43,7 @@ public class BattleshipServerGUI extends JFrame
 		
 		// ------------------------ Create GUI ------------------------
 
-		this.setTitle("Battleship Server");
+		this.setTitle("Server GUI");
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		// Step 1: Instantiate JComponents
@@ -53,7 +53,7 @@ public class BattleshipServerGUI extends JFrame
 		statusLabel		= new JLabel("Status: ");
 		serverLogLabel	= new JLabel("Server Log: ");
 		
-		listenButton	= new JButton("Start Server");
+		listenButton	= new JButton("Listen");
 		closeButton		= new JButton("Close");
 		quitButton		= new JButton("Quit");
 
