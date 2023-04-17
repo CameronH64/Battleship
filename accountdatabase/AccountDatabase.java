@@ -12,7 +12,7 @@ public class AccountDatabase {
     public AccountDatabase() throws IOException {
     	
     	Properties properties = new Properties();
-		FileInputStream fileInputStream = new FileInputStream("lab7out/db.properties");
+		FileInputStream fileInputStream = new FileInputStream("accountdatabase/db.properties");
 		properties.load(fileInputStream);
 		
 		String url = properties.getProperty("url");
