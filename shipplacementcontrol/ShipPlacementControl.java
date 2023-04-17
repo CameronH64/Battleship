@@ -35,8 +35,8 @@ public class ShipPlacementControl implements ActionListener
 		// The Cancel button takes the user back to the initial panel.
 		if (command == "Confirm Placement")
 		{
-			System.out.println("Confirm placement pressed.");
-			
+			CardLayout cardLayout = (CardLayout)container.getLayout();
+			cardLayout.show(container, "6");
 		}		
 
 		// Have more if-else statements here for every action that happens (buttons, etc).

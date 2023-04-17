@@ -7,7 +7,6 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import gameplaypanel.GameplayPanel;
-import gameplaypanel.TestingPanelSwitchPanel;
 import instructioncontrol.InstructionControl;
 import instructionpanel.InstructionPanel;
 import menucontrols.CreateUserControl;
@@ -19,7 +18,6 @@ import menupanels.MainMenuPanel;
 import shipplacementcontrol.ShipPlacementControl;
 import shipplacementpanel.ShipPlacementPanel;
 import gameplaycontrol.GameplayControl;
-import gameplaycontrol.TestingPanelSwitchControl;
 
 public class BattleshipClientGUI extends JFrame {
 
@@ -72,7 +70,7 @@ public class BattleshipClientGUI extends JFrame {
 		
 		GameplayControl gameplayControl = new GameplayControl(buffer, battleshipClient);
 		GameplayPanel gameplayPanel = new GameplayPanel(gameplayControl);
-		
+		gameplayControl.setGameplayPanel(gameplayPanel);
 		
 		
 		// 2. Add the panels to cardLayout (six total).

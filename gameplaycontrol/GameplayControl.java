@@ -18,6 +18,7 @@ public class GameplayControl implements ActionListener
 {
 	// Private data fields.
 	private JPanel container;
+	private GameplayPanel gameplayPanel;
 	private BattleshipClient battleshipClient;
 	private ArrayList<CellLabel> gameplayCellLabels;
 	
@@ -26,6 +27,12 @@ public class GameplayControl implements ActionListener
 	{
 		this.container = container;
 		this.battleshipClient = battleshipClient;
+	}
+	
+	public void setGameplayPanel(GameplayPanel gameplayPanel) {
+		
+		this.gameplayPanel = gameplayPanel;
+		
 	}
 	
 	public void setCellLabels(ArrayList<CellLabel> gameplayCellLabels) {
@@ -67,40 +74,32 @@ public class GameplayControl implements ActionListener
 			System.out.println("Client-side: New Game pressed.");
 			
 			
-			
 		} else if (command == "Quit") {
 			
 			System.out.println("Client-side: Quit pressed.");
 			
-			GameplayPanel panel = (GameplayPanel)container.getComponent(0);
-			JButton temp = panel.getNewGameButton();
-			
-			temp.setVisible(true);
-			
-			
-		} else if (command == "Connect") {
+			// Be sure to exit cleanly.
 			
 			try {
-				battleshipClient.openConnection();
+				battleshipClient.closeConnection();
 			} catch (IOException e) {
+				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			
-		}
+//			System.exit(0);
+			
+			
+		} 
+		// Code for enabling the New Game button
+//		JButton newGameButton = gameplayPanel.getNewGameButton();
+//		newGameButton.setEnabled(true);
 		
-		// Testing code. Use this code to switch to another JPanel. (Make a new JPanel for yourself for testing.
-
-		// Can set the New Game button to be visible!
-		
-//		GameplayPanel panel = (GameplayPanel)container.getComponent(1);
-//		JButton temp = panel.getNewGameButton();
-//		
-//		temp.setVisible(true);
-
-		
+				
 //		CardLayout cardLayout = (CardLayout)container.getLayout();
 //		cardLayout.show(container, "1");
 
+		
 		
 	}
 
