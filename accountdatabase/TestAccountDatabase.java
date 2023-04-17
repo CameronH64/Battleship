@@ -21,7 +21,12 @@ package accountdatabase;
 		Hint: Lab 7 In should be a good baseline for this!
 		
 		*/
+public class TestAccountDatabase {
+	
+	public TestAccountDatabase() {
+		
+		
 		
 	}
-
-
+	
+}
