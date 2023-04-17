@@ -11,14 +11,14 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import ocsf.client.AbstractClient;
-
+import dataclasses.LoginConfirmationData;
 import dataclasses.LoginData;
 import dataclasses.ShotFiredData;
 
 public class BattleshipClient extends AbstractClient{
 	
-//	private JPanel container;
-
+	private JPanel container;
+	
 	public BattleshipClient() {
 		super("localhost", 8300);
 	}
@@ -46,6 +46,26 @@ public class BattleshipClient extends AbstractClient{
 			
 			System.out.println("Client-side: Received ShotFiredData.");
 			
+		} else if (arg0 instanceof LoginConfirmationData) {
+			
+			// If yes, switch
+			// If no, stay.
+			
+			LoginConfirmationData confirmation = (LoginConfirmationData)arg0;
+			
+			if (confirmation.getValue()) {
+				
+				CardLayout cardLayout = (CardLayout)container.getLayout();
+				cardLayout.show(container, "4");				
+				
+			} else {
+				
+				System.out.println("Invalid credentials");
+				
+			}
+			
+
+			
 		}
 		
 	}
@@ -55,6 +75,12 @@ public class BattleshipClient extends AbstractClient{
 //		statusLabel.setForeground(Color.RED);
 		
 		
+		
+	}
+	
+	public void setContainer(JPanel container) {
+		
+		this.container = container;
 		
 	}
 	
