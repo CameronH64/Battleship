@@ -26,7 +26,7 @@ public class InstructionPanel extends JPanel {
 	public InstructionPanel(InstructionControl instructionControl){
 
 		setBackground(new Color(255, 255, 255));
-//		setBorder(new EmptyBorder(5, 5, 5, 5));
+		setBorder(new EmptyBorder(5, 5, 5, 5));
 		
 		setLayout(new BorderLayout());
 		

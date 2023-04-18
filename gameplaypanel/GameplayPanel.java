@@ -5,9 +5,9 @@ import javax.swing.border.MatteBorder;
 
 import client.BattleshipClient;
 import dataclasses.CellButton;
-import dataclasses.CellLabel;
-import gameplaycontrol.CellLabelControl;
+import dataclasses.PlacementLabel;
 import gameplaycontrol.GameplayControl;
+import shipplacementcontrol.PlacementLabelControl;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -22,7 +22,7 @@ public class GameplayPanel extends JPanel {
 	// Private Data Fields and JComponents.
 	// Generally, it's better to have these explicitly declared here so that it's easier to debug the code.
 
-	private ArrayList<CellLabel> gameplayCellLabels;
+	private ArrayList<PlacementLabel> gameplayCellLabels;
 	JButton newGameButton;
 
 	// Constructor
@@ -141,21 +141,21 @@ public class GameplayPanel extends JPanel {
 		for (int row = 0; row < 10; row++) {
 			for (int col = 0; col < 10; col++) {
 
-				CellLabel cellLabel = new CellLabel(count);
+				PlacementLabel cellLabel = new PlacementLabel(count);
 
 				cellLabel.setOpaque(true);
 				cellLabel.setPreferredSize(new Dimension(cellSize, cellSize));
 				cellLabel.setBackground(gridColor);
 				cellLabel.setBorder(new MatteBorder(1, 1, (row == 9 ? 1 : 0), (col == 9 ? 1 : 0), Color.BLACK));
 
-				cellLabel.setVerticalAlignment(CellLabel.CENTER);
-				cellLabel.setHorizontalAlignment(CellLabel.CENTER);
+				cellLabel.setVerticalAlignment(PlacementLabel.CENTER);
+				cellLabel.setHorizontalAlignment(PlacementLabel.CENTER);
 				Font font = cellLabel.getFont();
 				int fontSize = 20; // set the font size to 20
 				cellLabel.setFont(new Font(font.getName(), Font.PLAIN, fontSize));
 
 				// Add the MouseListener to cellLabel so it will be able to do stuff.
-				cellLabel.addMouseListener(new CellLabelControl(cellLabel));
+				cellLabel.addMouseListener(new PlacementLabelControl(cellLabel));
 
 				// Add the cellLabel to the gameboard, the 10x10 GridLayout
 				gameBoard.add(cellLabel);
@@ -186,15 +186,15 @@ public class GameplayPanel extends JPanel {
 		for (int row = 0; row < 10; row++) {
 			for (int col = 0; col < 10; col++) {
 
-				CellLabel cellLabel = new CellLabel(count);
+				PlacementLabel cellLabel = new PlacementLabel(count);
 
 				cellLabel.setOpaque(true);
 				cellLabel.setPreferredSize(new Dimension(cellSize, cellSize));
 				cellLabel.setBackground(gridColor);
 				cellLabel.setBorder(new MatteBorder(1, 1, (row == 9 ? 1 : 0), (col == 9 ? 1 : 0), Color.BLACK));
 
-				cellLabel.setVerticalAlignment(CellLabel.CENTER);
-				cellLabel.setHorizontalAlignment(CellLabel.CENTER);
+				cellLabel.setVerticalAlignment(PlacementLabel.CENTER);
+				cellLabel.setHorizontalAlignment(PlacementLabel.CENTER);
 				Font font = cellLabel.getFont();
 				int fontSize = 20; // set the font size to 20
 				cellLabel.setFont(new Font(font.getName(), Font.PLAIN, fontSize));

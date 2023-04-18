@@ -3,7 +3,7 @@ package gameplaycontrol;
 import javax.swing.*;
 
 import client.BattleshipClient;
-import dataclasses.CellLabel;
+import dataclasses.PlacementLabel;
 import dataclasses.LoginData;
 import dataclasses.ShotFiredData;
 import gameplaypanel.GameplayPanel;
@@ -20,7 +20,7 @@ public class GameplayControl implements ActionListener
 	private JPanel container;
 	private GameplayPanel gameplayPanel;
 	private BattleshipClient battleshipClient;
-	private ArrayList<CellLabel> gameplayCellLabels;
+	private ArrayList<PlacementLabel> gameplayCellLabels;
 	
 	// This constructor connects the outside components so that the control panel can affect things.
 	public GameplayControl(JPanel container, BattleshipClient battleshipClient)
@@ -35,7 +35,7 @@ public class GameplayControl implements ActionListener
 		
 	}
 	
-	public void setCellLabels(ArrayList<CellLabel> gameplayCellLabels) {
+	public void setCellLabels(ArrayList<PlacementLabel> gameplayCellLabels) {
 		
 		this.gameplayCellLabels = gameplayCellLabels;
 		
@@ -71,13 +71,13 @@ public class GameplayControl implements ActionListener
 		// The Cancel button takes the user back to the initial panel.
 		if (command == "New Game")
 		{
-			System.out.println("Client-side: New Game pressed.");
+			System.out.println("[CLIENT] NEW GAME PRESSED");
 			
 			
 			
 		} else if (command == "Quit") {
 			
-			System.out.println("Client-side: Quit pressed.");
+			System.out.println("[CLIENT] QUIT PRESSED");
 			
 			// Be sure to exit cleanly.
 			
@@ -93,6 +93,8 @@ public class GameplayControl implements ActionListener
 			
 			
 		} else if (command == "Connect") {
+			
+			System.out.println("[CLIENT] CONNECT PRESSED");
 			
 			try {
 				battleshipClient.openConnection();

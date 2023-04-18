@@ -5,20 +5,20 @@ import java.util.ArrayList;
 
 public class ShipPlacementData implements Serializable {
 	
-	private ArrayList<String> shipConfiguration;
+	private ArrayList<PlacementLabel> shipConfiguration;
 	
 	public ShipPlacementData(){
 				
-		shipConfiguration = new ArrayList<String>();
+		shipConfiguration = new ArrayList<PlacementLabel>();
 		
 	}
 	
 	// Getters and Setters
-	public ArrayList<String> getShipConfiguration() {
+	public ArrayList<PlacementLabel> getShipConfiguration() {
 		return shipConfiguration;
 	}
 
-	public void setShipConfiguration(ArrayList<String> shipConfiguration) {
+	public void setShipConfiguration(ArrayList<PlacementLabel> shipConfiguration) {
 		this.shipConfiguration = shipConfiguration;
 	}
 	

@@ -1,9 +1,9 @@
-package gameplaycontrol;
+package shipplacementcontrol;
 
 import javax.swing.*;
 
 import client.BattleshipClient;
-import dataclasses.CellLabel;
+import dataclasses.PlacementLabel;
 import dataclasses.LoginData;
 import dataclasses.ShotFiredData;
 import gameplaypanel.GameplayPanel;
@@ -15,18 +15,19 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-public class CellLabelControl implements MouseListener
+public class PlacementLabelControl implements MouseListener
 {
 	// Private data fields.
 	private JPanel container;
 	private BattleshipClient battleshipClient;
-	private CellLabel cellLabel;
+	private PlacementLabel placementLabel;
+	
 	
 	
 	// This constructor connects the outside components so that the control panel can affect things.
-	public CellLabelControl(CellLabel cellLabel)
+	public PlacementLabelControl(PlacementLabel placementLabel)
 	{
-		this.cellLabel = cellLabel;
+		this.placementLabel = placementLabel;
 	}
 	
 	
@@ -41,13 +42,13 @@ public class CellLabelControl implements MouseListener
 	public void mousePressed(MouseEvent e) {
 		// TODO Auto-generated method stub
 		
-		cellLabel.setBackground(Color.RED);
-		System.out.println("Position: " + cellLabel.getPosition());
+		placementLabel.setBackground(Color.RED);
+		System.out.println("Position: " + placementLabel.getPosition());
 		
 		// Remove the mouse listener so that the user can't press the same cell twice.
-		cellLabel.removeMouseListener(this);
+		placementLabel.removeMouseListener(this);
 		
-		cellLabel.getShipCharacter();
+		placementLabel.getShipCharacter();
 		
 	}
 

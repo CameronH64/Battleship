@@ -8,11 +8,14 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.Scanner;
+import java.util.Stack;
 
 import dataclasses.LoginConfirmationData;
 // External imports
 import dataclasses.LoginData;
+import dataclasses.PlayerData;
 import dataclasses.ShipPlacementData;
 import dataclasses.ShotFiredData;
 
@@ -20,35 +23,30 @@ import dataclasses.ShotFiredData;
 
 public class BattleshipServer extends AbstractServer
 {
-	private JTextArea log;
-	private JLabel status;
-
-	private ArrayList<String> player1Reference;
-	private ArrayList<String> player1Gameplay;
+	private JTextArea serverLogTextArea;
+	private JLabel serverConnectionStatusLabel;
 	
-	private ArrayList<String> player2Reference;
-	private ArrayList<String> player2Gameplay;
-	
-	private ArrayList<ConnectionToClient> clientList;
-
+	private static Random random = new Random();
+	private int turnFlag = 0;
+		
+	Stack<PlayerData> playerStack = new Stack<PlayerData>();		// This will manage all the players. The ConnectionClient objects will also be assigned to these.
 	private boolean player1Win;
 	private boolean player2Win;
-
-
+	
+	
+	
 	public BattleshipServer()
 	{
+		
 		super(8300);
-
-		player1Reference = new ArrayList<String>();
-		player2Reference = new ArrayList<String>();
-
+		
+		// Randomly choose which player goes first (1 means player 1, 2 means player 2)
+		turnFlag = random.nextInt(2)+1;
+		
 		player1Win = false;
 		player2Win = false;
-
-	}
-
-	public void testingSetUp() {
-
+		
+		// Testing Setup
 		String player1FleetArray[][] = {{"0","C","C","C","C","C","0","0","0","0"},
 										{"0","0","0","P","P","0","0","0","0","0"},
 										{"0","0","0","0","0","0","0","0","0","0"},
@@ -92,7 +90,12 @@ public class BattleshipServer extends AbstractServer
 		}
 
 		// Now have a flat fleet for player 2.
+		
+	}
+		
+	public void testingSetUp() {
 
+		
 
 	}
 
@@ -101,8 +104,8 @@ public class BattleshipServer extends AbstractServer
 		super(port);
 	}
 
-	public void setLog(JTextArea log) { this.log = log;	}
-	public void setStatus(JLabel status) { this.status = status; }
+	public void setLog(JTextArea log) { this.serverLogTextArea = log;	}
+	public void setStatus(JLabel status) { this.serverConnectionStatusLabel = status; }
 
 	@Override
 	protected void handleMessageFromClient(Object arg0, ConnectionToClient arg1)
@@ -146,11 +149,36 @@ public class BattleshipServer extends AbstractServer
 			System.out.println("[SERVER] RECEIVED SHOTFIREDDATA");
 			//			System.out.println(x);
 			//			System.out.println(y);
-
+			
+			// Game logic goes here.
+			
+			// Use a "turn flag?"
+			
+			// Check turn flag.
+			
+			// If 1, player one's turn.
+			// Do player 1 checking.
+			// Add one to turn flag.
+			
+			// If 2, player one's turn.
+			// Do player 2 checking.
+			// Subtract one to turn flag.
+			
+			if (turnFlag == 1) {
+				
+				
+				
+				turnFlag++;
+				
+			} else if (turnFlag == 2) {
+				
+				
+				
+				turnFlag--;
+				
+			}
+			
 		}
-
-		// Server-side debugging
-		//		log.append("Debugging: " + data.getUsername() + " " + data.getPassword() + " " + arg1.toString() + "\n");
 
 	}
 
@@ -177,8 +205,6 @@ public class BattleshipServer extends AbstractServer
 	// Count how many ship letters there are (17 means sunk).
 
 
-
-	// ------------------------- BATTLESHIP CLASSES -------------------------
 
 	protected boolean validateUser(LoginData data) {
 
@@ -221,8 +247,6 @@ public class BattleshipServer extends AbstractServer
 	}
 	
 	
-	
-	// ------------------------- OCSF CLASSES -------------------------
 	
 	protected void listeningException(Throwable exception) 
 	{
@@ -271,28 +295,8 @@ public class BattleshipServer extends AbstractServer
 	
 	protected void clientConnected(ConnectionToClient client) 
 	{
-
-		// Will have player connection stuff here.
-		// Probably have an array of two ConnectionToClient objects to 
-		// keep track of the players (only two are allowed).
-		// Will need an if statement to check that there are only two players.
-		// Heck, I could write a method to do that.
 		
-		
-		// Sure, connect the client.
-		
-		// But then, see if that would be the third client.
-		// If it is, remove it. It doesn't belong here.
-		
-		// Not not, just let it be.
-
-		System.out.println("[SERVER] CLIENT CONNECTED: CLIENT " + client.getId());
-		System.out.println("[SERVER] CONNECTIONS: " + getClientConnections().length);
-		System.out.println();
-		
-		int numberOfClients = getClientConnections().length;
-		
-		if (numberOfClients > 2) {
+		if (getClientConnections().length > 2) {
 			
 			System.out.println("[SERVER] REMOVED CLIENT HERE");
 			
@@ -305,19 +309,42 @@ public class BattleshipServer extends AbstractServer
 			
 			
 			
-//			// Using threads?
-//			Thread thread[] = getClientConnections();
-//			
-//			thread[2].interrupt();
-//			
-//			System.out.println("Debugging:");
-//			
-//			for (ConnectionToClient connectionToClient : clientList) {
-//				System.out.println(connectionToClient.getId());
-//			}
+		} else {
 			
+			System.out.println("[SERVER] CLIENT CONNECTED: CLIENT " + client.getId());
+			System.out.println("[SERVER] CONNECTIONS: " + getClientConnections().length);
+			System.out.println();
+			
+			int numberOfClients = getClientConnections().length;
+			
+			PlayerData player = new PlayerData();
+			player.setPlayerNumber(numberOfClients);
+			player.setPlayerConnectionToClient(client);			// This gives an ID to the player that can be referenced and accessed.
+			playerStack.add(player);
+			
+			/*
+	 		
+	 		This method is quite interesting, and I put a lot of thought into the backend for the players and player data.
+	 		
+	 		Having a stack of players would be a good idea.
+	 		
+	 		First, declare a PlayerData object to be put into the stack called playerData.
+	 		
+	 		Depending on the number of connections to the server there are, that will be the player number.
+			Assign it to playerData
+			
+			Then, assign the ConnectionToClient object to playerData.
+			assign it to playerData.
+			
+			Player ocean grid will be added later, through handleMessageFromClient.
+			Player targeting grid is actually made by default in the PlayerData class.	(Again, the "targeting grid" is just a list of zeros.)
+			
+			Lastly, add the player to the stack.
+
+			*/
 			
 		}
+
 		
 //		status.setText("Connected");
 //		status.setForeground(Color.green);

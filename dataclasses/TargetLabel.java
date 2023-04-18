@@ -4,12 +4,12 @@ import java.io.Serializable;
 
 import javax.swing.JLabel;
 
-public class CellLabel extends JLabel implements Serializable {
+public class TargetLabel extends JLabel implements Serializable {
 	
-	private int position;
-	private String shipCharacter;
+	private int position;			// 0-99 for the GridLayout
+	private String shipCharacter;	// The character that is there.
 	
-	public CellLabel(int position) {
+	public TargetLabel(int position) {
 		
 		this.position = position;
 		shipCharacter = "";
