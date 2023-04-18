@@ -69,7 +69,7 @@ public class BattleshipClientGUI extends JFrame {
 		ShipPlacementPanel shipPlacementPanel = new ShipPlacementPanel(shipPlacementControl);
 		
 		GameplayControl gameplayControl = new GameplayControl(buffer, battleshipClient);
-		GameplayPanel gameplayPanel = new GameplayPanel(gameplayControl);
+		GameplayPanel gameplayPanel = new GameplayPanel(gameplayControl, battleshipClient);
 		gameplayControl.setGameplayPanel(gameplayPanel);
 		
 		

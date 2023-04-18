@@ -12,7 +12,6 @@ public class TargetLabel extends JLabel implements Serializable {
 	public TargetLabel(int position) {
 		
 		this.position = position;
-		shipCharacter = "";
 		
 	}
 

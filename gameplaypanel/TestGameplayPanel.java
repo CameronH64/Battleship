@@ -28,9 +28,6 @@ public class TestGameplayPanel extends JFrame {
 
 	public TestGameplayPanel() {
 
-
-		// TODO Auto-generated method stub
-
 		// Initialize JFrame settings.
 		this.setTitle("Battleship Client");
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -70,7 +67,7 @@ public class TestGameplayPanel extends JFrame {
 //		ShipPlacementPanel shipPlacementPanel = new ShipPlacementPanel(shipPlacementControl);
 
 		GameplayControl gameplayControl = new GameplayControl(buffer, battleshipClient);
-		GameplayPanel gameplayPanel = new GameplayPanel(gameplayControl);
+		GameplayPanel gameplayPanel = new GameplayPanel(gameplayControl, battleshipClient);
 		gameplayControl.setGameplayPanel(gameplayPanel);
 
 

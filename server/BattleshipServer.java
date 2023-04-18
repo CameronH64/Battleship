@@ -131,16 +131,21 @@ public class BattleshipServer extends AbstractServer
 			String password = ((LoginData) arg0).getPassword();
 
 			System.out.println("[SERVER] RECEIVED LOGINDATA");
-			System.out.println(username + ", " + password);
+			System.out.println("[SERVER] DEBUG: LOGINDATA: " + username + ", " + password);
 			
-			LoginConfirmationData data = new LoginConfirmationData(true);
+			LoginConfirmationData loginConfirmationData = new LoginConfirmationData(true);
 			
 			try {
-				arg1.sendToClient(data);
+				arg1.sendToClient(loginConfirmationData);
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+			
+			// I actually don't need to do this.
+			// When player logs in, want to set up their play materials.
+//			ArrayList<String> playerOceanGrid = new ArrayList<String>();
+//			playerStack.get(getNumberOfClients()).setPlayerTargetingGrid(playerOceanGrid);
 			
 			
 			
@@ -251,7 +256,7 @@ public class BattleshipServer extends AbstractServer
 	protected void listeningException(Throwable exception) 
 	{
 		//Display info about the exception
-		System.out.println("Listening Exception:" + exception);
+		System.out.println("[SERVER] LISTENING EXCEPTION" + exception);
 		exception.printStackTrace();
 		System.out.println(exception.getMessage());
 

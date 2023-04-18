@@ -38,23 +38,6 @@ public class BattleshipServerControl implements ActionListener
 		// The Cancel button takes the user back to the initial panel.
 		if (command.equals("Start Server")) {
 
-//			String portNumberText = portNumberTextField.getText();		// Get the text from the JTextFields.
-//			String timeoutText = timeoutTextField.getText();
-//
-//			try {													// Make sure that the 
-//				Integer.parseInt(portNumberText);
-//				Integer.parseInt(timeoutText);					
-//
-//			} catch (Exception e) {
-//				serverLogTextArea.append("Port number/timeout not entered.\n");
-//				server.setLog(serverLogTextArea);
-//				return;
-//			}
-
-			// As of now, assume the correct values are being entered. This can be improved later.
-//			int portNumber = Integer.parseInt(portNumberText);
-//			int timeout = Integer.parseInt(timeoutText);	
-			
 			// In a try catch because a non-Java connection will crash the program.
 			try {
 				
@@ -100,20 +83,6 @@ public class BattleshipServerControl implements ActionListener
 
 
 
-//		} else if (command.equals("Stop")) {
-//
-//			if (!server.isListening()) {
-//
-//				serverLogTextArea.append("Stop invalid. Server is not currently running.\n");
-//				server.setLog(serverLogTextArea);
-//
-//				return;
-//			}
-//
-//			server.stopListening();
-
-
-
 		} else if (command.equals("Quit")) {
 
 			System.out.println("Server shutting down...");
@@ -122,8 +91,6 @@ public class BattleshipServerControl implements ActionListener
 			// If pressed, server shuts down and GUI closes.
 
 		}
-
-		// Have more if-else statements here for every action that happens (buttons, etc).
 
 
 

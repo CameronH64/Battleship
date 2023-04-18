@@ -4,10 +4,10 @@ import javax.swing.*;
 import javax.swing.border.MatteBorder;
 
 import client.BattleshipClient;
-import dataclasses.CellButton;
-import dataclasses.PlacementLabel;
+import dataclasses.OceanLabel;
+import dataclasses.TargetLabel;
 import gameplaycontrol.GameplayControl;
-import shipplacementcontrol.PlacementLabelControl;
+import gameplaycontrol.TargetLabelControl;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -19,16 +19,24 @@ public class GameplayPanel extends JPanel {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	// Private Data Fields and JComponents.
-	// Generally, it's better to have these explicitly declared here so that it's easier to debug the code.
-
-	private ArrayList<PlacementLabel> gameplayCellLabels;
+	private ArrayList<TargetLabel> targetLabels;
+	private ArrayList<OceanLabel> oceanLabels;
 	JButton newGameButton;
-
+	
+	BattleshipClient battleshipClient;
+	
 	// Constructor
-	public GameplayPanel(GameplayControl gameplayControl){
-
-
+	public GameplayPanel(GameplayControl gameplayControl, BattleshipClient battleshipClient){
+		
+		
+		
+		targetLabels = new ArrayList<TargetLabel>();
+		oceanLabels = new ArrayList<OceanLabel>();
+		
+		this.battleshipClient = battleshipClient;
+		
+		
+		
 		// Initialize the primary BorderLayouts and place them, ready for adding stuff into them.
 		JPanel bufferBorderLayout = new JPanel(new BorderLayout());
 
@@ -141,33 +149,37 @@ public class GameplayPanel extends JPanel {
 		for (int row = 0; row < 10; row++) {
 			for (int col = 0; col < 10; col++) {
 
-				PlacementLabel cellLabel = new PlacementLabel(count);
+				TargetLabel targetLabel = new TargetLabel(count);
 
-				cellLabel.setOpaque(true);
-				cellLabel.setPreferredSize(new Dimension(cellSize, cellSize));
-				cellLabel.setBackground(gridColor);
-				cellLabel.setBorder(new MatteBorder(1, 1, (row == 9 ? 1 : 0), (col == 9 ? 1 : 0), Color.BLACK));
+				targetLabel.setOpaque(true);
+				targetLabel.setPreferredSize(new Dimension(cellSize, cellSize));
+				targetLabel.setBackground(gridColor);
+				targetLabel.setBorder(new MatteBorder(1, 1, (row == 9 ? 1 : 0), (col == 9 ? 1 : 0), Color.BLACK));
 
-				cellLabel.setVerticalAlignment(PlacementLabel.CENTER);
-				cellLabel.setHorizontalAlignment(PlacementLabel.CENTER);
-				Font font = cellLabel.getFont();
+				targetLabel.setVerticalAlignment(TargetLabel.CENTER);
+				targetLabel.setHorizontalAlignment(TargetLabel.CENTER);
+				Font font = targetLabel.getFont();
 				int fontSize = 20; // set the font size to 20
-				cellLabel.setFont(new Font(font.getName(), Font.PLAIN, fontSize));
+				targetLabel.setFont(new Font(font.getName(), Font.PLAIN, fontSize));
 
 				// Add the MouseListener to cellLabel so it will be able to do stuff.
-				cellLabel.addMouseListener(new PlacementLabelControl(cellLabel));
-
+				
+				targetLabel.addMouseListener(new TargetLabelControl(targetLabel, battleshipClient));
+				
+				
 				// Add the cellLabel to the gameboard, the 10x10 GridLayout
-				gameBoard.add(cellLabel);
-
+				targetLabels.add(targetLabel);
+				gameBoard.add(targetLabel);
+				
 				count++;	// Increment the count so that the next CellLabel will have the correct position.
 
 			}
 		}
 		return gameBoard;
 	}
-
-
+	
+	
+	
 	private JPanel createOceanGrid() {
 
 		// Variables
@@ -186,25 +198,26 @@ public class GameplayPanel extends JPanel {
 		for (int row = 0; row < 10; row++) {
 			for (int col = 0; col < 10; col++) {
 
-				PlacementLabel cellLabel = new PlacementLabel(count);
+				OceanLabel oceanLabel = new OceanLabel(count);
 
-				cellLabel.setOpaque(true);
-				cellLabel.setPreferredSize(new Dimension(cellSize, cellSize));
-				cellLabel.setBackground(gridColor);
-				cellLabel.setBorder(new MatteBorder(1, 1, (row == 9 ? 1 : 0), (col == 9 ? 1 : 0), Color.BLACK));
+				oceanLabel.setOpaque(true);
+				oceanLabel.setPreferredSize(new Dimension(cellSize, cellSize));
+				oceanLabel.setBackground(gridColor);
+				oceanLabel.setBorder(new MatteBorder(1, 1, (row == 9 ? 1 : 0), (col == 9 ? 1 : 0), Color.BLACK));
 
-				cellLabel.setVerticalAlignment(PlacementLabel.CENTER);
-				cellLabel.setHorizontalAlignment(PlacementLabel.CENTER);
-				Font font = cellLabel.getFont();
+				oceanLabel.setVerticalAlignment(OceanLabel.CENTER);
+				oceanLabel.setHorizontalAlignment(OceanLabel.CENTER);
+				Font font = oceanLabel.getFont();
 				int fontSize = 20; // set the font size to 20
-				cellLabel.setFont(new Font(font.getName(), Font.PLAIN, fontSize));
+				oceanLabel.setFont(new Font(font.getName(), Font.PLAIN, fontSize));
 
 				// Add the MouseListener to cellLabel so it will be able to do stuff.
-				//				cellLabel.addMouseListener(new CellLabelControl(cellLabel));		// Commented out because this grid isn't touched by the user.
+//								cellLabel.addMouseListener(new CellLabelControl(cellLabel));		// Commented out because this grid isn't touched by the user.
 
 				// Add the cellLabel to the gameboard, the 10x10 GridLayout
-				gameBoard.add(cellLabel);
-
+				oceanLabels.add(oceanLabel);
+				gameBoard.add(oceanLabel);
+				
 				count++;	// Increment the count so that the next CellLabel will have the correct position.
 
 			}

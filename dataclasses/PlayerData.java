@@ -9,16 +9,16 @@ public class PlayerData {
 	private int playerNumber;
 	private String playerName;
 	private ShipPlacementData playerOceanGrid;
-	private ArrayList<Integer> playerTargetingGrid;
+	private ArrayList<String> playerTargetingGrid;
 	private ConnectionToClient playerConnectionToClient;
 	
 	public PlayerData() {
 
-		playerTargetingGrid = new ArrayList<Integer>();
+		playerTargetingGrid = new ArrayList<String>();
 		
 		for (int i = 0; i < 100; i++) {
 			
-			playerTargetingGrid.add(0);
+			playerTargetingGrid.add("0");
 			
 		}
 		
@@ -40,11 +40,11 @@ public class PlayerData {
 		this.playerOceanGrid = playerOceanGrid;
 	}
 
-	public ArrayList<Integer> getPlayerTargetingGrid() {
+	public ArrayList<String> getPlayerTargetingGrid() {
 		return playerTargetingGrid;
 	}
 
-	public void setPlayerTargetingGrid(ArrayList<Integer> playerTargetingGrid) {
+	public void setPlayerTargetingGrid(ArrayList<String> playerTargetingGrid) {
 		this.playerTargetingGrid = playerTargetingGrid;
 	}
 

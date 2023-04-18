@@ -5,7 +5,9 @@ import javax.swing.*;
 import client.BattleshipClient;
 import dataclasses.PlacementLabel;
 import dataclasses.LoginData;
+import dataclasses.OceanLabel;
 import dataclasses.ShotFiredData;
+import dataclasses.TargetLabel;
 import gameplaypanel.GameplayPanel;
 
 import java.awt.CardLayout;
@@ -18,9 +20,10 @@ public class GameplayControl implements ActionListener
 {
 	// Private data fields.
 	private JPanel container;
-	private GameplayPanel gameplayPanel;
 	private BattleshipClient battleshipClient;
-	private ArrayList<PlacementLabel> gameplayCellLabels;
+	private GameplayPanel gameplayPanel;
+	private ArrayList<TargetLabel> targetLabels;
+	private ArrayList<OceanLabel> oceanLabels;
 	
 	// This constructor connects the outside components so that the control panel can affect things.
 	public GameplayControl(JPanel container, BattleshipClient battleshipClient)
@@ -35,14 +38,26 @@ public class GameplayControl implements ActionListener
 		
 	}
 	
-	public void setCellLabels(ArrayList<PlacementLabel> gameplayCellLabels) {
-		
-		this.gameplayCellLabels = gameplayCellLabels;
-		
+	public ArrayList<TargetLabel> getTargetLabels() {
+		return targetLabels;
 	}
-	
-	
-	
+
+	public void setTargetLabels(ArrayList<TargetLabel> targetLabels) {
+		this.targetLabels = targetLabels;
+	}
+
+	public ArrayList<OceanLabel> getOceanLabels() {
+		return oceanLabels;
+	}
+
+	public void setOceanLabels(ArrayList<OceanLabel> oceanLabels) {
+		this.oceanLabels = oceanLabels;
+	}
+
+	public GameplayPanel getGameplayPanel() {
+		return gameplayPanel;
+	}
+
 	public JPanel getContainer() {
 		return container;
 	}
