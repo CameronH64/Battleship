@@ -74,6 +74,7 @@ public class GameplayControl implements ActionListener
 			System.out.println("Client-side: New Game pressed.");
 			
 			
+			
 		} else if (command == "Quit") {
 			
 			System.out.println("Client-side: Quit pressed.");
@@ -90,7 +91,20 @@ public class GameplayControl implements ActionListener
 //			System.exit(0);
 			
 			
-		} 
+			
+		} else if (command == "Connect") {
+			
+			try {
+				battleshipClient.openConnection();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			
+			
+		}
+			
 		// Code for enabling the New Game button
 //		JButton newGameButton = gameplayPanel.getNewGameButton();
 //		newGameButton.setEnabled(true);

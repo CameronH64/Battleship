@@ -26,7 +26,7 @@ public class BattleshipClient extends AbstractClient{
 //	public void setContainer(JPanel container) { this.container = container; }
 	
 	public void connectionEstablished() {
-		System.out.println("Client-side: Client connected. ");
+		System.out.println("[CLIENT] CLIENT CONNECTED");
 	}
 		
 	public void handleMessageFromServer(Object arg0) {
@@ -40,11 +40,11 @@ public class BattleshipClient extends AbstractClient{
 		
 		if (arg0 instanceof LoginData) {
 			
-			System.out.println("Client-side: Received LoginData.");
+			System.out.println("[CLIENT] RECEIVED LOGINDATA");
 			
 		} else if (arg0 instanceof ShotFiredData) {
 			
-			System.out.println("Client-side: Received ShotFiredData.");
+			System.out.println("[CLIENT] RECEIVED SHOTFIREDDATA");
 			
 		} else if (arg0 instanceof LoginConfirmationData) {
 			
@@ -60,7 +60,7 @@ public class BattleshipClient extends AbstractClient{
 				
 			} else {
 				
-				System.out.println("Invalid credentials");
+				System.out.println("[CLIENT] INVALID CREDENTIALS");
 				
 			}
 			
@@ -74,7 +74,7 @@ public class BattleshipClient extends AbstractClient{
 //		statusLabel.setText("Not Connected");
 //		statusLabel.setForeground(Color.RED);
 		
-		
+		System.out.println("[CLIENT] CONNECTION CLOSED");
 		
 	}
 	

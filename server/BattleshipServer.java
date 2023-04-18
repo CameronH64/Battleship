@@ -50,15 +50,15 @@ public class BattleshipServer extends AbstractServer
 	public void testingSetUp() {
 
 		String player1FleetArray[][] = {{"0","C","C","C","C","C","0","0","0","0"},
-				{"0","0","0","P","P","0","0","0","0","0"},
-				{"0","0","0","0","0","0","0","0","0","0"},
-				{"0","0","0","0","B","B","B","B","0","0"},
-				{"0","0","0","0","0","0","0","0","0","0"},
-				{"0","0","0","0","0","0","0","0","0","0"},
-				{"0","0","0","0","D","0","S","0","0","0"},
-				{"0","0","0","0","D","0","S","0","0","0"},
-				{"0","0","0","0","D","0","S","0","0","0"},
-				{"0","0","0","0","0","0","0","0","0","0"}};
+										{"0","0","0","P","P","0","0","0","0","0"},
+										{"0","0","0","0","0","0","0","0","0","0"},
+										{"0","0","0","0","B","B","B","B","0","0"},
+										{"0","0","0","0","0","0","0","0","0","0"},
+										{"0","0","0","0","0","0","0","0","0","0"},
+										{"0","0","0","0","D","0","S","0","0","0"},
+										{"0","0","0","0","D","0","S","0","0","0"},
+										{"0","0","0","0","D","0","S","0","0","0"},
+										{"0","0","0","0","0","0","0","0","0","0"}};
 
 		ArrayList<String> player1FlatFleet = new ArrayList<String>();
 
@@ -72,15 +72,15 @@ public class BattleshipServer extends AbstractServer
 		// Now have a flat fleet for player 1.
 
 		String player2FleetArray[][] = {{"0","C","C","C","C","C","0","0","0","0"},
-				{"0","0","0","P","P","0","0","0","0","0"},
-				{"0","0","0","0","0","0","0","0","0","0"},
-				{"0","0","0","0","B","B","B","B","0","0"},
-				{"0","0","0","0","0","0","0","0","0","0"},
-				{"0","0","0","0","0","0","0","0","0","0"},
-				{"0","0","0","0","D","0","S","0","0","0"},
-				{"0","0","0","0","D","0","S","0","0","0"},
-				{"0","0","0","0","D","0","S","0","0","0"},
-				{"0","0","0","0","0","0","0","0","0","0"}};
+										{"0","0","0","P","P","0","0","0","0","0"},
+										{"0","0","0","0","0","0","0","0","0","0"},
+										{"0","0","0","0","B","B","B","B","0","0"},
+										{"0","0","0","0","0","0","0","0","0","0"},
+										{"0","0","0","0","0","0","0","0","0","0"},
+										{"0","0","0","0","D","0","S","0","0","0"},
+										{"0","0","0","0","D","0","S","0","0","0"},
+										{"0","0","0","0","D","0","S","0","0","0"},
+										{"0","0","0","0","0","0","0","0","0","0"}};
 
 		ArrayList<String> player2FlatFleet = new ArrayList<String>();
 
@@ -127,7 +127,7 @@ public class BattleshipServer extends AbstractServer
 			String username = ((LoginData) arg0).getUsername();
 			String password = ((LoginData) arg0).getPassword();
 
-			System.out.println("Server-side: Received a LoginData object!");
+			System.out.println("[SERVER] RECEIVED LOGINDATA");
 			System.out.println(username + ", " + password);
 			
 			LoginConfirmationData data = new LoginConfirmationData(true);
@@ -143,7 +143,7 @@ public class BattleshipServer extends AbstractServer
 			
 		} else if (arg0 instanceof ShotFiredData) {
 
-			System.out.println("Server-side: Received a ShotFiredData object!");
+			System.out.println("[SERVER] RECEIVED SHOTFIREDDATA");
 			//			System.out.println(x);
 			//			System.out.println(y);
 
@@ -242,19 +242,21 @@ public class BattleshipServer extends AbstractServer
 
 	protected void serverStarted() 
 	{
-		System.out.println("Server-side: Server Started\n");
+		System.out.println("[SERVER] SERVER STARTED");
+		System.out.println();
 		//log.append("Server Started\n");
 	}
 
 	protected void serverStopped() 
 	{
-		System.out.println("Server-side: Server Stopped");
+		System.out.println("[SERVER] SERVER STOPPED");
+		System.out.println();
 		//log.append("Server Stopped Accepting New Clients - Press Listen to Start Accepting New Clients\n");
 	}
 
 	protected void serverClosed()
 	{
-		System.out.println("Server and all current clients are closed - Press Listen to Restart");
+		System.out.println("[SERVER] SERVER AND CLIENTS CLOSED. PRESS LISTEN TO RESTART.");
 		//log.append("Server and all current clients are closed - Press Listen to Restart\n");
 	}
 
@@ -284,15 +286,15 @@ public class BattleshipServer extends AbstractServer
 		
 		// Not not, just let it be.
 
-		System.out.println("Server-side: Client connected. " + client.getId());
-		
-		System.out.println("Number of connections: " + getClientConnections().length);
+		System.out.println("[SERVER] CLIENT CONNECTED: CLIENT " + client.getId());
+		System.out.println("[SERVER] CONNECTIONS: " + getClientConnections().length);
+		System.out.println();
 		
 		int numberOfClients = getClientConnections().length;
 		
 		if (numberOfClients > 2) {
 			
-			System.out.println("Remove a client here.");
+			System.out.println("[SERVER] REMOVED CLIENT HERE");
 			
 			try {
 				client.close();
@@ -315,12 +317,6 @@ public class BattleshipServer extends AbstractServer
 //			}
 			
 			
-		} else {
-			
-//			System.out.println("Client Not Connected: Too many connections.");
-			System.out.println("Added a client here.");
-			System.out.println();
-			
 		}
 		
 //		status.setText("Connected");
@@ -337,8 +333,8 @@ public class BattleshipServer extends AbstractServer
 		// If the disconnected client is found, remove it from clientList.
 		
 		
-		System.out.println("Server-side: Client Disconnected.");
-		System.out.println("Number of connections: " + getClientConnections().length);
+		System.out.println("[SERVER] CLIENT DISCONNECTED");
+		System.out.println("[SERVER] CONNECTIONS: " + getClientConnections().length);
 		System.out.println();
 		
 //		int count = 0;
