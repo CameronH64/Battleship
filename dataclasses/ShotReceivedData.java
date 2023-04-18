@@ -2,11 +2,11 @@ package dataclasses;
 
 import java.io.Serializable;
 
-public class ShotFiredData implements Serializable {
+public class ShotReceivedData implements Serializable {
 	
 	private int position;
 	
-	public ShotFiredData(int position){
+	public ShotReceivedData(int position){
 		
 		this.position = position;
 		
