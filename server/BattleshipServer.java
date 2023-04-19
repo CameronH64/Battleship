@@ -12,9 +12,9 @@ import java.util.Random;
 import java.util.Scanner;
 import java.util.Stack;
 
-import dataclasses.LoginConfirmationData;
+import dataclasses.ConfirmationData;
 // External imports
-import dataclasses.LoginData;
+import dataclasses.MainMenuLoginData;
 import dataclasses.PlayerData;
 import dataclasses.ShipPlacementData;
 import dataclasses.ShotFiredData;
@@ -116,24 +116,25 @@ public class BattleshipServer extends AbstractServer
 		Reminder to myself: This method is a big if-else ladder that checks what kind of data is being inputted.
 
 		If login data, do server stuff
+		If deleteUserData, do server stuff
 		If shot fired data, do confirmation stuff.
 		If ship configuration data, assign it to the server's player configurations.
-
+		
 		Also, "ConnectionToClient arg1" is the connected client that send the message.
 
 		 */
 
-		if (arg0 instanceof LoginData) {
+		if (arg0 instanceof MainMenuLoginData) {
 
 			//			log.append("Server-side: Recieved a LoginData object!");
 
-			String username = ((LoginData) arg0).getUsername();
-			String password = ((LoginData) arg0).getPassword();
+			String username = ((MainMenuLoginData) arg0).getUsername();
+			String password = ((MainMenuLoginData) arg0).getPassword();
 
 			System.out.println("[SERVER] RECEIVED LOGINDATA");
 			System.out.println("[SERVER] DEBUG: LOGINDATA: " + username + ", " + password);
 			
-			LoginConfirmationData loginConfirmationData = new LoginConfirmationData(true);
+			ConfirmationData loginConfirmationData = new ConfirmationData(true);
 			
 			try {
 				arg1.sendToClient(loginConfirmationData);
@@ -211,7 +212,7 @@ public class BattleshipServer extends AbstractServer
 
 
 
-	protected boolean validateUser(LoginData data) {
+	protected boolean validateUser(MainMenuLoginData data) {
 
 		String username = data.getUsername();
 		String password = data.getPassword();

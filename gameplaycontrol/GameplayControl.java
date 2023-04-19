@@ -4,7 +4,7 @@ import javax.swing.*;
 
 import client.BattleshipClient;
 import dataclasses.PlacementLabel;
-import dataclasses.LoginData;
+import dataclasses.MainMenuLoginData;
 import dataclasses.OceanLabel;
 import dataclasses.ShotFiredData;
 import dataclasses.TargetLabel;

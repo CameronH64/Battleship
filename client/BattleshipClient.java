@@ -11,8 +11,8 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import ocsf.client.AbstractClient;
-import dataclasses.LoginConfirmationData;
-import dataclasses.LoginData;
+import dataclasses.ConfirmationData;
+import dataclasses.MainMenuLoginData;
 import dataclasses.ShotFiredData;
 
 public class BattleshipClient extends AbstractClient{
@@ -38,7 +38,7 @@ public class BattleshipClient extends AbstractClient{
 		
 //		boolean loginStatus = (boolean)arg0;
 		
-		if (arg0 instanceof LoginData) {
+		if (arg0 instanceof MainMenuLoginData) {
 			
 			System.out.println("[CLIENT] RECEIVED LOGINDATA");
 			
@@ -46,12 +46,12 @@ public class BattleshipClient extends AbstractClient{
 			
 			System.out.println("[CLIENT] RECEIVED SHOTFIREDDATA");
 			
-		} else if (arg0 instanceof LoginConfirmationData) {
+		} else if (arg0 instanceof ConfirmationData) {
 			
 			// If yes, switch
 			// If no, stay.
 			
-			LoginConfirmationData confirmation = (LoginConfirmationData)arg0;
+			ConfirmationData confirmation = (ConfirmationData)arg0;
 			
 			if (confirmation.getValue()) {
 				

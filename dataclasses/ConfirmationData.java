@@ -2,7 +2,7 @@ package dataclasses;
 
 import java.io.Serializable;
 
-public class LoginConfirmationData implements Serializable {
+public class ConfirmationData implements Serializable {
 
 	/**
 	 * 
@@ -10,13 +10,13 @@ public class LoginConfirmationData implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private boolean value;
 	
-	public LoginConfirmationData() {
+	public ConfirmationData() {
 		
 		value = false;
 		
 	}
 	
-	public LoginConfirmationData(boolean value) {
+	public ConfirmationData(boolean value) {
 		
 		this.value = value;
 		

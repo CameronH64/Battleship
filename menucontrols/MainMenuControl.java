@@ -7,7 +7,7 @@ import java.awt.*;
 import java.awt.event.*;
 import java.io.*;
 import menupanels.MainMenuPanel;
-import dataclasses.LoginData;
+import dataclasses.MainMenuLoginData;
 import client.BattleshipClient;
 
 public class MainMenuControl implements ActionListener
@@ -38,7 +38,7 @@ public class MainMenuControl implements ActionListener
 			JTextField fieldPassword = mainMenu.getFieldPassword();
 			
 //			JLabel labelStatusResponse = mainMenu.getLabelStatusResponse();
-			LoginData credentials = new LoginData(fieldUsername.getText(), fieldPassword.getText());
+			MainMenuLoginData credentials = new MainMenuLoginData(fieldUsername.getText(), fieldPassword.getText());
 			
 			try {
 				battleshipClient.sendToServer(credentials);

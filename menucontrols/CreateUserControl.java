@@ -7,7 +7,7 @@ import java.awt.*;
 import java.awt.event.*;
 import java.io.*;
 import menupanels.CreateUserPanel;
-import dataclasses.LoginData;
+import dataclasses.MainMenuLoginData;
 import client.BattleshipClient;
 
 public class CreateUserControl implements ActionListener
@@ -37,7 +37,7 @@ public class CreateUserControl implements ActionListener
 			JTextField fieldUsername = createUserMenu.getFieldUsername();
 			JTextField fieldPassword = createUserMenu.getFieldPassword();
 			JLabel labelStatusResponse = createUserMenu.getLabelStatusResponse();
-			LoginData credentials = new LoginData(fieldUsername.getText(), fieldPassword.getText());
+			MainMenuLoginData credentials = new MainMenuLoginData(fieldUsername.getText(), fieldPassword.getText());
 			//client.sendToServer(credentials);
 
 			labelStatusResponse.setForeground(Color.black);

@@ -3,7 +3,7 @@ package gameplaycontrol;
 import javax.swing.*;
 
 import client.BattleshipClient;
-import dataclasses.LoginData;
+import dataclasses.MainMenuLoginData;
 import dataclasses.ShotFiredData;
 import dataclasses.TargetLabel;
 import gameplaypanel.GameplayPanel;

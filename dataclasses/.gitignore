@@ -12,3 +12,7 @@
 /PlacementLabel.class
 /TargetLabel.class
 /OceanLabel.class
+/ConfirmationData.class
+/MainMenuLoginData.class
+/CreateUserData.class
+/DeleteUserData.class

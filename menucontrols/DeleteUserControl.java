@@ -7,7 +7,7 @@ import java.awt.*;
 import java.awt.event.*;
 import java.io.*;
 import menupanels.DeleteUserPanel;
-import dataclasses.LoginData;
+import dataclasses.MainMenuLoginData;
 import client.BattleshipClient;
 
 public class DeleteUserControl implements ActionListener
@@ -37,7 +37,7 @@ public class DeleteUserControl implements ActionListener
 			JTextField fieldUsername = deleteUserMenu.getFieldUsername();
 			JTextField fieldPassword = deleteUserMenu.getFieldPassword();
 			JLabel labelStatusResponse = deleteUserMenu.getLabelStatusResponse();
-			LoginData credentials = new LoginData(fieldUsername.getText(), fieldPassword.getText());
+			MainMenuLoginData credentials = new MainMenuLoginData(fieldUsername.getText(), fieldPassword.getText());
 			//client.sendToServer(credentials);
 
 			labelStatusResponse.setForeground(Color.black);
