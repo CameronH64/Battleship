@@ -28,9 +28,8 @@ public class BattleshipServer extends AbstractServer
 	private JTextArea serverLogTextArea;
 	private JLabel serverConnectionStatusLabel;
 	
-	private static Random random = new Random();
-	private int turnFlag = 0;
-		
+	private int turnCounter = 0;
+	
 	Stack<PlayerData> playerStack = new Stack<PlayerData>();		// This will manage all the players. The ConnectionClient objects will also be assigned to these.
 	private boolean player1Win;
 	private boolean player2Win;
@@ -51,13 +50,7 @@ public class BattleshipServer extends AbstractServer
 		
 		
 	}
-		
-	public void testingSetUp() {
-
-		
-
-	}
-
+	
 	public BattleshipServer(int port)
 	{
 		super(port);
@@ -137,6 +130,10 @@ public class BattleshipServer extends AbstractServer
 			// If doesn't exists, executeDML to create the user.
 			// Then, send to client a message that the user was created.
 			
+		} else if (arg0 instanceof ShipPlacementData) {
+			
+			// Depending on which client ID, assign this placement data to the PlayerData object (inside playerStack).
+			
 			
 			
 		} else if (arg0 instanceof ShotFiredData) {
@@ -150,48 +147,121 @@ public class BattleshipServer extends AbstractServer
 			// Cycle through all the players (2) and find which player's ConnectionToClient ID matches the one sent.
 			// This user is the one who fired the shot.
 			
-			PlayerData playerFired = new PlayerData();
 			
-			for (PlayerData playerData : playerStack) {
-				if (playerData.getPlayerConnectionToClient().getId() == arg1.getId()) {
+			// Player 1 will go first because the turnCounter starts at 0, which is even.
+			
+			ShotFiredData shotFired = (ShotFiredData)arg0;
+			
+			// If player 1's turn, based off of the turnCounter
+			if (turnCounter % 2 == 0) {
+				
+				// Get the player's involved (only two)
+				PlayerData player1 = playerStack.get(0);
+				PlayerData player2 = playerStack.get(1);
+				
+				ArrayList<String> player1TargetingGrid = player1.getPlayerTargetingGrid();
+				ArrayList<String> player2OceanGrid = player2.getPlayerOceanGrid();
+				
+				String hitSpot = player2OceanGrid.get(shotFired.getPosition());
+				
+				// Check if player 1 hit player 2
+				if (hitSpot != "0") {
 					
-					playerFired = playerData;
+					System.out.println("Server side: Player 1 hit player 2!");
+					
+					switch (hitSpot) {
+					
+					case "C":
+						player2.setCarrierHitCount(player2.getCarrierHitCount() + 1);
+						break;
+					case "B":
+						player2.setBattleshipHitCount(player2.getBattleshipHitCount() + 1);
+						break;
+					case "D":
+						player2.setDestroyerHitCount(player2.getDestroyerHitCount() + 1);
+						break;
+					case "S":
+						player2.setSubmarineHitCount(player2.getSubmarineHitCount() + 1);
+						break;
+					case "P":
+						player2.setPatrolHitCount(player2.getPatrolHitCount() + 1);
+						break;
+					// I don't think I need a default?
+					}
+					
+					// Check if player one has sunk a ship.
+					if (player2.getCarrierHitCount() == 5 && !player2.isCarrierSunk()) {
+						
+						player2.setCarrierSunk(true);
+						
+						System.out.println("Carrier sunk!");
+						System.out.println();
+						
+					} else if (player2.getBattleshipHitCount() == 4 && !player2.isBattleshipSunk()) {
+						
+						player2.setBattleshipSunk(true);
+
+						System.out.println("Battleship sunk!");
+						System.out.println();
+						
+					} else if (player2.getDestroyerHitCount() == 3 && !player2.isDestroyerSunk()) {
+						
+						player2.setDestroyerSunk(true);
+						
+						System.out.println("Destroyer sunk!");
+						System.out.println();
+						
+					} else if (player2.getSubmarineHitCount() == 3 && !player2.isSubmarineSunk()) {
+						
+						player2.setSubmarineSunk(true);
+						
+						System.out.println("Submarine sunk!");
+						System.out.println();
+						
+					} else if (player2.getPatrolHitCount() == 2 && !player2.isPatrolSunk()) {
+						
+						player2.setPatrolSunk(true);
+						
+						System.out.println("Patrol sunk!");
+						System.out.println();
+						
+					}
+					
+					
+				} else if (hitSpot == "0") {
+					
+					System.out.println("Server side: Player 1 did not hit player 2!");
+					System.out.println();
 					
 				}
+				
+//				turnCounter++;
+				
+			// Or if player 2's turn.
+			} else if (turnCounter % 2 == 1) {
+				
+				PlayerData player1 = playerStack.get(0);
+				PlayerData player2 = playerStack.get(1);
+				
+				
+				
+				turnCounter++;
+				
 			}
 			
 			
 			
-			
-			
-			
-			
-			
-			// Use a "turn flag?"
-			
-			// Check turn flag.
-			
-			// If 1, player one's turn.
-			// Do player 1 checking.
-			// Add one to turn flag.
-			
-			// If 2, player one's turn.
-			// Do player 2 checking.
-			// Subtract one to turn flag.
-			
-//			if (turnFlag == 1) {
-//				
-//				
-//				
-//				turnFlag++;
-//				
-//			} else if (turnFlag == 2) {
-//				
-//				
-//				
-//				turnFlag--;
-//				
+//			PlayerData playerFired = new PlayerData();
+//			
+//			for (PlayerData playerData : playerStack) {
+//				if (playerData.getPlayerConnectionToClient().getId() == arg1.getId()) {
+//					
+//					playerFired = playerData;
+//					
+//				}
 //			}
+			
+			
 			
 		}
 
@@ -255,10 +325,11 @@ public class BattleshipServer extends AbstractServer
 
 	}
 	
-	protected boolean checkTwoOrFewerClients() {
+	protected void resetGame() {
 
-		return true;
-
+		turnCounter = 0;
+		playerStack = new Stack<PlayerData>();
+		
 	}
 	
 	
@@ -332,11 +403,16 @@ public class BattleshipServer extends AbstractServer
 			
 			int numberOfClients = getClientConnections().length;
 			
+			
+			
+			// Add the new player to the player data structure!
 			PlayerData player = new PlayerData();
 			player.setPlayerNumber(numberOfClients);
 			player.setPlayerConnectionToClient(client);			// This gives an ID to the player that can be referenced and accessed.
 			player.setTestingOceanGrid();						// For testing.
 			playerStack.add(player);
+			
+			
 			
 			/*
 	 		

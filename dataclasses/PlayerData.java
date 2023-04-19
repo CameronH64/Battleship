@@ -11,18 +11,42 @@ public class PlayerData {
 	private ConnectionToClient playerConnectionToClient;
 	
 	private ArrayList<String> playerTargetingGrid;
-	private ShipPlacementData playerOceanGrid;
+	private ArrayList<String> playerOceanGrid;
+	
+	private int carrierHitCount;
+	private int battleshipHitCount;
+	private int destroyerHitCount;
+	private int submarineHitCount;
+	private int patrolHitCount;
+	
+	private boolean carrierSunk;
+	private boolean battleshipSunk;
+	private boolean destroyerSunk;
+	private boolean submarineSunk;
+	private boolean patrolSunk;
 	
 	public PlayerData() {
 		
-		// Set up the targeting grid; it'll be blank.
+		carrierHitCount = 0;
+		battleshipHitCount = 0;
+		destroyerHitCount = 0;
+		submarineHitCount = 0;
+		patrolHitCount = 0;
+		
+		carrierSunk = false;
+		battleshipSunk = false;
+		destroyerSunk = false;
+		submarineSunk = false;
+		patrolSunk = false;
+		
+		// Always set up the targeting grid; it'll be blank.
 		playerTargetingGrid = new ArrayList<String>();
 		
-		for (int i = 0; i < 100; i++) {
-			
+		for (int i = 0; i < 100; i++) {	
 			playerTargetingGrid.add("0");
-			
 		}
+		
+		setTestingOceanGrid();
 		
 	}
 	
@@ -52,10 +76,91 @@ public class PlayerData {
 			}
 		}
 		
-		playerOceanGrid.setShipConfiguration(flatFleet);
+		setPlayerOceanGrid(flatFleet);
 		
 	}
 	
+
+	public boolean isCarrierSunk() {
+		return carrierSunk;
+	}
+
+	public void setCarrierSunk(boolean carrierSunk) {
+		this.carrierSunk = carrierSunk;
+	}
+
+	public boolean isBattleshipSunk() {
+		return battleshipSunk;
+	}
+
+	public void setBattleshipSunk(boolean battleshipSunk) {
+		this.battleshipSunk = battleshipSunk;
+	}
+
+	public boolean isDestroyerSunk() {
+		return destroyerSunk;
+	}
+
+	public void setDestroyerSunk(boolean destroyerSunk) {
+		this.destroyerSunk = destroyerSunk;
+	}
+
+	public boolean isSubmarineSunk() {
+		return submarineSunk;
+	}
+
+	public void setSubmarineSunk(boolean submarineSunk) {
+		this.submarineSunk = submarineSunk;
+	}
+
+	public boolean isPatrolSunk() {
+		return patrolSunk;
+	}
+
+	public void setPatrolSunk(boolean patrolSunk) {
+		this.patrolSunk = patrolSunk;
+	}
+
+	public int getCarrierHitCount() {
+		return carrierHitCount;
+	}
+
+	public void setCarrierHitCount(int carrierHitCount) {
+		this.carrierHitCount = carrierHitCount;
+	}
+
+	public int getBattleshipHitCount() {
+		return battleshipHitCount;
+	}
+
+	public void setBattleshipHitCount(int battleshipHitCount) {
+		this.battleshipHitCount = battleshipHitCount;
+	}
+
+	public int getDestroyerHitCount() {
+		return destroyerHitCount;
+	}
+
+	public void setDestroyerHitCount(int destroyerHitCount) {
+		this.destroyerHitCount = destroyerHitCount;
+	}
+
+	public int getSubmarineHitCount() {
+		return submarineHitCount;
+	}
+
+	public void setSubmarineHitCount(int submarineHitCount) {
+		this.submarineHitCount = submarineHitCount;
+	}
+
+	public int getPatrolHitCount() {
+		return patrolHitCount;
+	}
+
+	public void setPatrolHitCount(int patrolHitCount) {
+		this.patrolHitCount = patrolHitCount;
+	}
+
 	public int getPlayerNumber() {
 		return playerNumber;
 	}
@@ -64,11 +169,11 @@ public class PlayerData {
 		this.playerNumber = playerNumber;
 	}
 
-	public ShipPlacementData getPlayerOceanGrid() {
+	public ArrayList<String> getPlayerOceanGrid() {
 		return playerOceanGrid;
 	}
 
-	public void setPlayerOceanGrid(ShipPlacementData playerOceanGrid) {
+	public void setPlayerOceanGrid(ArrayList<String> playerOceanGrid) {
 		this.playerOceanGrid = playerOceanGrid;
 	}
 
