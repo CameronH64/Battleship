@@ -8,12 +8,14 @@ public class PlayerData {
 	
 	private int playerNumber;
 	private String playerName;
-	private ShipPlacementData playerOceanGrid;
-	private ArrayList<String> playerTargetingGrid;
 	private ConnectionToClient playerConnectionToClient;
 	
+	private ArrayList<String> playerTargetingGrid;
+	private ShipPlacementData playerOceanGrid;
+	
 	public PlayerData() {
-
+		
+		// Set up the targeting grid; it'll be blank.
 		playerTargetingGrid = new ArrayList<String>();
 		
 		for (int i = 0; i < 100; i++) {
@@ -23,7 +25,37 @@ public class PlayerData {
 		}
 		
 	}
-
+	
+	public void setTestingOceanGrid() {
+		
+		// This method is for testing, since I can't get the ship configuration from the panel yet.
+		
+		ArrayList<String> flatFleet = new ArrayList<String>();
+		
+		String playerFleetArray[][] = {{"C","C","C","C","C","0","0","0","0","0"},
+									   {"B","B","B","B","0","0","0","0","0","0"},
+									   {"D","D","D","0","0","0","0","0","0","0"},
+									   {"S","S","S","0","0","0","0","0","0","0"},
+									   {"P","P","0","0","0","0","0","0","0","0"},
+									   {"0","0","0","0","0","0","0","0","0","0"},
+									   {"0","0","0","0","0","0","0","0","0","0"},
+									   {"0","0","0","0","0","0","0","0","0","0"},
+									   {"0","0","0","0","0","0","0","0","0","0"},
+									   {"0","0","0","0","0","0","0","0","0","0"}};
+		
+		
+		
+		// First, flatten the array into a 1D array.
+		for(int i = 0; i < 10; i++) {				// Check each row.
+			for(int j = 0; j < 10; j++) {			// Check each column.
+				flatFleet.add(playerFleetArray[i][j]);
+			}
+		}
+		
+		playerOceanGrid.setShipConfiguration(flatFleet);
+		
+	}
+	
 	public int getPlayerNumber() {
 		return playerNumber;
 	}

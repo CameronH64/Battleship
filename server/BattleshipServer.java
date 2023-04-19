@@ -13,6 +13,8 @@ import java.util.Scanner;
 import java.util.Stack;
 
 import dataclasses.ConfirmationData;
+import dataclasses.CreateUserData;
+import dataclasses.DeleteUserData;
 // External imports
 import dataclasses.MainMenuLoginData;
 import dataclasses.PlayerData;
@@ -41,55 +43,12 @@ public class BattleshipServer extends AbstractServer
 		super(8300);
 		
 		// Randomly choose which player goes first (1 means player 1, 2 means player 2)
-		turnFlag = random.nextInt(2)+1;
+//		turnFlag = random.nextInt(2)+1;
 		
 		player1Win = false;
 		player2Win = false;
 		
-		// Testing Setup
-		String player1FleetArray[][] = {{"0","C","C","C","C","C","0","0","0","0"},
-										{"0","0","0","P","P","0","0","0","0","0"},
-										{"0","0","0","0","0","0","0","0","0","0"},
-										{"0","0","0","0","B","B","B","B","0","0"},
-										{"0","0","0","0","0","0","0","0","0","0"},
-										{"0","0","0","0","0","0","0","0","0","0"},
-										{"0","0","0","0","D","0","S","0","0","0"},
-										{"0","0","0","0","D","0","S","0","0","0"},
-										{"0","0","0","0","D","0","S","0","0","0"},
-										{"0","0","0","0","0","0","0","0","0","0"}};
-
-		ArrayList<String> player1FlatFleet = new ArrayList<String>();
-
-		// First, flatten the array into a 1D array.
-		for(int i = 0; i < 10; i++) {				// Check each row.
-			for(int j = 0; j < 10; j++) {			// Check each column.
-				player1FlatFleet.add(player1FleetArray[i][j]);
-			}
-		}
-
-		// Now have a flat fleet for player 1.
-
-		String player2FleetArray[][] = {{"0","C","C","C","C","C","0","0","0","0"},
-										{"0","0","0","P","P","0","0","0","0","0"},
-										{"0","0","0","0","0","0","0","0","0","0"},
-										{"0","0","0","0","B","B","B","B","0","0"},
-										{"0","0","0","0","0","0","0","0","0","0"},
-										{"0","0","0","0","0","0","0","0","0","0"},
-										{"0","0","0","0","D","0","S","0","0","0"},
-										{"0","0","0","0","D","0","S","0","0","0"},
-										{"0","0","0","0","D","0","S","0","0","0"},
-										{"0","0","0","0","0","0","0","0","0","0"}};
-
-		ArrayList<String> player2FlatFleet = new ArrayList<String>();
-
-		// First, flatten the array into a 1D array.
-		for(int i = 0; i < 10; i++) {				// Check each row.
-			for(int j = 0; j < 10; j++) {			// Check each column.
-				player2FlatFleet.add(player2FleetArray[i][j]);
-			}
-		}
-
-		// Now have a flat fleet for player 2.
+		
 		
 	}
 		
@@ -150,13 +109,63 @@ public class BattleshipServer extends AbstractServer
 			
 			
 			
+		} else if (arg0 instanceof DeleteUserData) {
+			
+			System.out.println("[SERVER] RECEIVED DELETEUSERDATA");
+			
+			// Receives a DeleteUserData object username/password to delete.
+			
+			// Will use the verify account method to check that the account exists to be deleted.
+			
+			// If exists, executeDML to delete it.
+			// Then, send to client a message that the user was deleted.
+			
+			// If doesn't exists, don't do any SQL stuff.
+			// Then, send to client a message the user was not deleted.
+			
+		} else if (arg0 instanceof CreateUserData) {
+			
+			System.out.println("[SERVER] RECEIVED CREATEUSERDATA");
+			
+			// Receives a CreateUserData object username/password to delete.
+			
+			// Will use the verify account method to check that the account DOES NOT exist to be created.
+			
+			// If exists, don't do any SQL stuff.
+			// Then, send to client a message that the user wasn't created (already exists).
+			
+			// If doesn't exists, executeDML to create the user.
+			// Then, send to client a message that the user was created.
+			
+			
+			
 		} else if (arg0 instanceof ShotFiredData) {
 
 			System.out.println("[SERVER] RECEIVED SHOTFIREDDATA");
-			//			System.out.println(x);
-			//			System.out.println(y);
 			
-			// Game logic goes here.
+			// Check the player's shot fired against the other player's ocean grid.
+			
+			// Confusing, but this is how it works:
+			
+			// Cycle through all the players (2) and find which player's ConnectionToClient ID matches the one sent.
+			// This user is the one who fired the shot.
+			
+			PlayerData playerFired = new PlayerData();
+			
+			for (PlayerData playerData : playerStack) {
+				if (playerData.getPlayerConnectionToClient().getId() == arg1.getId()) {
+					
+					playerFired = playerData;
+					
+				}
+			}
+			
+			
+			
+			
+			
+			
+			
 			
 			// Use a "turn flag?"
 			
@@ -170,19 +179,19 @@ public class BattleshipServer extends AbstractServer
 			// Do player 2 checking.
 			// Subtract one to turn flag.
 			
-			if (turnFlag == 1) {
-				
-				
-				
-				turnFlag++;
-				
-			} else if (turnFlag == 2) {
-				
-				
-				
-				turnFlag--;
-				
-			}
+//			if (turnFlag == 1) {
+//				
+//				
+//				
+//				turnFlag++;
+//				
+//			} else if (turnFlag == 2) {
+//				
+//				
+//				
+//				turnFlag--;
+//				
+//			}
 			
 		}
 
@@ -326,6 +335,7 @@ public class BattleshipServer extends AbstractServer
 			PlayerData player = new PlayerData();
 			player.setPlayerNumber(numberOfClients);
 			player.setPlayerConnectionToClient(client);			// This gives an ID to the player that can be referenced and accessed.
+			player.setTestingOceanGrid();						// For testing.
 			playerStack.add(player);
 			
 			/*
