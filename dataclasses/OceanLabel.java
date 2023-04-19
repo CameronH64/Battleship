@@ -13,6 +13,12 @@ public class OceanLabel extends JLabel implements Serializable {
 		
 		this.position = position;
 		shipCharacter = "";
+	}
+	
+	public OceanLabel(int position, String shipCharacter) {
+		
+		this.position = position;
+		this.shipCharacter = shipCharacter;
 		
 	}
 

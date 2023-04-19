@@ -13,6 +13,7 @@ import javax.swing.JTextField;
 import ocsf.client.AbstractClient;
 import dataclasses.ConfirmationData;
 import dataclasses.MainMenuLoginData;
+import dataclasses.OceanLabel;
 import dataclasses.ShotFiredData;
 
 public class BattleshipClient extends AbstractClient{
@@ -65,6 +66,10 @@ public class BattleshipClient extends AbstractClient{
 			}
 			
 
+			
+		} else if (arg0 instanceof OceanLabel) {
+			
+			
 			
 		}
 		

@@ -17,9 +17,11 @@ import dataclasses.CreateUserData;
 import dataclasses.DeleteUserData;
 // External imports
 import dataclasses.MainMenuLoginData;
+import dataclasses.OceanLabel;
 import dataclasses.PlayerData;
 import dataclasses.ShipPlacementData;
 import dataclasses.ShotFiredData;
+import dataclasses.TargetLabel;
 
 // This also has the main method to start the BattleshipServer.
 
@@ -159,17 +161,17 @@ public class BattleshipServer extends AbstractServer
 				PlayerData player1 = playerStack.get(0);
 				PlayerData player2 = playerStack.get(1);
 				
-				ArrayList<String> player1TargetingGrid = player1.getPlayerTargetingGrid();
-				ArrayList<String> player2OceanGrid = player2.getPlayerOceanGrid();
+				ArrayList<TargetLabel> player1TargetingGrid = player1.getPlayerTargetingGrid();
+				ArrayList<OceanLabel> player2OceanGrid = player2.getPlayerOceanGrid();
 				
-				String hitSpot = player2OceanGrid.get(shotFired.getPosition());
+				OceanLabel hitOceanLabel = player2OceanGrid.get(shotFired.getPosition());
 				
 				// Check if player 1 hit player 2
-				if (hitSpot != "0") {
+				if (hitOceanLabel.getShipCharacter() != "0") {
 					
 					System.out.println("Server side: Player 1 hit player 2!");
 					
-					switch (hitSpot) {
+					switch (hitOceanLabel.getShipCharacter()) {
 					
 					case "C":
 						player2.setCarrierHitCount(player2.getCarrierHitCount() + 1);
@@ -228,7 +230,7 @@ public class BattleshipServer extends AbstractServer
 					}
 					
 					
-				} else if (hitSpot == "0") {
+				} else if (hitOceanLabel.getShipCharacter() == "0") {
 					
 					System.out.println("Server side: Player 1 did not hit player 2!");
 					System.out.println();

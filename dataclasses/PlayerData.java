@@ -10,8 +10,8 @@ public class PlayerData {
 	private String playerName;
 	private ConnectionToClient playerConnectionToClient;
 	
-	private ArrayList<String> playerTargetingGrid;
-	private ArrayList<String> playerOceanGrid;
+	private ArrayList<TargetLabel> playerTargetingGrid;
+	private ArrayList<OceanLabel> playerOceanGrid;
 	
 	private int carrierHitCount;
 	private int battleshipHitCount;
@@ -39,22 +39,25 @@ public class PlayerData {
 		submarineSunk = false;
 		patrolSunk = false;
 		
-		// Always set up the targeting grid; it'll be blank.
-		playerTargetingGrid = new ArrayList<String>();
+		// Set up the targeting grid; it'll always be blank.
+		playerTargetingGrid = new ArrayList<TargetLabel>();
 		
 		for (int i = 0; i < 100; i++) {	
-			playerTargetingGrid.add("0");
+			playerTargetingGrid.add(new TargetLabel(i, "0"));
 		}
 		
+		// Needed for testing. To assign an ocean grid to the player.
+		// WILL BE REMOVED ONCE ArrayList<PlacementLabel> IS RECEIVED FROM CLIENT.
 		setTestingOceanGrid();
 		
 	}
 	
+	
 	public void setTestingOceanGrid() {
 		
-		// This method is for testing, since I can't get the ship configuration from the panel yet.
+		// This method is for testing, since I the ShipPlacement panel/control is a work in progress.
 		
-		ArrayList<String> flatFleet = new ArrayList<String>();
+		ArrayList<OceanLabel> flatFleet = new ArrayList<OceanLabel>();
 		
 		String playerFleetArray[][] = {{"C","C","C","C","C","0","0","0","0","0"},
 									   {"B","B","B","B","0","0","0","0","0","0"},
@@ -72,11 +75,13 @@ public class PlayerData {
 		// First, flatten the array into a 1D array.
 		for(int i = 0; i < 10; i++) {				// Check each row.
 			for(int j = 0; j < 10; j++) {			// Check each column.
-				flatFleet.add(playerFleetArray[i][j]);
+				flatFleet.add(new OceanLabel(i, playerFleetArray[i][j]));
 			}
 		}
 		
 		setPlayerOceanGrid(flatFleet);
+		
+		
 		
 	}
 	
@@ -169,21 +174,25 @@ public class PlayerData {
 		this.playerNumber = playerNumber;
 	}
 
-	public ArrayList<String> getPlayerOceanGrid() {
-		return playerOceanGrid;
-	}
-
-	public void setPlayerOceanGrid(ArrayList<String> playerOceanGrid) {
-		this.playerOceanGrid = playerOceanGrid;
-	}
-
-	public ArrayList<String> getPlayerTargetingGrid() {
+	public ArrayList<TargetLabel> getPlayerTargetingGrid() {
 		return playerTargetingGrid;
 	}
 
-	public void setPlayerTargetingGrid(ArrayList<String> playerTargetingGrid) {
+
+	public void setPlayerTargetingGrid(ArrayList<TargetLabel> playerTargetingGrid) {
 		this.playerTargetingGrid = playerTargetingGrid;
 	}
+
+
+	public ArrayList<OceanLabel> getPlayerOceanGrid() {
+		return playerOceanGrid;
+	}
+
+
+	public void setPlayerOceanGrid(ArrayList<OceanLabel> playerOceanGrid) {
+		this.playerOceanGrid = playerOceanGrid;
+	}
+
 
 	public ConnectionToClient getPlayerConnectionToClient() {
 		return playerConnectionToClient;
