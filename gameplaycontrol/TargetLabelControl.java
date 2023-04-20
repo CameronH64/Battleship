@@ -27,10 +27,13 @@ public class TargetLabelControl implements MouseListener
 	public TargetLabelControl(TargetLabel targetLabel, BattleshipClient battleshipClient)
 	{
 		this.targetLabel = targetLabel;
-		this.battleshipClient = battleshipClient;
-		
+		this.battleshipClient = battleshipClient;		
 	}
 	
+	public TargetLabelControl(TargetLabel targetLabel)
+	{
+		this.targetLabel = targetLabel;	
+	}
 	
 	
 	public BattleshipClient getBattleshipClient() {

@@ -8,6 +8,7 @@ import dataclasses.OceanLabel;
 import dataclasses.TargetLabel;
 import gameplaycontrol.GameplayControl;
 import gameplaycontrol.TargetLabelControl;
+import shipplacementpanel.ShipPlacementPanel;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -24,7 +25,9 @@ public class GameplayPanel extends JPanel {
 	JButton newGameButton;
 	
 	BattleshipClient battleshipClient;
-	
+
+	private ShipPlacementPanel shipPlacementPanel;
+
 	// Constructor
 	public GameplayPanel(GameplayControl gameplayControl, BattleshipClient battleshipClient){
 		
@@ -139,7 +142,7 @@ public class GameplayPanel extends JPanel {
 
 
 		// Create the gameboard, a 10x10 GridLayout JPanel
-		JPanel gameBoard = new JPanel(new GridLayout(10, 10));
+		JPanel targetBoard = new JPanel(new GridLayout(10, 10));
 		//		gameBoard.setPreferredSize(new Dimension(200, 200));
 
 		// Incrementing for placing each CellLabel in place.
@@ -162,20 +165,20 @@ public class GameplayPanel extends JPanel {
 				int fontSize = 20; // set the font size to 20
 				targetLabel.setFont(new Font(font.getName(), Font.PLAIN, fontSize));
 
-				// Add the MouseListener to cellLabel so it will be able to do stuff.
 				
+				// Add the MouseListener to targetLabel so it will be able to do stuff.
 				targetLabel.addMouseListener(new TargetLabelControl(targetLabel, battleshipClient));
 				
 				
 				// Add the cellLabel to the gameboard, the 10x10 GridLayout
 				targetLabels.add(targetLabel);
-				gameBoard.add(targetLabel);
+				targetBoard.add(targetLabel);
 				
 				count++;	// Increment the count so that the next CellLabel will have the correct position.
 
 			}
 		}
-		return gameBoard;
+		return targetBoard;
 	}
 	
 	
@@ -188,7 +191,7 @@ public class GameplayPanel extends JPanel {
 
 
 		// Create the gameboard, a 10x10 GridLayout JPanel
-		JPanel gameBoard = new JPanel(new GridLayout(10, 10));
+		JPanel oceanBoard = new JPanel(new GridLayout(10, 10));
 		//		gameBoard.setPreferredSize(new Dimension(200, 200));
 
 		// Incrementing for placing each CellLabel in place.
@@ -211,18 +214,49 @@ public class GameplayPanel extends JPanel {
 				int fontSize = 20; // set the font size to 20
 				oceanLabel.setFont(new Font(font.getName(), Font.PLAIN, fontSize));
 
-				// Add the MouseListener to cellLabel so it will be able to do stuff.
-//								cellLabel.addMouseListener(new CellLabelControl(cellLabel));		// Commented out because this grid isn't touched by the user.
+//				cellLabel.addMouseListener(new CellLabelControl(cellLabel));		// Commented out because this grid isn't touched by the user.
 
 				// Add the cellLabel to the gameboard, the 10x10 GridLayout
 				oceanLabels.add(oceanLabel);
-				gameBoard.add(oceanLabel);
+				oceanBoard.add(oceanLabel);
 				
 				count++;	// Increment the count so that the next CellLabel will have the correct position.
 
 			}
 		}
-		return gameBoard;
+		return oceanBoard;
 	}
 
+
+	public ArrayList<TargetLabel> getTargetLabels() {
+		return targetLabels;
+	}
+
+
+	public void setTargetLabels(ArrayList<TargetLabel> targetLabels) {
+		this.targetLabels = targetLabels;
+	}
+
+
+	public ArrayList<OceanLabel> getOceanLabels() {
+		return oceanLabels;
+	}
+
+
+	public void setOceanLabels(ArrayList<OceanLabel> oceanLabels) {
+		this.oceanLabels = oceanLabels;
+	}
+
+
+	public ShipPlacementPanel getShipPlacementPanel() {
+		return shipPlacementPanel;
+	}
+
+
+	public void setShipPlacementPanel(ShipPlacementPanel shipPlacementPanel) {
+		this.shipPlacementPanel = shipPlacementPanel;
+	}
+	
+	
+	
 }

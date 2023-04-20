@@ -1,10 +1,23 @@
 package shipplacementpanel;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.GridLayout;
+import java.util.ArrayList;
+
+import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JRadioButton;
+import javax.swing.border.MatteBorder;
 
+import dataclasses.PlacementLabel;
+import dataclasses.TargetLabel;
+import gameplaycontrol.TargetLabelControl;
+import shipplacementcontrol.PlacementLabelControl;
 import shipplacementcontrol.ShipPlacementControl;
 
 public class ShipPlacementPanel extends JPanel {
@@ -37,23 +50,189 @@ public class ShipPlacementPanel extends JPanel {
 	
 	JLabel listenLabel;
 	JButton confirmPlacementButton;
+	ArrayList<PlacementLabel> placementLabels;
+	
+	ButtonGroup shipSelectionGroup;
+	
+	JRadioButton carrierRadioButton;
+	JRadioButton battleshipRadioButton;
+	JRadioButton destroyerRadioButton;
+	JRadioButton submarineRadioButton;
+	JRadioButton patrolRadioButton;
 	
 	// Constructor
 	public ShipPlacementPanel(ShipPlacementControl shipPlacementControl){
+		
+		placementLabels = new ArrayList<PlacementLabel>();
 		
 		// Make the GUI using JComponents.
 		listenLabel = new JLabel("Hey, listen! Press the button!");
 		confirmPlacementButton = new JButton("Confirm Placement");
 		confirmPlacementButton.addActionListener(shipPlacementControl);
+
+		JPanel placementGrid = createTargetGrid();
+		
+		shipSelectionGroup = new ButtonGroup();
+        
+        carrierRadioButton = new JRadioButton("Carrier");
+        carrierRadioButton.setSelected(true);
+        battleshipRadioButton = new JRadioButton("Battleship");
+        destroyerRadioButton = new JRadioButton("Destroyer");
+        submarineRadioButton = new JRadioButton("Submarine");
+        patrolRadioButton = new JRadioButton("Patrol");
+        
+        shipSelectionGroup.add(carrierRadioButton);
+        shipSelectionGroup.add(battleshipRadioButton);
+        shipSelectionGroup.add(destroyerRadioButton);
+        shipSelectionGroup.add(submarineRadioButton);
+        shipSelectionGroup.add(patrolRadioButton);
+        
+		
 		
 		// Add components to JPanel.
 		add(listenLabel, BorderLayout.CENTER);
 		add(confirmPlacementButton);
+		add(placementGrid);
+		
+		// Add the radio buttons.
+		add(carrierRadioButton);
+		add(battleshipRadioButton);
+		add(destroyerRadioButton);
+		add(submarineRadioButton);
+		add(patrolRadioButton);
 		
 		// Show the JPanel.
 		setSize(500, 500);
 		setVisible(true);
 		
+	}
+	
+	// Getters and setters
+	
+	public ButtonGroup getShipSelectionGroup() {
+		return shipSelectionGroup;
+	}
+
+	public ArrayList<PlacementLabel> getPlacementLabels() {
+		return placementLabels;
+	}
+
+	public void setPlacementLabels(ArrayList<PlacementLabel> placementLabels) {
+		this.placementLabels = placementLabels;
+	}
+
+	public void setShipSelectionGroup(ButtonGroup shipSelectionGroup) {
+		this.shipSelectionGroup = shipSelectionGroup;
+	}
+
+	public JRadioButton getCarrierRadioButton() {
+		return carrierRadioButton;
+	}
+
+
+
+	public void setCarrierRadioButton(JRadioButton carrierRadioButton) {
+		this.carrierRadioButton = carrierRadioButton;
+	}
+
+
+
+	public JRadioButton getBattleshipRadioButton() {
+		return battleshipRadioButton;
+	}
+
+
+
+	public void setBattleshipRadioButton(JRadioButton battleshipRadioButton) {
+		this.battleshipRadioButton = battleshipRadioButton;
+	}
+
+
+
+	public JRadioButton getDestroyerRadioButton() {
+		return destroyerRadioButton;
+	}
+
+
+
+	public void setDestroyerRadioButton(JRadioButton destroyRadioButton) {
+		this.destroyerRadioButton = destroyRadioButton;
+	}
+
+
+
+	public JRadioButton getSubmarineRadioButton() {
+		return submarineRadioButton;
+	}
+
+
+
+	public void setSubmarineRadioButton(JRadioButton submarineRadioButton) {
+		this.submarineRadioButton = submarineRadioButton;
+	}
+
+
+
+	public JRadioButton getPatrolRadioButton() {
+		return patrolRadioButton;
+	}
+
+
+
+	public void setPatrolRadioButton(JRadioButton patrolRadioButton) {
+		this.patrolRadioButton = patrolRadioButton;
+	}
+
+
+
+	private JPanel createTargetGrid() {
+
+		// Variables
+		Color gridColor = new Color(0, 0, 255);
+		int cellSize = 32;
+
+
+
+		// Create the gameboard, a 10x10 GridLayout JPanel
+		JPanel targetBoard = new JPanel(new GridLayout(10, 10));
+		//		gameBoard.setPreferredSize(new Dimension(200, 200));
+
+		// Incrementing for placing each CellLabel in place.
+		int count = 0;
+
+		// For each cell in the GridLayout, place a CellLabel in it.
+		for (int row = 0; row < 10; row++) {
+			for (int col = 0; col < 10; col++) {
+
+				PlacementLabel placementLabel = new PlacementLabel(count);
+
+				placementLabel.setOpaque(true);
+				placementLabel.setPreferredSize(new Dimension(cellSize, cellSize));
+				placementLabel.setBackground(gridColor);
+				placementLabel.setBorder(new MatteBorder(1, 1, (row == 9 ? 1 : 0), (col == 9 ? 1 : 0), Color.BLACK));
+
+				placementLabel.setVerticalAlignment(TargetLabel.CENTER);
+				placementLabel.setHorizontalAlignment(TargetLabel.CENTER);
+				Font font = placementLabel.getFont();
+				int fontSize = 20; // set the font size to 20
+				placementLabel.setFont(new Font(font.getName(), Font.PLAIN, fontSize));
+
+				
+				// Add the MouseListener to targetLabel so it will be able to do stuff.
+				PlacementLabelControl placementLabelControl = new PlacementLabelControl(placementLabel);
+				placementLabel.addMouseListener(placementLabelControl);
+				placementLabelControl.setPlacementPanel(this);
+				
+				
+				// Add the cellLabel to the gameboard, the 10x10 GridLayout
+				placementLabels.add(placementLabel);
+				targetBoard.add(placementLabel);
+				
+				count++;	// Increment the count so that the next CellLabel will have the correct position.
+
+			}
+		}
+		return targetBoard;
 	}
 	
 }

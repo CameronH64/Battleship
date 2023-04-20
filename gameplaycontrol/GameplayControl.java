@@ -9,6 +9,7 @@ import dataclasses.OceanLabel;
 import dataclasses.ShotFiredData;
 import dataclasses.TargetLabel;
 import gameplaypanel.GameplayPanel;
+import shipplacementpanel.ShipPlacementPanel;
 
 import java.awt.CardLayout;
 import java.awt.event.*;
@@ -23,13 +24,15 @@ public class GameplayControl implements ActionListener
 	private BattleshipClient battleshipClient;
 	private GameplayPanel gameplayPanel;
 	private ArrayList<TargetLabel> targetLabels;
-	private ArrayList<OceanLabel> oceanLabels;
+	private ArrayList<OceanLabel> oceanLabels;	
+	
 	
 	// This constructor connects the outside components so that the control panel can affect things.
 	public GameplayControl(JPanel container, BattleshipClient battleshipClient)
 	{
 		this.container = container;
 		this.battleshipClient = battleshipClient;
+		
 	}
 	
 	public void setGameplayPanel(GameplayPanel gameplayPanel) {

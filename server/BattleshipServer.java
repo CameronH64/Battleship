@@ -8,7 +8,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Random;
 import java.util.Scanner;
 import java.util.Stack;
 
@@ -175,18 +174,23 @@ public class BattleshipServer extends AbstractServer
 					
 					case "C":
 						player2.setCarrierHitCount(player2.getCarrierHitCount() + 1);
+						player1TargetingGrid.get(shotFired.getPosition()).setForeground(new Color(255, 0, 0));;
 						break;
 					case "B":
 						player2.setBattleshipHitCount(player2.getBattleshipHitCount() + 1);
+						player1TargetingGrid.get(shotFired.getPosition()).setForeground(new Color(255, 0, 0));;
 						break;
 					case "D":
 						player2.setDestroyerHitCount(player2.getDestroyerHitCount() + 1);
+						player1TargetingGrid.get(shotFired.getPosition()).setForeground(new Color(255, 0, 0));;
 						break;
 					case "S":
 						player2.setSubmarineHitCount(player2.getSubmarineHitCount() + 1);
+						player1TargetingGrid.get(shotFired.getPosition()).setForeground(new Color(255, 0, 0));;
 						break;
 					case "P":
 						player2.setPatrolHitCount(player2.getPatrolHitCount() + 1);
+						player1TargetingGrid.get(shotFired.getPosition()).setForeground(new Color(255, 0, 0));;
 						break;
 					// I don't think I need a default?
 					}

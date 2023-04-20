@@ -12,7 +12,7 @@ public class PlacementLabel extends JLabel implements Serializable {
 	public PlacementLabel(int position) {
 		
 		this.position = position;
-		shipCharacter = "";
+		shipCharacter = "0";
 		
 	}
 
