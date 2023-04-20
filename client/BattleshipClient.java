@@ -5,6 +5,7 @@ package client;
 
 import java.awt.CardLayout;
 import java.awt.Color;
+import java.util.ArrayList;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -15,13 +16,29 @@ import dataclasses.ConfirmationData;
 import dataclasses.MainMenuLoginData;
 import dataclasses.OceanLabel;
 import dataclasses.ShotFiredData;
+import dataclasses.TargetLabel;
+import dataclasses.UpdatedOceanGridData;
+import dataclasses.UpdatedTargetGridData;
 
 public class BattleshipClient extends AbstractClient{
 	
 	private JPanel container;
 	
+	private ArrayList<TargetLabel> targetLabels;
+	private ArrayList<OceanLabel> oceanLabels;
+
+	
 	public BattleshipClient() {
 		super("localhost", 8300);
+		
+		targetLabels = new ArrayList<TargetLabel>();
+		
+		for (int i = 0; i < 100; i++) {
+			
+			targetLabels.add(new TargetLabel(5));
+			
+		}
+		
 	}
 	
 //	public void setContainer(JPanel container) { this.container = container; }
@@ -67,12 +84,30 @@ public class BattleshipClient extends AbstractClient{
 			
 
 			
-		} else if (arg0 instanceof OceanLabel) {
+		} else if (arg0 instanceof String) {
+			
+			System.out.println("[CLIENT] RECEIVED STRING");
 			
 			
+		} else if (arg0 instanceof UpdatedTargetGridData) {
 			
-		}
-		
+			UpdatedTargetGridData updatedTargetGridData = (UpdatedTargetGridData)arg0;
+			
+			ArrayList<TargetLabel> targetLabels = updatedTargetGridData.getTargetLabels();
+			
+			setTargetLabels(targetLabels);
+			
+			
+		} else if (arg0 instanceof UpdatedOceanGridData) {
+
+			UpdatedOceanGridData updatedOceanGridData = (UpdatedOceanGridData)arg0;
+			
+			ArrayList<OceanLabel> oceanLabels = updatedOceanGridData.getOceanLabels();
+			
+			setOceanLabels(oceanLabels);
+			
+			
+		}		
 	}
 	
 	public void connectionClosed() {
@@ -88,6 +123,24 @@ public class BattleshipClient extends AbstractClient{
 		this.container = container;
 		
 	}
+
+	public ArrayList<TargetLabel> getTargetLabels() {
+		return targetLabels;
+	}
+
+	public void setTargetLabels(ArrayList<TargetLabel> targetLabels) {
+		this.targetLabels = targetLabels;
+	}
+
+	public ArrayList<OceanLabel> getOceanLabels() {
+		return oceanLabels;
+	}
+
+	public void setOceanLabels(ArrayList<OceanLabel> oceanLabels) {
+		this.oceanLabels = oceanLabels;
+	}
+	
+	
 	
 	// Already has a sendToServer() method. No implementation needed.
 	

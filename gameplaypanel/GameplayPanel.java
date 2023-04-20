@@ -144,34 +144,36 @@ public class GameplayPanel extends JPanel {
 		// Create the gameboard, a 10x10 GridLayout JPanel
 		JPanel targetBoard = new JPanel(new GridLayout(10, 10));
 		//		gameBoard.setPreferredSize(new Dimension(200, 200));
-
+		
 		// Incrementing for placing each CellLabel in place.
 		int count = 0;
-
+		
+		ArrayList<TargetLabel> targetLabels = battleshipClient.getTargetLabels();
+		
 		// For each cell in the GridLayout, place a CellLabel in it.
 		for (int row = 0; row < 10; row++) {
 			for (int col = 0; col < 10; col++) {
 
-				TargetLabel targetLabel = new TargetLabel(count);
+				TargetLabel targetLabel = targetLabels.get(count);
 
 				targetLabel.setOpaque(true);
 				targetLabel.setPreferredSize(new Dimension(cellSize, cellSize));
-				targetLabel.setBackground(gridColor);
+//				targetLabel.setBackground(gridColor);
 				targetLabel.setBorder(new MatteBorder(1, 1, (row == 9 ? 1 : 0), (col == 9 ? 1 : 0), Color.BLACK));
 
 				targetLabel.setVerticalAlignment(TargetLabel.CENTER);
 				targetLabel.setHorizontalAlignment(TargetLabel.CENTER);
 				Font font = targetLabel.getFont();
 				int fontSize = 20; // set the font size to 20
-				targetLabel.setFont(new Font(font.getName(), Font.PLAIN, fontSize));
+//				targetLabel.setFont(new Font(font.getName(), Font.PLAIN, fontSize));
 
 				
 				// Add the MouseListener to targetLabel so it will be able to do stuff.
-				targetLabel.addMouseListener(new TargetLabelControl(targetLabel, battleshipClient));
+				TargetLabelControl targetLabelControl = new TargetLabelControl(targetLabel, battleshipClient);
+				targetLabel.addMouseListener(targetLabelControl);
+				targetLabelControl.setGameplayPanel(this);
 				
-				
-				// Add the cellLabel to the gameboard, the 10x10 GridLayout
-				targetLabels.add(targetLabel);
+//				targetLabels.add(targetLabel);
 				targetBoard.add(targetLabel);
 				
 				count++;	// Increment the count so that the next CellLabel will have the correct position.

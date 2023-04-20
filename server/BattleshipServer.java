@@ -21,6 +21,8 @@ import dataclasses.PlayerData;
 import dataclasses.ShipPlacementData;
 import dataclasses.ShotFiredData;
 import dataclasses.TargetLabel;
+import dataclasses.UpdatedOceanGridData;
+import dataclasses.UpdatedTargetGridData;
 
 // This also has the main method to start the BattleshipServer.
 
@@ -34,7 +36,6 @@ public class BattleshipServer extends AbstractServer
 	Stack<PlayerData> playerStack = new Stack<PlayerData>();		// This will manage all the players. The ConnectionClient objects will also be assigned to these.
 	private boolean player1Win;
 	private boolean player2Win;
-	
 	
 	
 	public BattleshipServer()
@@ -174,23 +175,23 @@ public class BattleshipServer extends AbstractServer
 					
 					case "C":
 						player2.setCarrierHitCount(player2.getCarrierHitCount() + 1);
-						player1TargetingGrid.get(shotFired.getPosition()).setForeground(new Color(255, 0, 0));;
+						player1TargetingGrid.get(shotFired.getPosition()).setForeground(new Color(255, 0, 0));
 						break;
 					case "B":
 						player2.setBattleshipHitCount(player2.getBattleshipHitCount() + 1);
-						player1TargetingGrid.get(shotFired.getPosition()).setForeground(new Color(255, 0, 0));;
+						player1TargetingGrid.get(shotFired.getPosition()).setForeground(new Color(255, 0, 0));
 						break;
 					case "D":
 						player2.setDestroyerHitCount(player2.getDestroyerHitCount() + 1);
-						player1TargetingGrid.get(shotFired.getPosition()).setForeground(new Color(255, 0, 0));;
+						player1TargetingGrid.get(shotFired.getPosition()).setForeground(new Color(255, 0, 0));
 						break;
 					case "S":
 						player2.setSubmarineHitCount(player2.getSubmarineHitCount() + 1);
-						player1TargetingGrid.get(shotFired.getPosition()).setForeground(new Color(255, 0, 0));;
+						player1TargetingGrid.get(shotFired.getPosition()).setForeground(new Color(255, 0, 0));
 						break;
 					case "P":
 						player2.setPatrolHitCount(player2.getPatrolHitCount() + 1);
-						player1TargetingGrid.get(shotFired.getPosition()).setForeground(new Color(255, 0, 0));;
+						player1TargetingGrid.get(shotFired.getPosition()).setForeground(new Color(255, 0, 0));
 						break;
 					// I don't think I need a default?
 					}
@@ -241,7 +242,32 @@ public class BattleshipServer extends AbstractServer
 					
 				}
 				
-//				turnCounter++;
+				
+				// Testing 
+				try {
+					player1.getPlayerConnectionToClient().sendToClient(new UpdatedTargetGridData(player1TargetingGrid));
+					System.out.println("First Test");
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+				try {
+					player2.getPlayerConnectionToClient().sendToClient(new UpdatedOceanGridData(player2OceanGrid));
+					System.out.println("Second Test.");
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+				// Add two more things in BattleshipServer:
+				// at the top, data.
+				// Two more pieces of data to represent grids.
+				// Player 1 update grid
+				// Player 2 update grid
+				
+				
+				turnCounter++;
 				
 			// Or if player 2's turn.
 			} else if (turnCounter % 2 == 1) {

@@ -21,6 +21,7 @@ public class TargetLabelControl implements MouseListener
 	private JPanel container;
 	private BattleshipClient battleshipClient;
 	private TargetLabel targetLabel;
+	private GameplayPanel setGameplayPanel;
 	
 	
 	// This constructor connects the outside components so that the control panel can affect things.
@@ -73,6 +74,8 @@ public class TargetLabelControl implements MouseListener
 		// Remove the mouse listener so that the user can't press the same cell twice.
 		targetLabel.removeMouseListener(this);
 		
+//		setGameplayPanel.repaint();
+		
 	}
 
 	@Override
@@ -91,6 +94,12 @@ public class TargetLabelControl implements MouseListener
 	public void mouseExited(MouseEvent e) {
 		// TODO Auto-generated method stub
 
+	}
+
+	public void setGameplayPanel(GameplayPanel gameplayPanel) {
+		
+		this.setGameplayPanel = gameplayPanel;
+		
 	}
 
 }
