@@ -20,8 +20,8 @@ public class GameplayPanel extends JPanel {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	private ArrayList<TargetLabel> targetLabels;
-	private ArrayList<OceanLabel> oceanLabels;
+//	private ArrayList<TargetLabel> targetLabels;
+//	private ArrayList<OceanLabel> oceanLabels;
 	JButton newGameButton;
 	
 	BattleshipClient battleshipClient;
@@ -33,8 +33,8 @@ public class GameplayPanel extends JPanel {
 		
 		
 		
-		targetLabels = new ArrayList<TargetLabel>();
-		oceanLabels = new ArrayList<OceanLabel>();
+//		targetLabels = new ArrayList<TargetLabel>();
+//		oceanLabels = new ArrayList<OceanLabel>();
 		
 		this.battleshipClient = battleshipClient;
 		
@@ -68,7 +68,7 @@ public class GameplayPanel extends JPanel {
 		JLabel oceanGridLabel = new JLabel("Ocean Grid");
 		oceanGridLabel.setHorizontalAlignment(JLabel.CENTER);
 		JPanel oceanGrid = createOceanGrid();
-
+		
 		centerBorderLayout.add(oceanGridLabel, BorderLayout.NORTH);
 		centerBorderLayout.add(oceanGrid, BorderLayout.CENTER);
 
@@ -103,14 +103,14 @@ public class GameplayPanel extends JPanel {
 		
 		
 		
-		JButton connectButton = new JButton("Connect");
-		connectButton.addActionListener(gameplayControl);
+		JButton startButton = new JButton("Start");
+		startButton.addActionListener(gameplayControl);
 		
 		
 		
 		southPanel.add(newGameButton);
 		southPanel.add(quitButton);
-		southPanel.add(connectButton);
+		southPanel.add(startButton);
 		
 		southBorderLayout.add(northPanel, BorderLayout.NORTH);
 		southBorderLayout.add(centerPanel, BorderLayout.CENTER);
@@ -120,7 +120,9 @@ public class GameplayPanel extends JPanel {
 
 		// Finally, add the buffer BorderLayout
 		add(bufferBorderLayout);
-
+		
+		
+		
 		setSize(500, 500);
 		setVisible(true);
 
@@ -148,13 +150,13 @@ public class GameplayPanel extends JPanel {
 		// Incrementing for placing each CellLabel in place.
 		int count = 0;
 		
-		ArrayList<TargetLabel> targetLabels = battleshipClient.getTargetLabels();
+		ArrayList<TargetLabel> clientTargetLabels = battleshipClient.getTargetLabels();						// Retrieve the targetLabels from battleshipClient.
 		
 		// For each cell in the GridLayout, place a CellLabel in it.
 		for (int row = 0; row < 10; row++) {
 			for (int col = 0; col < 10; col++) {
 
-				TargetLabel targetLabel = targetLabels.get(count);
+				TargetLabel targetLabel = clientTargetLabels.get(count);
 
 				targetLabel.setOpaque(true);
 				targetLabel.setPreferredSize(new Dimension(cellSize, cellSize));
@@ -195,7 +197,9 @@ public class GameplayPanel extends JPanel {
 		// Create the gameboard, a 10x10 GridLayout JPanel
 		JPanel oceanBoard = new JPanel(new GridLayout(10, 10));
 		//		gameBoard.setPreferredSize(new Dimension(200, 200));
-
+		
+		ArrayList<OceanLabel> oceanLabels = battleshipClient.getOceanLabels();							// Retrieve the OceanLabels from battleshipClient.
+		
 		// Incrementing for placing each CellLabel in place.
 		int count = 0;
 
@@ -203,7 +207,7 @@ public class GameplayPanel extends JPanel {
 		for (int row = 0; row < 10; row++) {
 			for (int col = 0; col < 10; col++) {
 
-				OceanLabel oceanLabel = new OceanLabel(count);
+				OceanLabel oceanLabel = oceanLabels.get(count);
 
 				oceanLabel.setOpaque(true);
 				oceanLabel.setPreferredSize(new Dimension(cellSize, cellSize));
@@ -230,24 +234,24 @@ public class GameplayPanel extends JPanel {
 	}
 
 
-	public ArrayList<TargetLabel> getTargetLabels() {
-		return targetLabels;
-	}
-
-
-	public void setTargetLabels(ArrayList<TargetLabel> targetLabels) {
-		this.targetLabels = targetLabels;
-	}
-
-
-	public ArrayList<OceanLabel> getOceanLabels() {
-		return oceanLabels;
-	}
-
-
-	public void setOceanLabels(ArrayList<OceanLabel> oceanLabels) {
-		this.oceanLabels = oceanLabels;
-	}
+//	public ArrayList<TargetLabel> getTargetLabels() {
+//		return targetLabels;
+//	}
+//
+//
+//	public void setTargetLabels(ArrayList<TargetLabel> targetLabels) {
+//		this.targetLabels = targetLabels;
+//	}
+//
+//
+//	public ArrayList<OceanLabel> getOceanLabels() {
+//		return oceanLabels;
+//	}
+//
+//
+//	public void setOceanLabels(ArrayList<OceanLabel> oceanLabels) {
+//		this.oceanLabels = oceanLabels;
+//	}
 
 
 	public ShipPlacementPanel getShipPlacementPanel() {

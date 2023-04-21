@@ -193,7 +193,11 @@ public class ShipPlacementPanel extends JPanel {
 		return placementBoard;
 	}
 
-	
+	public void redrawPlacementPanel() {
+		
+		this.revalidate();
+		
+	}
 	
 	// Getters and setters
 	

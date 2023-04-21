@@ -64,6 +64,8 @@ public class ShipPlacementControl implements ActionListener
 				e.printStackTrace();
 			}
 			
+//			shipPlacementPanel.revalidate();
+			
 			CardLayout cardLayout = (CardLayout)container.getLayout();
 			cardLayout.show(container, "6");
 		}

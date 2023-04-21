@@ -1,5 +1,6 @@
 package dataclasses;
 
+import java.awt.Color;
 import java.util.ArrayList;
 
 import ocsf.server.ConnectionToClient;
@@ -46,9 +47,12 @@ public class PlayerData {
 			playerTargetingGrid.add(new TargetLabel(i, "0"));
 		}
 		
+		// Set up empty OceanGrid; it will soon be populated from data sent from ShipPlacement
+		playerOceanGrid = new ArrayList<OceanLabel>();
+		
 		// Needed for testing. To assign an ocean grid to the player.
 		// WILL BE REMOVED ONCE ArrayList<PlacementLabel> IS RECEIVED FROM CLIENT.
-		setTestingOceanGrid();
+//		setTestingOceanGrid();
 		
 	}
 	
@@ -85,7 +89,21 @@ public class PlayerData {
 		
 	}
 	
-
+	public void setOceanFromCharacters(ArrayList<String> shipPlacementCharacters) {
+		
+		int i = 0;
+		
+		for (String character : shipPlacementCharacters) {				// When found, cycle through the received ship placement data characters, generating an OceanLabel for each player.
+			OceanLabel oceanLabel = new OceanLabel(i, character);
+			oceanLabel.setBackground(Color.BLUE);
+			playerOceanGrid.add(oceanLabel);
+			
+			i++;
+			
+		}
+		
+	}
+	
 	public boolean isCarrierSunk() {
 		return carrierSunk;
 	}

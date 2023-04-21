@@ -110,18 +110,9 @@ public class GameplayControl implements ActionListener
 			
 			
 			
-		} else if (command == "Connect") {
+		} else if (command == "Start") {
 			
-			System.out.println("[CLIENT] CONNECT PRESSED");
-			
-			try {
-				battleshipClient.openConnection();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			
-			
+			battleshipClient.setupOceanGrid();
 			
 		}
 			
