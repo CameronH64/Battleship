@@ -111,8 +111,8 @@ public class BattleshipClient extends AbstractClient{
 			int i = 0;
 			for (TargetLabel targetLabel : displayTargetLabels) {
 				
-				String serverShipCharacter = serverTargetLabels.get(i).getShipCharacter();
-				targetLabel.setShipCharacter(serverShipCharacter);
+				String serverHitCharacter = serverTargetLabels.get(i).getHitCharacter();
+				targetLabel.setHitCharacter(serverHitCharacter);
 				
 				i++;
 			}
@@ -160,14 +160,14 @@ public class BattleshipClient extends AbstractClient{
 		
 		for (TargetLabel targetLabel: displayTargetLabels) {
 			
-			if (targetLabel.getShipCharacter().equals("1")){
+			if (targetLabel.getHitCharacter().equals("1")){
 				targetLabel.setBackground(Color.RED);
 			}
-			
-			if (targetLabel.getShipCharacter().equals("2")){
+						
+			if (targetLabel.getHitCharacter().equals("2")){
 				targetLabel.setBackground(Color.WHITE);
 			}
-			
+
 		}
 		
 	}

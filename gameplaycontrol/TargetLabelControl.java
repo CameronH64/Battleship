@@ -70,7 +70,7 @@ public class TargetLabelControl implements MouseListener
 		}
 
 		// Remove the mouse listener so that the user can't press the same cell twice.
-		targetLabel.removeMouseListener(this);
+//		targetLabel.removeMouseListener(this);
 		
 //		setGameplayPanel.repaint();
 		

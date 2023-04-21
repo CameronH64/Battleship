@@ -13,7 +13,7 @@ public class OceanLabel extends JLabel implements Serializable {
 	public OceanLabel(int position) {
 		
 		this.position = position;
-		shipCharacter = "";
+		shipCharacter = "0";
 		shipHitStatus = false;
 	}
 	

@@ -221,45 +221,52 @@ public class BattleshipServer extends AbstractServer
 				PlayerData player1 = playerStack.get(0);
 				PlayerData player2 = playerStack.get(1);
 				
+				// Get the player 1 targeting grid and player 2 ocean grid.
 				ArrayList<TargetLabel> player1TargetingGrid = player1.getPlayerTargetingGrid();
 				ArrayList<OceanLabel> player2OceanGrid = player2.getPlayerOceanGrid();
 				
+				// The only pertinent information for firing and being hit is the position.
 				OceanLabel hitOceanLabel = player2OceanGrid.get(shotFired.getPosition());
 				
-				// --------------------- CHECK IF PLAYER 1 HITS PLAYER 2 ------------------------
-				if (hitOceanLabel.getShipCharacter() != "0") {
+				System.out.println("Aimed at character: ");
+				System.out.println(hitOceanLabel.getShipCharacter());
+				
+				// --------------------- CHECK IF PLAYER 1 MISSES ------------------------
+				if (hitOceanLabel.getShipCharacter().equals("0")) {
 					
-					System.out.println("Server side: Player 1 hit player 2!");
+					player1TargetingGrid.get(shotFired.getPosition()).setHitCharacter("2");
+					
+//					System.out.println("Misses shot: ");
+//					System.out.println(player1TargetingGrid.get(shotFired.getPosition()).getHitCharacter());
+					
+					
+					
+				// --------------------- CHECK IF PLAYER 1 HITS PLAYER 2 ------------------------
+				} else if (!hitOceanLabel.getShipCharacter().equals("0")) {
 					
 					switch (hitOceanLabel.getShipCharacter()) {
 					
 					case "C":
-						player2.setCarrierHitCount(player2.getCarrierHitCount() + 1);
-//						player1TargetingGrid.get(shotFired.getPosition()).setForeground(new Color(255, 0, 0));
-						player1TargetingGrid.get(shotFired.getPosition()).setShipCharacter("1");
+						player2.setCarrierHitCount(player2.getCarrierHitCount() + 1);				// Increment the hit count.
+						player1TargetingGrid.get(shotFired.getPosition()).setHitCharacter("1");		// Set the targeting grid character.
 						
 						break;
 					case "B":
 						player2.setBattleshipHitCount(player2.getBattleshipHitCount() + 1);
-						player1TargetingGrid.get(shotFired.getPosition()).setForeground(new Color(255, 0, 0));
-						player1TargetingGrid.get(shotFired.getPosition()).setShipCharacter("1");
+						player1TargetingGrid.get(shotFired.getPosition()).setHitCharacter("1");
 						break;
 					case "D":
 						player2.setDestroyerHitCount(player2.getDestroyerHitCount() + 1);
-						player1TargetingGrid.get(shotFired.getPosition()).setForeground(new Color(255, 0, 0));
-						player1TargetingGrid.get(shotFired.getPosition()).setShipCharacter("1");
+						player1TargetingGrid.get(shotFired.getPosition()).setHitCharacter("1");
 						break;
 					case "S":
 						player2.setSubmarineHitCount(player2.getSubmarineHitCount() + 1);
-						player1TargetingGrid.get(shotFired.getPosition()).setForeground(new Color(255, 0, 0));
-						player1TargetingGrid.get(shotFired.getPosition()).setShipCharacter("1");
+						player1TargetingGrid.get(shotFired.getPosition()).setHitCharacter("1");
 						break;
 					case "P":
 						player2.setPatrolHitCount(player2.getPatrolHitCount() + 1);
-						player1TargetingGrid.get(shotFired.getPosition()).setForeground(new Color(255, 0, 0));
-						player1TargetingGrid.get(shotFired.getPosition()).setShipCharacter("1");
+						player1TargetingGrid.get(shotFired.getPosition()).setHitCharacter("1");
 						break;
-					// I don't think I need a default?
 					}
 					
 					// Check if player one has sunk a ship.
@@ -301,18 +308,19 @@ public class BattleshipServer extends AbstractServer
 					}
 					
 					
-				} else if (hitOceanLabel.getShipCharacter() == "0") {
-					
-					System.out.println("Server side: Player 1 did not hit player 2!");
-					System.out.println();
 					
 				}
 				
 				
-				// Testing 
+				
+				
+				
+				
+				
+				
+				// Send updated information to the clients.
 				try {
 					player1.getPlayerConnectionToClient().sendToClient(new UpdatedTargetGridData(player1TargetingGrid));
-					System.out.println("Sent Updated Target Grid Data to player 1.");
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -320,7 +328,6 @@ public class BattleshipServer extends AbstractServer
 				
 				try {
 					player2.getPlayerConnectionToClient().sendToClient(new UpdatedOceanGridData(player2OceanGrid));
-					System.out.println("Sent Updated Ocean Grid Data to player 1.");
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
