@@ -3,6 +3,7 @@ package shipplacementpanel;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.util.ArrayList;
@@ -16,7 +17,6 @@ import javax.swing.border.MatteBorder;
 
 import dataclasses.PlacementLabel;
 import dataclasses.TargetLabel;
-import gameplaycontrol.TargetLabelControl;
 import shipplacementcontrol.PlacementLabelControl;
 import shipplacementcontrol.ShipPlacementControl;
 
@@ -48,9 +48,7 @@ public class ShipPlacementPanel extends JPanel {
 	
 	*/
 	
-	JLabel listenLabel;
 	JButton confirmPlacementButton;
-	ArrayList<PlacementLabel> placementLabels;
 	
 	ButtonGroup shipSelectionGroup;
 	
@@ -60,17 +58,28 @@ public class ShipPlacementPanel extends JPanel {
 	JRadioButton submarineRadioButton;
 	JRadioButton patrolRadioButton;
 	
+	ArrayList<PlacementLabel> placementLabels;
+
 	// Constructor
 	public ShipPlacementPanel(ShipPlacementControl shipPlacementControl){
 		
+		
+		
 		placementLabels = new ArrayList<PlacementLabel>();
 		
-		// Make the GUI using JComponents.
-		listenLabel = new JLabel("Hey, listen! Press the button!");
-		confirmPlacementButton = new JButton("Confirm Placement");
-		confirmPlacementButton.addActionListener(shipPlacementControl);
-
-		JPanel placementGrid = createTargetGrid();
+		setLayout(new GridLayout(2, 1, 1, 1));
+		
+		
+		// 1. Create the placementGrid JPanel.
+		JPanel placementGrid = createPlacementGrid();
+		
+		
+		
+		// 2. Create the radioButton JPanel.
+		
+		JPanel radioButtonPanelTop = new JPanel();
+		JPanel radioButtonPanelBottom = new JPanel();
+		JPanel radioButtonPanelBoth = new JPanel();
 		
 		shipSelectionGroup = new ButtonGroup();
         
@@ -87,25 +96,115 @@ public class ShipPlacementPanel extends JPanel {
         shipSelectionGroup.add(submarineRadioButton);
         shipSelectionGroup.add(patrolRadioButton);
         
-		
-		
-		// Add components to JPanel.
-		add(listenLabel, BorderLayout.CENTER);
-		add(confirmPlacementButton);
+        radioButtonPanelTop.add(carrierRadioButton);
+        radioButtonPanelTop.add(battleshipRadioButton);
+        radioButtonPanelTop.add(destroyerRadioButton);
+        radioButtonPanelBottom.add(submarineRadioButton);
+        radioButtonPanelBottom.add(patrolRadioButton);
+        
+        radioButtonPanelBoth.add(radioButtonPanelTop);
+        radioButtonPanelBoth.add(radioButtonPanelBottom);
+        
+        
+        
+		// 3. Make the confirm button panel.
+        
+        JPanel buttonPanel = new JPanel();
+        
+		confirmPlacementButton = new JButton("Confirm Placement");
+		confirmPlacementButton.addActionListener(shipPlacementControl);
+
+        buttonPanel.add(confirmPlacementButton);
+        
+        
+        
+        
+        
+        
+		// Add the three panels to ShipPlacementPanel.
 		add(placementGrid);
 		
-		// Add the radio buttons.
-		add(carrierRadioButton);
-		add(battleshipRadioButton);
-		add(destroyerRadioButton);
-		add(submarineRadioButton);
-		add(patrolRadioButton);
+		JPanel testPanel = new JPanel(new GridLayout(2, 1, 1, 1));
+		testPanel.add(radioButtonPanelBoth);
+		testPanel.add(buttonPanel);
+		
+		add(testPanel);
+        
+        
+        
+		
+//		// Add components to JPanel.
+//		add(confirmPlacementButton);
+//		add(placementGrid);
+//		
+//		// Add the radio buttons.
+//		add(carrierRadioButton);
+//		add(battleshipRadioButton);
+//		add(destroyerRadioButton);
+//		add(submarineRadioButton);
+//		add(patrolRadioButton);
 		
 		// Show the JPanel.
 		setSize(500, 500);
 		setVisible(true);
 		
 	}
+	
+	
+	
+	private JPanel createPlacementGrid() {
+
+		// Variables
+		Color gridColor = new Color(0, 0, 255);
+		int cellSize = 32;
+
+
+
+		// Create the placementboard, a 10x10 GridLayout JPanel
+		JPanel placementBoard = new JPanel(new GridLayout(10, 10));
+		placementBoard.setPreferredSize(new Dimension(200, 200));
+
+		// Incrementing for placing each CellLabel in place.
+		int count = 0;
+
+		// For each cell in the GridLayout, place a PlacementLabel in it.
+		for (int row = 0; row < 10; row++) {
+			for (int col = 0; col < 10; col++) {
+
+				PlacementLabel placementLabel = new PlacementLabel(count);
+
+				placementLabel.setOpaque(true);
+				placementLabel.setPreferredSize(new Dimension(cellSize, cellSize));
+				placementLabel.setBackground(gridColor);
+				placementLabel.setBorder(new MatteBorder(1, 1, (row == 9 ? 1 : 0), (col == 9 ? 1 : 0), Color.BLACK));
+				placementLabel.setVerticalAlignment(TargetLabel.CENTER);
+				placementLabel.setHorizontalAlignment(TargetLabel.CENTER);
+				Font font = placementLabel.getFont();
+				int fontSize = 20; // set the font size to 20
+				placementLabel.setFont(new Font(font.getName(), Font.PLAIN, fontSize));
+				
+				
+				
+				// Add the MouseListener to placementLabel so it will be able to do stuff.
+				PlacementLabelControl placementLabelControl = new PlacementLabelControl(placementLabel);
+				placementLabel.addMouseListener(placementLabelControl);
+				placementLabelControl.setPlacementPanel(this);
+				
+				
+				// Add the placementLabel to the gameboard, the 10x10 GridLayout
+				placementLabels.add(placementLabel);
+				placementBoard.add(placementLabel);
+				
+				
+				
+				count++;	// Increment the count so that the next CellLabel will have the correct position.
+
+			}
+		}
+		return placementBoard;
+	}
+
+	
 	
 	// Getters and setters
 	
@@ -181,58 +280,6 @@ public class ShipPlacementPanel extends JPanel {
 
 	public void setPatrolRadioButton(JRadioButton patrolRadioButton) {
 		this.patrolRadioButton = patrolRadioButton;
-	}
-
-
-
-	private JPanel createTargetGrid() {
-
-		// Variables
-		Color gridColor = new Color(0, 0, 255);
-		int cellSize = 32;
-
-
-
-		// Create the gameboard, a 10x10 GridLayout JPanel
-		JPanel targetBoard = new JPanel(new GridLayout(10, 10));
-		//		gameBoard.setPreferredSize(new Dimension(200, 200));
-
-		// Incrementing for placing each CellLabel in place.
-		int count = 0;
-
-		// For each cell in the GridLayout, place a CellLabel in it.
-		for (int row = 0; row < 10; row++) {
-			for (int col = 0; col < 10; col++) {
-
-				PlacementLabel placementLabel = new PlacementLabel(count);
-
-				placementLabel.setOpaque(true);
-				placementLabel.setPreferredSize(new Dimension(cellSize, cellSize));
-				placementLabel.setBackground(gridColor);
-				placementLabel.setBorder(new MatteBorder(1, 1, (row == 9 ? 1 : 0), (col == 9 ? 1 : 0), Color.BLACK));
-
-				placementLabel.setVerticalAlignment(TargetLabel.CENTER);
-				placementLabel.setHorizontalAlignment(TargetLabel.CENTER);
-				Font font = placementLabel.getFont();
-				int fontSize = 20; // set the font size to 20
-				placementLabel.setFont(new Font(font.getName(), Font.PLAIN, fontSize));
-
-				
-				// Add the MouseListener to targetLabel so it will be able to do stuff.
-				PlacementLabelControl placementLabelControl = new PlacementLabelControl(placementLabel);
-				placementLabel.addMouseListener(placementLabelControl);
-				placementLabelControl.setPlacementPanel(this);
-				
-				
-				// Add the cellLabel to the gameboard, the 10x10 GridLayout
-				placementLabels.add(placementLabel);
-				targetBoard.add(placementLabel);
-				
-				count++;	// Increment the count so that the next CellLabel will have the correct position.
-
-			}
-		}
-		return targetBoard;
 	}
 	
 }
