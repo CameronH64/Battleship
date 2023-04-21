@@ -134,6 +134,9 @@ public class BattleshipClient extends AbstractClient{
 				String serverShipCharacter = serverOceanLabels.get(i).getShipCharacter();
 				oceanLabel.setShipCharacter(serverShipCharacter);
 				
+				boolean serverShipHitStatus = serverOceanLabels.get(i).getShipHitStatus();
+				oceanLabel.setShipHitStatus(serverShipHitStatus);
+				
 				i++;
 			}
 
@@ -183,28 +186,60 @@ public class BattleshipClient extends AbstractClient{
 		for (OceanLabel oceanLabel: displayOceanLabels) {
 			
 			if (oceanLabel.getShipCharacter().equals("C")){
-				oceanLabel.setBackground(Color.GRAY);
+				
 				oceanLabel.setText("C");
+
+				if (oceanLabel.getShipHitStatus() == false) {
+					oceanLabel.setBackground(Color.GRAY);
+					
+				} else {
+					oceanLabel.setBackground(Color.RED);
+				}
+				
 			}
 
 			if (oceanLabel.getShipCharacter().equals("B")){
-				oceanLabel.setBackground(Color.GRAY);
 				oceanLabel.setText("B");
+
+				if (oceanLabel.getShipHitStatus() == false) {
+					oceanLabel.setBackground(Color.GRAY);
+					
+				} else {
+					oceanLabel.setBackground(Color.RED);
+				}
 			}
 
 			if (oceanLabel.getShipCharacter().equals("D")){
-				oceanLabel.setBackground(Color.GRAY);
 				oceanLabel.setText("D");
+
+				if (oceanLabel.getShipHitStatus() == false) {
+					oceanLabel.setBackground(Color.GRAY);
+					
+				} else {
+					oceanLabel.setBackground(Color.RED);
+				}
 			}
 
 			if (oceanLabel.getShipCharacter().equals("S")){
-				oceanLabel.setBackground(Color.GRAY);
 				oceanLabel.setText("S");
+
+				if (oceanLabel.getShipHitStatus() == false) {
+					oceanLabel.setBackground(Color.GRAY);
+					
+				} else {
+					oceanLabel.setBackground(Color.RED);
+				}
 			}
 
 			if (oceanLabel.getShipCharacter().equals("P")){
-				oceanLabel.setBackground(Color.GRAY);
 				oceanLabel.setText("P");
+
+				if (oceanLabel.getShipHitStatus() == false) {
+					oceanLabel.setBackground(Color.GRAY);
+					
+				} else {
+					oceanLabel.setBackground(Color.RED);
+				}
 			}
 		}
 		

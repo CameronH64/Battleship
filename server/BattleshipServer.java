@@ -228,8 +228,10 @@ public class BattleshipServer extends AbstractServer
 				// The only pertinent information for firing and being hit is the position.
 				OceanLabel hitOceanLabel = player2OceanGrid.get(shotFired.getPosition());
 				
-				System.out.println("Aimed at character: ");
-				System.out.println(hitOceanLabel.getShipCharacter());
+//				System.out.println("Aimed at character: ");
+//				System.out.println(hitOceanLabel.getShipCharacter());
+				
+				
 				
 				// --------------------- CHECK IF PLAYER 1 MISSES ------------------------
 				if (hitOceanLabel.getShipCharacter().equals("0")) {
@@ -244,12 +246,13 @@ public class BattleshipServer extends AbstractServer
 				// --------------------- CHECK IF PLAYER 1 HITS PLAYER 2 ------------------------
 				} else if (!hitOceanLabel.getShipCharacter().equals("0")) {
 					
+					hitOceanLabel.setShipHitStatus(true);
+					
 					switch (hitOceanLabel.getShipCharacter()) {
 					
 					case "C":
 						player2.setCarrierHitCount(player2.getCarrierHitCount() + 1);				// Increment the hit count.
 						player1TargetingGrid.get(shotFired.getPosition()).setHitCharacter("1");		// Set the targeting grid character.
-						
 						break;
 					case "B":
 						player2.setBattleshipHitCount(player2.getBattleshipHitCount() + 1);
