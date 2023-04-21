@@ -107,15 +107,11 @@ public class GameplayControl implements ActionListener
 			}
 			
 //			System.exit(0);
-			
-			
-			
-		} else if (command == "Start") {
-			
-			battleshipClient.setupOceanGrid();
-			
+				
 		}
-			
+		
+		
+		
 		// Code for enabling the New Game button
 //		JButton newGameButton = gameplayPanel.getNewGameButton();
 //		newGameButton.setEnabled(true);

@@ -103,14 +103,10 @@ public class GameplayPanel extends JPanel {
 		
 		
 		
-		JButton startButton = new JButton("Start");
-		startButton.addActionListener(gameplayControl);
-		
 		
 		
 		southPanel.add(newGameButton);
 		southPanel.add(quitButton);
-		southPanel.add(startButton);
 		
 		southBorderLayout.add(northPanel, BorderLayout.NORTH);
 		southBorderLayout.add(centerPanel, BorderLayout.CENTER);
@@ -165,15 +161,12 @@ public class GameplayPanel extends JPanel {
 
 				targetLabel.setVerticalAlignment(TargetLabel.CENTER);
 				targetLabel.setHorizontalAlignment(TargetLabel.CENTER);
-				Font font = targetLabel.getFont();
-				int fontSize = 20; // set the font size to 20
-//				targetLabel.setFont(new Font(font.getName(), Font.PLAIN, fontSize));
-
+				
+				
 				
 				// Add the MouseListener to targetLabel so it will be able to do stuff.
 				TargetLabelControl targetLabelControl = new TargetLabelControl(targetLabel, battleshipClient);
 				targetLabel.addMouseListener(targetLabelControl);
-				targetLabelControl.setGameplayPanel(this);
 				
 //				targetLabels.add(targetLabel);
 				targetBoard.add(targetLabel);
@@ -223,7 +216,7 @@ public class GameplayPanel extends JPanel {
 //				cellLabel.addMouseListener(new CellLabelControl(cellLabel));		// Commented out because this grid isn't touched by the user.
 
 				// Add the cellLabel to the gameboard, the 10x10 GridLayout
-				oceanLabels.add(oceanLabel);
+//				oceanLabels.add(oceanLabel);
 				oceanBoard.add(oceanLabel);
 				
 				count++;	// Increment the count so that the next CellLabel will have the correct position.

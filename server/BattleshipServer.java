@@ -226,7 +226,7 @@ public class BattleshipServer extends AbstractServer
 				
 				OceanLabel hitOceanLabel = player2OceanGrid.get(shotFired.getPosition());
 				
-				// Check if player 1 hit player 2
+				// --------------------- CHECK IF PLAYER 1 HITS PLAYER 2 ------------------------
 				if (hitOceanLabel.getShipCharacter() != "0") {
 					
 					System.out.println("Server side: Player 1 hit player 2!");
@@ -333,17 +333,11 @@ public class BattleshipServer extends AbstractServer
 				// Player 2 update grid
 				
 				
-				turnCounter++;
+//				turnCounter++;
 				
 			// Or if player 2's turn.
 			} else if (turnCounter % 2 == 1) {
-				
-				PlayerData player1 = playerStack.get(0);
-				PlayerData player2 = playerStack.get(1);
-				
-				
-				
-				turnCounter++;
+
 				
 			}
 			

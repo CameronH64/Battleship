@@ -21,8 +21,6 @@ public class TargetLabelControl implements MouseListener
 	private JPanel container;
 	private BattleshipClient battleshipClient;
 	private TargetLabel targetLabel;
-	private GameplayPanel setGameplayPanel;
-	
 	
 	// This constructor connects the outside components so that the control panel can affect things.
 	public TargetLabelControl(TargetLabel targetLabel, BattleshipClient battleshipClient)
@@ -94,12 +92,6 @@ public class TargetLabelControl implements MouseListener
 	public void mouseExited(MouseEvent e) {
 		// TODO Auto-generated method stub
 
-	}
-
-	public void setGameplayPanel(GameplayPanel gameplayPanel) {
-		
-		this.setGameplayPanel = gameplayPanel;
-		
 	}
 
 }
