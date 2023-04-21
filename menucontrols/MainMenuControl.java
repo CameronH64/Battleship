@@ -55,13 +55,13 @@ public class MainMenuControl implements ActionListener
 		else if (command == "Create User") 
 		{
 			CardLayout cardLayout = (CardLayout)container.getLayout();
-			cardLayout.show(container, "2");
+			cardLayout.show(container, "3");
 
 		} 
 		else if (command == "Delete User") 
 		{
 			CardLayout cardLayout = (CardLayout)container.getLayout();
-			cardLayout.show(container, "3");
+			cardLayout.show(container, "2");
 
 		}
 		else if (command == "Quit")
