@@ -232,16 +232,27 @@ public class BattleshipServer extends AbstractServer
 //				System.out.println(hitOceanLabel.getShipCharacter());
 				
 				
+				// Check that the player hasn't fired at the location before.
+				if (!player1.getPlayerTargetingGrid().get(shotFired.getPosition()).getHitCharacter().equals("0")) {		// Check that the cell hasn't been fired at before by checking that the target grid is not "1" or "2."
+					
+					
+					
+					System.out.println("You already fired here.");
+					
+					// Do NOT use turnCounter here.
+//					turnCounter++;
+
 				
 				// --------------------- CHECK IF PLAYER 1 MISSES ------------------------
-				if (hitOceanLabel.getShipCharacter().equals("0")) {
+				} else if (hitOceanLabel.getShipCharacter().equals("0")) {
 					
 					player1TargetingGrid.get(shotFired.getPosition()).setHitCharacter("2");
 					
 //					System.out.println("Misses shot: ");
 //					System.out.println(player1TargetingGrid.get(shotFired.getPosition()).getHitCharacter());
 					
-					
+//					turnCounter++;
+
 					
 				// --------------------- CHECK IF PLAYER 1 HITS PLAYER 2 ------------------------
 				} else if (!hitOceanLabel.getShipCharacter().equals("0")) {
@@ -250,7 +261,7 @@ public class BattleshipServer extends AbstractServer
 					
 					switch (hitOceanLabel.getShipCharacter()) {
 					
-					case "C":
+					case "C":						
 						player2.setCarrierHitCount(player2.getCarrierHitCount() + 1);				// Increment the hit count.
 						player1TargetingGrid.get(shotFired.getPosition()).setHitCharacter("1");		// Set the targeting grid character.
 						break;
@@ -310,7 +321,7 @@ public class BattleshipServer extends AbstractServer
 						
 					}
 					
-					
+//					turnCounter++;
 					
 				}
 				
@@ -343,7 +354,6 @@ public class BattleshipServer extends AbstractServer
 				// Player 2 update grid
 				
 				
-//				turnCounter++;
 				
 			// Or if player 2's turn.
 			} else if (turnCounter % 2 == 1) {
