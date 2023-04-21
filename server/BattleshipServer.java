@@ -8,6 +8,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Scanner;
 import java.util.Stack;
 
@@ -136,6 +137,56 @@ public class BattleshipServer extends AbstractServer
 			
 			// Depending on which client ID, assign this placement data to the PlayerData object (inside playerStack).
 			
+			// Recieved from client: ShipPlacementData that holds an ArrayList<String>.
+			
+			// KEY: Extract the string data from the the ShipPlacementData object to generate an OceanLabels grid for the player.
+			ShipPlacementData shipPlacementData = (ShipPlacementData)arg0;
+			ArrayList<String> shipPlacementCharacters = shipPlacementData.getShipConfiguration();
+			
+			int i = 0;
+			
+			for (PlayerData playerData : playerStack) {			// Cycle through the player stack.
+				
+				if (playerData.getPlayerConnectionToClient().equals(arg1)) {		// Until the player (client) that sent the message is found.
+					
+					for (String character : shipPlacementCharacters) {				// When found, cycle through the received ship placement data characters, generating an OceanLabel for each player.
+						playerData.getPlayerOceanGrid().add(new OceanLabel(i, character));
+						i++;
+					}
+					
+				}
+				
+			}
+			
+			// TESTING: Print out all of the received data from the client.
+//			System.out.println("Testing: Player 1 ocean labels: ");
+//			ArrayList<OceanLabel> labels = playerStack.get(0).getPlayerOceanGrid();
+//			
+//			int count = 0;
+//			
+//			for (int row = 0; row < 10; row++) {
+//				for (int col = 0; col < 10; col++) {
+//					System.out.print(shipPlacementCharacters.get(count));
+//					count++;
+//				}
+//				System.out.println();
+//			}
+			
+			
+			
+			// TESTING: Print out all of the ship characters that have been stored inside of player data's OceanGrid.
+//			System.out.println("Testing: Player 1 ocean labels: ");
+//			ArrayList<OceanLabel> labels = playerStack.get(0).getPlayerOceanGrid();
+//			
+//			int count = 0;
+//			
+//			for (int row = 0; row < 10; row++) {
+//				for (int col = 0; col < 10; col++) {
+//					System.out.print(labels.get(count).getShipCharacter());
+//					count++;
+//				}
+//				System.out.println();
+//			}
 			
 			
 		} else if (arg0 instanceof ShotFiredData) {
@@ -441,7 +492,7 @@ public class BattleshipServer extends AbstractServer
 			PlayerData player = new PlayerData();
 			player.setPlayerNumber(numberOfClients);
 			player.setPlayerConnectionToClient(client);			// This gives an ID to the player that can be referenced and accessed.
-			player.setTestingOceanGrid();						// For testing.
+//			player.setTestingOceanGrid();						// For testing.
 			playerStack.add(player);
 			
 			

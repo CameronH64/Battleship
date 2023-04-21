@@ -4,13 +4,9 @@
 package client;
 
 import java.awt.CardLayout;
-import java.awt.Color;
 import java.util.ArrayList;
 
-import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextArea;
-import javax.swing.JTextField;
 import ocsf.client.AbstractClient;
 import dataclasses.ConfirmationData;
 import dataclasses.MainMenuLoginData;
@@ -24,18 +20,18 @@ public class BattleshipClient extends AbstractClient{
 	
 	private JPanel container;
 	
-	private ArrayList<TargetLabel> targetLabels;
-	private ArrayList<OceanLabel> oceanLabels;
+	private ArrayList<TargetLabel> localTargetLabels;
+	private ArrayList<OceanLabel> localOceanLabels;
 
 	
 	public BattleshipClient() {
 		super("localhost", 8300);
 		
-		targetLabels = new ArrayList<TargetLabel>();
+		localTargetLabels = new ArrayList<TargetLabel>();
 		
 		for (int i = 0; i < 100; i++) {
 			
-			targetLabels.add(new TargetLabel(5));
+			localTargetLabels.add(new TargetLabel(5));
 			
 		}
 		
@@ -125,19 +121,19 @@ public class BattleshipClient extends AbstractClient{
 	}
 
 	public ArrayList<TargetLabel> getTargetLabels() {
-		return targetLabels;
+		return localTargetLabels;
 	}
 
 	public void setTargetLabels(ArrayList<TargetLabel> targetLabels) {
-		this.targetLabels = targetLabels;
+		this.localTargetLabels = targetLabels;
 	}
 
 	public ArrayList<OceanLabel> getOceanLabels() {
-		return oceanLabels;
+		return localOceanLabels;
 	}
 
 	public void setOceanLabels(ArrayList<OceanLabel> oceanLabels) {
-		this.oceanLabels = oceanLabels;
+		this.localOceanLabels = oceanLabels;
 	}
 	
 	

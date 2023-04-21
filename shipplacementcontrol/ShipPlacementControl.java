@@ -4,6 +4,7 @@ import javax.swing.*;
 
 import client.BattleshipClient;
 import dataclasses.PlacementLabel;
+import dataclasses.ShipPlacementData;
 import shipplacementpanel.ShipPlacementPanel;
 
 import java.awt.CardLayout;
@@ -11,6 +12,7 @@ import java.awt.event.*;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 public class ShipPlacementControl implements ActionListener
 {
@@ -19,7 +21,6 @@ public class ShipPlacementControl implements ActionListener
 	private BattleshipClient battleshipClient;
 	
 	private ShipPlacementPanel shipPlacementPanel;
-	private ArrayList<PlacementLabel> placementLabels;
 	
 	// This constructor connects the outside components so that the control panel can affect things.
 	public ShipPlacementControl(JPanel container, BattleshipClient battleshipClient)
@@ -49,6 +50,19 @@ public class ShipPlacementControl implements ActionListener
 			// If not, change the test on the panel.
 			
 			
+			// Send an ArrayList<String> to the server. This is the necessary information needed for the OceanGrid.
+			
+			ArrayList<PlacementLabel> placementLabels = shipPlacementPanel.getPlacementLabels();			// Returns an ArrayList.
+			ShipPlacementData shipPlacementData = new ShipPlacementData();
+			
+			shipPlacementData.setShipConfigurationFromPlacement(placementLabels);
+			
+			try {
+				battleshipClient.sendToServer(shipPlacementData);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			
 			CardLayout cardLayout = (CardLayout)container.getLayout();
 			cardLayout.show(container, "6");
@@ -67,15 +81,5 @@ public class ShipPlacementControl implements ActionListener
 	public void setShipPlacementPanel(ShipPlacementPanel shipPlacementPanel) {
 		this.shipPlacementPanel = shipPlacementPanel;
 	}
-
-	public ArrayList<PlacementLabel> getPlacementLabels() {
-		return placementLabels;
-	}
-
-	public void setPlacementLabels(ArrayList<PlacementLabel> placementLabels) {
-		this.placementLabels = placementLabels;
-	}
 	
-	
-
 }

@@ -133,17 +133,6 @@ public class ShipPlacementPanel extends JPanel {
         
         
 		
-//		// Add components to JPanel.
-//		add(confirmPlacementButton);
-//		add(placementGrid);
-//		
-//		// Add the radio buttons.
-//		add(carrierRadioButton);
-//		add(battleshipRadioButton);
-//		add(destroyerRadioButton);
-//		add(submarineRadioButton);
-//		add(patrolRadioButton);
-		
 		// Show the JPanel.
 		setSize(500, 500);
 		setVisible(true);

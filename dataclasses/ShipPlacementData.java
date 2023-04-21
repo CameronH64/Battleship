@@ -22,4 +22,14 @@ public class ShipPlacementData implements Serializable {
 		this.shipConfiguration = shipConfiguration;
 	}
 	
+	public void setShipConfigurationFromPlacement(ArrayList<PlacementLabel> placementLabels) {
+		
+		for (int i = 0; i < 100; i++) {
+			
+			shipConfiguration.add(placementLabels.get(i).getShipCharacter());			// Extract the ship characters from the placementLabels ArrayList and into the shipConfiguration.
+			
+		}
+		
+	}
+	
 }
