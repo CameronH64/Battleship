@@ -347,6 +347,16 @@ public class BattleshipServer extends AbstractServer
 					e.printStackTrace();
 				}
 				
+				
+				// Check if this player has won by checking if all ships are sunk.
+				
+				if (player2.isCarrierSunk() && player2.isBattleshipSunk() && player2.isDestroyerSunk() && player2.isSubmarineSunk() && player2.isPatrolSunk()) {
+					
+					System.out.println("Player 1 wins!");
+					
+				}
+				
+				
 				// Add two more things in BattleshipServer:
 				// at the top, data.
 				// Two more pieces of data to represent grids.
