@@ -9,12 +9,11 @@ import client.BattleshipClient;
 import javax.swing.*;
 import menucontrols.MainMenuControl;
 
-public class MainMenuPanelTest {
-	
+public class MainMenuPanelTest extends JFrame{
+
 	static Robot tester;
 	static MainMenuPanel mmPanel; 
 	static MainMenuControl mmControl;
-	static TestMenuPanels panels;
 	static BattleshipClient clientTest;
 	static JPanel bufferPanel;
 	static String[] credentials = {"username", "password"};
@@ -23,46 +22,29 @@ public class MainMenuPanelTest {
 	static JButton buttonLogIn;
 	static JButton buttonGoToDeleteUser;
 	static JButton buttonGoToCreateUser;
-	static CreateUserPanel panelCU;
-	static DeleteUserPanel panelDU;
-	static JButton buttonCUGoToMM;
-	static JButton buttonDUGoToMM;
 	static JTextField fieldUsername;
 	static JTextField fieldPassword;
-	static ArrayList<JButton> buttonsList;
+	//Constant values height and width of this GUI
+	private static final int windowHeight = 500;
+	private static final int windowWidth = 500;
 
 	@BeforeClass
 	public static void setUp() 
 	{
-		
+
 		try {
 			tester = new Robot();
 		} catch (AWTException e) {
 			e.printStackTrace();
 		}
-		
+
 		clientTest = new BattleshipClient();
-		panels = new TestMenuPanels();
-		/*
-		 * The MainMenuPanel in the TestMenuPanels is deep in a 
-		 * hierarchy of embedded JPanels and stuff. The following 
-		 * code exists to dig through that 
-		 */
-		Component[] componentArray = panels.getComponents();
-		JRootPane rootPane = (JRootPane)componentArray[0];
-		JLayeredPane layeredPane = rootPane.getLayeredPane();
-		bufferPanel = (JPanel)layeredPane.getComponent(0); 
-		//This gets the buffer that MainMenuPanel should be on
-		bufferPanel = (JPanel)bufferPanel.getComponent(0);
-		mmPanel = (MainMenuPanel)bufferPanel.getComponent(0);
-		JButton buttonConnect = mmPanel.getButtonConnect();
-		//To get the controller, go through the button
-		ActionListener[] controlListeners = buttonConnect.getActionListeners();
-		mmControl = (MainMenuControl)controlListeners[0];
-		
-		buttonsList = new ArrayList<JButton>();
+		bufferPanel = new JPanel();
+		mmControl = new MainMenuControl(bufferPanel, clientTest);
+		mmPanel = new MainMenuPanel(mmControl);
+		mmControl.setMainMenu(mmPanel);
 	}
-	
+
 	@Before
 	public void setUpBeforeTest()
 	{
@@ -71,19 +53,17 @@ public class MainMenuPanelTest {
 		buttonLogIn = mmPanel.getButtonLogIn();
 		buttonGoToDeleteUser = mmPanel.getButtonGoToDeleteUser();
 		buttonGoToCreateUser = mmPanel.getButtonGoToCreateUser();
-		panelCU = (CreateUserPanel)bufferPanel.getComponent(1);
-		panelDU = (DeleteUserPanel)bufferPanel.getComponent(2);
-		buttonCUGoToMM = panelCU.getButtonMainMenu();
-		buttonDUGoToMM = panelDU.getButtonMainMenu();
 		fieldUsername = mmPanel.getFieldUsername();
 		fieldPassword = mmPanel.getFieldPassword();
-		buttonsList.add(buttonConnect);
-		buttonsList.add(buttonQuit);
-		buttonsList.add(buttonLogIn);
-		buttonsList.add(buttonGoToDeleteUser);
-		buttonsList.add(buttonGoToCreateUser);
+
+		// Put components on the panel
+		bufferPanel.add(mmPanel);
+		this.add(bufferPanel);
+		// Show the JFrame.
+		setSize(windowWidth, windowHeight);
+		this.setVisible(true);
 	}
-	
+
 	@Test 
 	public void test()
 	{
@@ -95,7 +75,7 @@ public class MainMenuPanelTest {
 		{
 			e.printStackTrace();
 		}
-		
+
 		//Try the connect button
 		String expectedResponse = "Connected to Battleship Server.";
 		JLabel labelStatusResponse = mmPanel.getLabelStatusResponse();
@@ -115,9 +95,64 @@ public class MainMenuPanelTest {
 				e.printStackTrace();
 			}
 		}
-		
-		
-		
+
+		//Try the Log In button
+		expectedResponse = "Sent credentials to server.";
+		buttonLogIn.doClick(500);
+		if (!labelStatusResponse.getText().equals(expectedResponse))
+		{
+			assertEquals("check MainMenuPanel",labelStatusResponse.getText(),expectedResponse);
+		}
+		else
+		{
+			try
+			{
+				Thread.sleep(1000);
+			}
+			catch (InterruptedException e)
+			{
+				e.printStackTrace();
+			}
+		}
+
+		//Test the Delete User button
+		expectedResponse = "Changing to Delete User menu.";
+		buttonGoToDeleteUser.doClick(500);
+		if (!labelStatusResponse.getText().equals(expectedResponse)) 
+		{
+			assertEquals("check MainMenuPanel",labelStatusResponse.getText(),expectedResponse);
+		}
+		else 
+		{
+			try
+			{
+				Thread.sleep(1000);
+			}
+			catch (InterruptedException e)
+			{
+				e.printStackTrace();
+			}
+		}
+
+		//Test the Create User button
+		expectedResponse = "Changing to Create User menu.";
+		buttonGoToCreateUser.doClick(500);
+		if (!labelStatusResponse.getText().equals(expectedResponse))
+		{
+			assertEquals("check MainMenuPanel",labelStatusResponse.getText(),expectedResponse);
+		}
+		else
+		{
+			try
+			{
+				Thread.sleep(1000);
+			}
+			catch (InterruptedException e)
+			{
+				e.printStackTrace();
+			}
+		}
+
 	}
 
 }
