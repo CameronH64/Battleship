@@ -215,7 +215,7 @@ public class BattleshipServer extends AbstractServer
 			ShotFiredData shotFired = (ShotFiredData)arg0;
 			
 			// If player 1's turn, based off of the turnCounter
-			if (turnCounter % 2 == 0) {
+			if (turnCounter % 2 == 0 && arg1.getId() == playerStack.get(0).getPlayerConnectionToClient().getId()) {
 				
 				// Get the players involved (only two)
 				PlayerData player1 = playerStack.get(0);
@@ -251,7 +251,7 @@ public class BattleshipServer extends AbstractServer
 //					System.out.println("Misses shot: ");
 //					System.out.println(player1TargetingGrid.get(shotFired.getPosition()).getHitCharacter());
 					
-//					turnCounter++;
+					turnCounter++;
 
 					
 				// --------------------- CHECK IF PLAYER 1 HITS PLAYER 2 ------------------------
@@ -321,7 +321,7 @@ public class BattleshipServer extends AbstractServer
 						
 					}
 					
-//					turnCounter++;
+					turnCounter++;
 					
 				}
 				
@@ -348,6 +348,7 @@ public class BattleshipServer extends AbstractServer
 				}
 				
 				
+				
 				// Check if this player has won by checking if all ships are sunk.
 				
 				if (player2.isCarrierSunk() && player2.isBattleshipSunk() && player2.isDestroyerSunk() && player2.isSubmarineSunk() && player2.isPatrolSunk()) {
@@ -355,6 +356,7 @@ public class BattleshipServer extends AbstractServer
 					System.out.println("Player 1 wins!");
 					
 				}
+				
 				
 				
 				// Add two more things in BattleshipServer:
@@ -366,8 +368,147 @@ public class BattleshipServer extends AbstractServer
 				
 				
 			// Or if player 2's turn.
-			} else if (turnCounter % 2 == 1) {
+			} else if (turnCounter % 2 == 1 && arg1.getId() == playerStack.get(1).getPlayerConnectionToClient().getId()) {
 
+				// Get the players involved (only two)
+				PlayerData player1 = playerStack.get(0);
+				PlayerData player2 = playerStack.get(1);
+				
+				// Get the player 1 targeting grid and player 2 ocean grid.
+				ArrayList<TargetLabel> player2TargetingGrid = player2.getPlayerTargetingGrid();
+				ArrayList<OceanLabel> player1OceanGrid = player1.getPlayerOceanGrid();
+				
+				// The only pertinent information for firing and being hit is the position.
+				OceanLabel hitOceanLabel = player1OceanGrid.get(shotFired.getPosition());
+				
+//				System.out.println("Aimed at character: ");
+//				System.out.println(hitOceanLabel.getShipCharacter());
+				
+				
+				// Check that the player hasn't fired at the location before.
+				if (!player2.getPlayerTargetingGrid().get(shotFired.getPosition()).getHitCharacter().equals("0")) {		// Check that the cell hasn't been fired at before by checking that the target grid is not "1" or "2."
+					
+					
+					
+					System.out.println("You already fired here.");
+					
+					// Do NOT use turnCounter here.
+//					turnCounter++;
+
+				
+				// --------------------- CHECK IF PLAYER 1 MISSES ------------------------
+				} else if (hitOceanLabel.getShipCharacter().equals("0")) {
+					
+					player2TargetingGrid.get(shotFired.getPosition()).setHitCharacter("2");
+					
+//					System.out.println("Misses shot: ");
+//					System.out.println(player1TargetingGrid.get(shotFired.getPosition()).getHitCharacter());
+					
+					turnCounter++;
+
+					
+				// --------------------- CHECK IF PLAYER 1 HITS PLAYER 2 ------------------------
+				} else if (!hitOceanLabel.getShipCharacter().equals("0")) {
+					
+					hitOceanLabel.setShipHitStatus(true);
+					
+					switch (hitOceanLabel.getShipCharacter()) {
+					
+					case "C":						
+						player1.setCarrierHitCount(player1.getCarrierHitCount() + 1);				// Increment the hit count.
+						player2TargetingGrid.get(shotFired.getPosition()).setHitCharacter("1");		// Set the targeting grid character.
+						break;
+					case "B":
+						player1.setBattleshipHitCount(player1.getBattleshipHitCount() + 1);
+						player2TargetingGrid.get(shotFired.getPosition()).setHitCharacter("1");
+						break;
+					case "D":
+						player1.setDestroyerHitCount(player1.getDestroyerHitCount() + 1);
+						player2TargetingGrid.get(shotFired.getPosition()).setHitCharacter("1");
+						break;
+					case "S":
+						player1.setSubmarineHitCount(player1.getSubmarineHitCount() + 1);
+						player2TargetingGrid.get(shotFired.getPosition()).setHitCharacter("1");
+						break;
+					case "P":
+						player1.setPatrolHitCount(player1.getPatrolHitCount() + 1);
+						player2TargetingGrid.get(shotFired.getPosition()).setHitCharacter("1");
+						break;
+					}
+					
+					// Check if player one has sunk a ship.
+					if (player1.getCarrierHitCount() == 5 && !player1.isCarrierSunk()) {
+						
+						player1.setCarrierSunk(true);
+						
+						System.out.println("Carrier sunk!");
+						System.out.println();
+						
+					} else if (player1.getBattleshipHitCount() == 4 && !player1.isBattleshipSunk()) {
+						
+						player1.setBattleshipSunk(true);
+
+						System.out.println("Battleship sunk!");
+						System.out.println();
+						
+					} else if (player1.getDestroyerHitCount() == 3 && !player1.isDestroyerSunk()) {
+						
+						player1.setDestroyerSunk(true);
+						
+						System.out.println("Destroyer sunk!");
+						System.out.println();
+						
+					} else if (player1.getSubmarineHitCount() == 3 && !player1.isSubmarineSunk()) {
+						
+						player1.setSubmarineSunk(true);
+						
+						System.out.println("Submarine sunk!");
+						System.out.println();
+						
+					} else if (player1.getPatrolHitCount() == 2 && !player1.isPatrolSunk()) {
+						
+						player1.setPatrolSunk(true);
+						
+						System.out.println("Patrol sunk!");
+						System.out.println();
+						
+					}
+					
+					turnCounter++;
+					
+				}
+				
+				
+				
+				
+				
+				
+				
+				
+				// Send updated information to the clients.
+				try {
+					player2.getPlayerConnectionToClient().sendToClient(new UpdatedTargetGridData(player2TargetingGrid));
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+				try {
+					player1.getPlayerConnectionToClient().sendToClient(new UpdatedOceanGridData(player1OceanGrid));
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+				
+				
+				// Check if this player has won by checking if all ships are sunk.
+				
+				if (player1.isCarrierSunk() && player1.isBattleshipSunk() && player1.isDestroyerSunk() && player1.isSubmarineSunk() && player1.isPatrolSunk()) {
+					
+					System.out.println("Player 1 wins!");
+					
+				}
 				
 			}
 			
