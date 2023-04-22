@@ -4,6 +4,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.Properties;
 
 public class AccountDatabase {
@@ -66,7 +67,88 @@ public class AccountDatabase {
         // You can use any hash function here, e.g. SHA-256
         return "hashed_" + password;
     }
+    
+	public ArrayList<String> query(String query)
+	{
 
+		int i = 0;
+		int rowCount = 0;		// Detect empty result set.
+		ArrayList<String> array = new ArrayList<String>();
+
+		// Create a statement from the Connection.
+		Statement stmt;
+
+		try {
+			stmt = conn.createStatement();
+
+			// Run query
+			ResultSet rs = stmt.executeQuery(query);
+
+			// Get the metadata (get the number of columns for the for loop.
+			ResultSetMetaData rmd = rs.getMetaData();
+			int noColumns = rmd.getColumnCount();
+			
+			// Process this stuff
+			while(rs.next()){
+				
+				rowCount++;			// Find out if you have an empty result set.
+				String record = "";
+				
+				for (i = 0; i < noColumns; i++) {
+					
+					String value = rs.getString(i+1);			// Indexing starts at 1, not 0.
+					record += value + ",";
+					array.add(record);
+					// rowCount++;
+					
+				}
+				
+			}
+			
+			
+			
+			if (rowCount > 0)
+				return array;
+			else
+				return null;
+			
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			
+			return null;
+		}
+
+		//Add your code here
+
+		// A generic way of getting any query into the system.
+
+		// Returning an arraylist of comma delminated records.
+		// Need to use a loop to get this data.
+
+		// Don't know how many rows.
+		// Can find number of columns using the metadata.
+
+		/*
+		 * 0 Joe Smith, 1215 Main, 329-2511
+		 * 1 ...
+		 * 2 ...
+		 * 
+		 * */
+
+	}
+	
+	public void executeDML(String dml) throws SQLException
+	{
+		//Add your code here
+		
+		Statement stmt = conn.createStatement();
+		stmt.execute(dml);
+		
+	}
+    
     public void close() {
         try {
             this.conn.close();
