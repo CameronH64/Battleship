@@ -2,18 +2,24 @@ package menucontrols;
 
 import static org.junit.Assert.*;
 import java.awt.*;
+import java.awt.event.ActionListener;
 import org.junit.*;
-import menupanels.MainMenuPanel;
+import java.util.*;
 import client.BattleshipClient;
+import javax.swing.*;
+import menupanels.MainMenuPanel;
 
-public class MainMenuControlTest {
+public class MainMenuControlTest extends JFrame {
 
-	Robot tester;
-	MainMenuPanel mmPanel; 
-	MainMenuControl mmControl;
-	BattleshipClient clientTest;
+	static Robot tester;
+	static MainMenuPanel mmPanel; 
+	static MainMenuControl mmControl;
+	static BattleshipClient clientTest;
+	//Constant values height and width of this GUI
+	private static final int windowHeight = 500;
+	private static final int windowWidth = 500;
 
-	@Before
+	@BeforeClass
 	public void setUp() {
 		
 		try {
