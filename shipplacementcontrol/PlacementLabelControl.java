@@ -57,14 +57,14 @@ public class PlacementLabelControl implements MouseListener
 				placementLabel.setBackground(Color.BLUE);
 				placementLabel.setText("");
 				placementLabel.setShipCharacter("0");
-				System.out.println("Unset Carrier: " + placementLabel.getPosition());
+//				System.out.println("Unset Carrier: " + placementLabel.getPosition());
 				
 			} else {
 				
 				placementLabel.setBackground(Color.GRAY);
 				placementLabel.setText("C");
 				placementLabel.setShipCharacter("C");
-				System.out.println("Set Carrier: " + placementLabel.getPosition());
+//				System.out.println("Set Carrier: " + placementLabel.getPosition());
 				
 			}
 			
@@ -77,14 +77,14 @@ public class PlacementLabelControl implements MouseListener
 				placementLabel.setBackground(Color.BLUE);
 				placementLabel.setText("");
 				placementLabel.setShipCharacter("0");
-				System.out.println("Unset Battleship: " + placementLabel.getPosition());
+//				System.out.println("Unset Battleship: " + placementLabel.getPosition());
 				
 			} else {
 				
 				placementLabel.setBackground(Color.GRAY);
 				placementLabel.setText("B");
 				placementLabel.setShipCharacter("B");
-				System.out.println("Set Battleship: " + placementLabel.getPosition());
+//				System.out.println("Set Battleship: " + placementLabel.getPosition());
 				
 			}
 			
@@ -96,14 +96,14 @@ public class PlacementLabelControl implements MouseListener
 				placementLabel.setBackground(Color.BLUE);
 				placementLabel.setText("");
 				placementLabel.setShipCharacter("0");
-				System.out.println("Unset Destroyer: " + placementLabel.getPosition());
+//				System.out.println("Unset Destroyer: " + placementLabel.getPosition());
 				
 			} else {
 				
 				placementLabel.setBackground(Color.GRAY);
 				placementLabel.setText("D");
 				placementLabel.setShipCharacter("D");
-				System.out.println("Set Destroyer: " + placementLabel.getPosition());
+//				System.out.println("Set Destroyer: " + placementLabel.getPosition());
 				
 			}
 			
@@ -115,14 +115,14 @@ public class PlacementLabelControl implements MouseListener
 				placementLabel.setBackground(Color.BLUE);
 				placementLabel.setText("");
 				placementLabel.setShipCharacter("0");
-				System.out.println("Unset Submarine: " + placementLabel.getPosition());
+//				System.out.println("Unset Submarine: " + placementLabel.getPosition());
 				
 			} else {
 				
 				placementLabel.setBackground(Color.GRAY);
 				placementLabel.setText("S");
 				placementLabel.setShipCharacter("S");
-				System.out.println("Set Submarine: " + placementLabel.getPosition());
+//				System.out.println("Set Submarine: " + placementLabel.getPosition());
 				
 			}
 			
@@ -134,14 +134,14 @@ public class PlacementLabelControl implements MouseListener
 				placementLabel.setBackground(Color.BLUE);
 				placementLabel.setText("");
 				placementLabel.setShipCharacter("0");
-				System.out.println("Unset Patrol: " + placementLabel.getPosition());
+//				System.out.println("Unset Patrol: " + placementLabel.getPosition());
 				
 			} else {
 				
 				placementLabel.setBackground(Color.GRAY);
 				placementLabel.setText("P");
 				placementLabel.setShipCharacter("P");
-				System.out.println("Set Patrol: " + placementLabel.getPosition());
+//				System.out.println("Set Patrol: " + placementLabel.getPosition());
 				
 			}
 			

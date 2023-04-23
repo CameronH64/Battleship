@@ -107,18 +107,34 @@ public class MainMenuControl implements ActionListener
 			fieldPassword.setEditable(true);
 			labelStatusResponse.setForeground(Color.black);
 			labelStatusResponse.setText("Connected to Battleship Server.");
+			labelStatusResponse.setForeground(Color.GREEN);
 
 			JButton loginButton = mainMenu.getButtonLogIn();
 			loginButton.setEnabled(true);
-
-			battleshipClient.setHost(fieldIPAddress.getText());
-			try {
-				battleshipClient.openConnection();
-			} catch (IOException e) {
-				e.printStackTrace();
-				System.out.println("Error happened!");
+			
+			if (fieldIPAddress.getText().equals("")) {
+				
+				try {
+					battleshipClient.openConnection();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}				
+				
+			} else {
+				
+				// Because there's something in the IP address field, open the connection with that.
+				battleshipClient.setHost(fieldIPAddress.getText());
+				
+				try {
+					battleshipClient.openConnection();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
 			}
-
+			
 		}
 
 	}

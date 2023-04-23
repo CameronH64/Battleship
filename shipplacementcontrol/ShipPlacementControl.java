@@ -74,8 +74,7 @@ public class ShipPlacementControl implements ActionListener
 				
 			} else {
 				
-				System.out.println("Invalid configuration. Try again.");
-				System.out.println("Put a label on the GUI!");
+				shipPlacementPanel.getErrorLabel().setText("Invalid ship configuration; try again.");
 				
 			}
 			

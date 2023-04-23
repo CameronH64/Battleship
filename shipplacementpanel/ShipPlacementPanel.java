@@ -57,6 +57,7 @@ public class ShipPlacementPanel extends JPanel {
 	JRadioButton destroyerRadioButton;
 	JRadioButton submarineRadioButton;
 	JRadioButton patrolRadioButton;
+	JLabel errorLabel;
 	
 	ArrayList<PlacementLabel> placementLabels;
 
@@ -83,12 +84,12 @@ public class ShipPlacementPanel extends JPanel {
 		
 		shipSelectionGroup = new ButtonGroup();
         
-        carrierRadioButton = new JRadioButton("Carrier");
+        carrierRadioButton = new JRadioButton("Carrier (5)");
         carrierRadioButton.setSelected(true);
-        battleshipRadioButton = new JRadioButton("Battleship");
-        destroyerRadioButton = new JRadioButton("Destroyer");
-        submarineRadioButton = new JRadioButton("Submarine");
-        patrolRadioButton = new JRadioButton("Patrol");
+        battleshipRadioButton = new JRadioButton("Battleship (4)");
+        destroyerRadioButton = new JRadioButton("Destroyer (3)");
+        submarineRadioButton = new JRadioButton("Submarine (3)");
+        patrolRadioButton = new JRadioButton("Patrol (2)");
         
         shipSelectionGroup.add(carrierRadioButton);
         shipSelectionGroup.add(battleshipRadioButton);
@@ -107,16 +108,21 @@ public class ShipPlacementPanel extends JPanel {
         
         
         
+        JPanel messagePanel = new JPanel();
+        
+        errorLabel = new JLabel("");
+        messagePanel.add(errorLabel);
+        
+        
+        
 		// 3. Make the confirm button panel.
         
         JPanel buttonPanel = new JPanel();
-        
+                
 		confirmPlacementButton = new JButton("Confirm Placement");
 		confirmPlacementButton.addActionListener(shipPlacementControl);
-
-        buttonPanel.add(confirmPlacementButton);
-        
-        
+		
+		buttonPanel.add(confirmPlacementButton);
         
         
         
@@ -124,12 +130,14 @@ public class ShipPlacementPanel extends JPanel {
 		// Add the three panels to ShipPlacementPanel.
 		add(placementGrid);
 		
-		JPanel testPanel = new JPanel(new GridLayout(2, 1, 1, 1));
+		JPanel testPanel = new JPanel(new GridLayout(3, 1, 1, 1));
 		testPanel.add(radioButtonPanelBoth);
 		testPanel.add(buttonPanel);
+		testPanel.add(messagePanel);
 		
+//		add(messagePanel);
 		add(testPanel);
-        
+		
         
         
 		
@@ -273,6 +281,18 @@ public class ShipPlacementPanel extends JPanel {
 
 	public void setPatrolRadioButton(JRadioButton patrolRadioButton) {
 		this.patrolRadioButton = patrolRadioButton;
+	}
+
+
+
+	public JLabel getErrorLabel() {
+		return errorLabel;
+	}
+
+
+
+	public void setErrorLabel(JLabel errorLabel) {
+		this.errorLabel = errorLabel;
 	}
 	
 }

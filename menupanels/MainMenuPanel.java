@@ -51,7 +51,7 @@ public class MainMenuPanel extends JPanel {
 	public MainMenuPanel(MainMenuControl mainMenuControl){
 
 		//Initialize buttons and labels 
-		labelEnterIPAddress = new JLabel("Enter an IP Address: ");
+		labelEnterIPAddress = new JLabel("IP Address (blank for localhost): ");
 		labelEnterUsername = new JLabel("Enter Username: ");
 		labelEnterPassword = new JLabel("Enter Password: ");
 		labelStatusResponse = new JLabel("Please connect before logging in!");
