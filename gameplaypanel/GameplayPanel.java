@@ -27,7 +27,8 @@ public class GameplayPanel extends JPanel {
 	BattleshipClient battleshipClient;
 
 	private ShipPlacementPanel shipPlacementPanel;
-
+	JLabel sunkShipsLabel;
+	
 	// Constructor
 	public GameplayPanel(GameplayControl gameplayControl, BattleshipClient battleshipClient){
 		
@@ -38,7 +39,7 @@ public class GameplayPanel extends JPanel {
 		
 		this.battleshipClient = battleshipClient;
 		
-		
+		battleshipClient.setGameplayPanel(this);
 		
 		// Initialize the primary BorderLayouts and place them, ready for adding stuff into them.
 		JPanel bufferBorderLayout = new JPanel(new BorderLayout());
@@ -90,8 +91,8 @@ public class GameplayPanel extends JPanel {
 		northPanel.add(opponentLabel);
 
 		// Center panel
-		JLabel errorMessageLabel = new JLabel("Messages: ");
-		centerPanel.add(errorMessageLabel);
+		sunkShipsLabel = new JLabel("Sunk: ");
+		centerPanel.add(sunkShipsLabel);
 
 		// South panel
 		newGameButton = new JButton("New Game");
@@ -254,6 +255,16 @@ public class GameplayPanel extends JPanel {
 
 	public void setShipPlacementPanel(ShipPlacementPanel shipPlacementPanel) {
 		this.shipPlacementPanel = shipPlacementPanel;
+	}
+
+
+	public JLabel getSunkShipsLabel() {
+		return sunkShipsLabel;
+	}
+
+
+	public void setSunkShipsLabel(JLabel sunkShipsLabel) {
+		this.sunkShipsLabel = sunkShipsLabel;
 	}
 	
 	

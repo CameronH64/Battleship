@@ -21,6 +21,7 @@ import dataclasses.OceanLabel;
 import dataclasses.PlayerData;
 import dataclasses.ShipPlacementData;
 import dataclasses.ShotFiredData;
+import dataclasses.SunkMessage;
 import dataclasses.TargetLabel;
 import dataclasses.UpdatedOceanGridData;
 import dataclasses.UpdatedTargetGridData;
@@ -288,36 +289,60 @@ public class BattleshipServer extends AbstractServer
 						
 						player2.setCarrierSunk(true);
 						
-						System.out.println("Carrier sunk!");
-						System.out.println();
+						try {
+							player1.getPlayerConnectionToClient().sendToClient(new SunkMessage("carrier"));
+						} catch (IOException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+						
 						
 					} else if (player2.getBattleshipHitCount() == 4 && !player2.isBattleshipSunk()) {
 						
 						player2.setBattleshipSunk(true);
 
-						System.out.println("Battleship sunk!");
-						System.out.println();
+//						System.out.println("Battleship sunk!");
+//						System.out.println();
+						
+						try {
+							player1.getPlayerConnectionToClient().sendToClient(new SunkMessage("battleship"));
+						} catch (IOException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
 						
 					} else if (player2.getDestroyerHitCount() == 3 && !player2.isDestroyerSunk()) {
 						
 						player2.setDestroyerSunk(true);
 						
-						System.out.println("Destroyer sunk!");
-						System.out.println();
+						try {
+							player1.getPlayerConnectionToClient().sendToClient(new SunkMessage("destroyer"));
+						} catch (IOException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
 						
 					} else if (player2.getSubmarineHitCount() == 3 && !player2.isSubmarineSunk()) {
 						
 						player2.setSubmarineSunk(true);
 						
-						System.out.println("Submarine sunk!");
-						System.out.println();
+						try {
+							player1.getPlayerConnectionToClient().sendToClient(new SunkMessage("submarine"));
+						} catch (IOException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
 						
 					} else if (player2.getPatrolHitCount() == 2 && !player2.isPatrolSunk()) {
 						
 						player2.setPatrolSunk(true);
 						
-						System.out.println("Patrol sunk!");
-						System.out.println();
+						try {
+							player1.getPlayerConnectionToClient().sendToClient(new SunkMessage("patrol"));
+						} catch (IOException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
 						
 					}
 					
@@ -441,36 +466,56 @@ public class BattleshipServer extends AbstractServer
 						
 						player1.setCarrierSunk(true);
 						
-						System.out.println("Carrier sunk!");
-						System.out.println();
+						try {
+							player2.getPlayerConnectionToClient().sendToClient(new SunkMessage("carrier"));
+						} catch (IOException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
 						
 					} else if (player1.getBattleshipHitCount() == 4 && !player1.isBattleshipSunk()) {
 						
 						player1.setBattleshipSunk(true);
 
-						System.out.println("Battleship sunk!");
-						System.out.println();
+						try {
+							player2.getPlayerConnectionToClient().sendToClient(new SunkMessage("battleship"));
+						} catch (IOException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
 						
 					} else if (player1.getDestroyerHitCount() == 3 && !player1.isDestroyerSunk()) {
 						
 						player1.setDestroyerSunk(true);
 						
-						System.out.println("Destroyer sunk!");
-						System.out.println();
+						try {
+							player2.getPlayerConnectionToClient().sendToClient(new SunkMessage("destroyer"));
+						} catch (IOException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
 						
 					} else if (player1.getSubmarineHitCount() == 3 && !player1.isSubmarineSunk()) {
 						
 						player1.setSubmarineSunk(true);
 						
-						System.out.println("Submarine sunk!");
-						System.out.println();
+						try {
+							player2.getPlayerConnectionToClient().sendToClient(new SunkMessage("submarine"));
+						} catch (IOException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
 						
 					} else if (player1.getPatrolHitCount() == 2 && !player1.isPatrolSunk()) {
 						
 						player1.setPatrolSunk(true);
 						
-						System.out.println("Patrol sunk!");
-						System.out.println();
+						try {
+							player2.getPlayerConnectionToClient().sendToClient(new SunkMessage("patrol"));
+						} catch (IOException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
 						
 					}
 					

@@ -14,13 +14,16 @@ import dataclasses.ConfirmationData;
 import dataclasses.MainMenuLoginData;
 import dataclasses.OceanLabel;
 import dataclasses.ShotFiredData;
+import dataclasses.SunkMessage;
 import dataclasses.TargetLabel;
 import dataclasses.UpdatedOceanGridData;
 import dataclasses.UpdatedTargetGridData;
+import gameplaypanel.GameplayPanel;
 
 public class BattleshipClient extends AbstractClient{
 	
 	private JPanel container;
+	private GameplayPanel gameplayPanel;
 	
 	private ArrayList<TargetLabel> displayTargetLabels;
 	private ArrayList<OceanLabel> displayOceanLabels;
@@ -71,11 +74,7 @@ public class BattleshipClient extends AbstractClient{
 		if (arg0 instanceof MainMenuLoginData) {
 			
 			System.out.println("[CLIENT] RECEIVED LOGINDATA");
-			
-		} else if (arg0 instanceof ShotFiredData) {
-			
-			System.out.println("[CLIENT] RECEIVED SHOTFIREDDATA");
-			
+						
 		} else if (arg0 instanceof ConfirmationData) {
 			
 			// If yes, switch
@@ -92,15 +91,7 @@ public class BattleshipClient extends AbstractClient{
 				
 				System.out.println("[CLIENT] INVALID CREDENTIALS");
 				
-			}
-			
-
-			
-		} else if (arg0 instanceof String) {
-			
-			System.out.println("[CLIENT] RECEIVED STRING");
-			
-			
+			}			
 			
 		} else if (arg0 instanceof UpdatedTargetGridData) {
 			
@@ -142,8 +133,46 @@ public class BattleshipClient extends AbstractClient{
 
 			setupOceanGrid();
 			
-		}		
+		} else if (arg0 instanceof SunkMessage) {
+			
+			SunkMessage sunkMessage = (SunkMessage)arg0;
+			
+			String message = sunkMessage.getSunkMessage();
+			
+			switch(message) {
+			
+			case "carrier":
+//				System.out.println("[CLIENT-SIDE] SUNK CARRIER");
+				String asdf = gameplayPanel.getSunkShipsLabel().getText();
+				gameplayPanel.getSunkShipsLabel().setText(asdf + "carrier ");
+				break;
+			case "battleship":
+//				System.out.println("[CLIENT-SIDE] SUNK BATTLESHIP");
+				String sdfg = gameplayPanel.getSunkShipsLabel().getText();
+				gameplayPanel.getSunkShipsLabel().setText(sdfg + "battleship ");
+				break;
+			case "destroyer":
+//				System.out.println("[CLIENT-SIDE] SUNK DESTROYER");
+				String dfgh = gameplayPanel.getSunkShipsLabel().getText();
+				gameplayPanel.getSunkShipsLabel().setText(dfgh + "destroyer ");
+				break;
+			case "submarine":
+//				System.out.println("[CLIENT-SIDE] SUNK SUBMARINE");
+				String fghj = gameplayPanel.getSunkShipsLabel().getText();
+				gameplayPanel.getSunkShipsLabel().setText(fghj + "submarine ");
+				break;
+			case "patrol":
+//				System.out.println("[CLIENT-SIDE] SUNK PATROL");
+				String ghjk = gameplayPanel.getSunkShipsLabel().getText();
+				gameplayPanel.getSunkShipsLabel().setText(ghjk + "patrol ");
+				break;
+				
+			}
+			
+		}
 	}
+	
+	
 	
 	public void connectionClosed() {
 //		statusLabel.setText("Not Connected");
@@ -259,6 +288,14 @@ public class BattleshipClient extends AbstractClient{
 
 	public void setOceanLabels(ArrayList<OceanLabel> oceanLabels) {
 		this.displayOceanLabels = oceanLabels;
+	}
+
+	public GameplayPanel getGameplayPanel() {
+		return gameplayPanel;
+	}
+
+	public void setGameplayPanel(GameplayPanel gameplayPanel) {
+		this.gameplayPanel = gameplayPanel;
 	}
 	
 	
