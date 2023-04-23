@@ -205,6 +205,10 @@ public class BattleshipClient extends AbstractClient{
 				
 				gameplayPanel.getWinLoseLabel().setText("");
 				
+			} else if (message.equals("inorder")) {
+				
+				gameplayPanel.getWinLoseLabel().setText("Wait your turn!");
+				
 			}
 			
 		}

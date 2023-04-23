@@ -673,6 +673,32 @@ public class BattleshipServer extends AbstractServer
 				}
 				
 			} else {
+
+				// Get the players involved (only two)
+				PlayerData player1 = playerStack.get(0);
+				PlayerData player2 = playerStack.get(1);
+				
+				if (turnCounter % 2 == 0) {
+					
+					try {
+						player2.getPlayerConnectionToClient().sendToClient(new InvalidShotMessage("inorder"));
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+										
+				} else if (turnCounter % 2 == 1) {
+					
+					try {
+						player1.getPlayerConnectionToClient().sendToClient(new InvalidShotMessage("inorder"));
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					
+				}
+				
+
 				
 				System.out.println("You're going out of turn!");
 				
