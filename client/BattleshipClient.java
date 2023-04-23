@@ -11,6 +11,7 @@ import java.util.Collection;
 import javax.swing.JPanel;
 import ocsf.client.AbstractClient;
 import dataclasses.ConfirmationData;
+import dataclasses.InvalidShotMessage;
 import dataclasses.MainMenuLoginData;
 import dataclasses.OceanLabel;
 import dataclasses.ShotFiredData;
@@ -186,7 +187,28 @@ public class BattleshipClient extends AbstractClient{
 				
 			}
 			
+		} else if (arg0 instanceof InvalidShotMessage) {
+			
+			InvalidShotMessage invalidShotMessage = (InvalidShotMessage)arg0;
+			
+			String message = invalidShotMessage.getMessage();
+			
+			if (message.equals("single")) {
+				
+				gameplayPanel.getWinLoseLabel().setText("Wait for another player!");
+				
+			} else if (message.equals("repeat")) {
+				
+				gameplayPanel.getWinLoseLabel().setText("Repeat shot; try again.");
+				
+			} else if (message.equals("blank")) {
+				
+				gameplayPanel.getWinLoseLabel().setText("");
+				
+			}
+			
 		}
+		
 	}
 	
 	

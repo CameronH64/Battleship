@@ -15,6 +15,7 @@ import java.util.Stack;
 import dataclasses.ConfirmationData;
 import dataclasses.CreateUserData;
 import dataclasses.DeleteUserData;
+import dataclasses.InvalidShotMessage;
 // External imports
 import dataclasses.MainMenuLoginData;
 import dataclasses.OceanLabel;
@@ -202,7 +203,7 @@ public class BattleshipServer extends AbstractServer
 			
 		} else if (arg0 instanceof ShotFiredData) {
 
-			System.out.println("[SERVER] RECEIVED SHOTFIREDDATA");
+//			System.out.println("[SERVER] RECEIVED SHOTFIREDDATA");
 			
 			// Check the player's shot fired against the other player's ocean grid.
 			
@@ -215,9 +216,24 @@ public class BattleshipServer extends AbstractServer
 			// Player 1 will go first because the turnCounter starts at 0, which is even.
 			
 			ShotFiredData shotFired = (ShotFiredData)arg0;
+
 			
+			if (playerStack.size() < 2) {
+				
+//				System.out.println("You have to wait for a second player!");
+
+				// Get the players involved (only two)
+				PlayerData player1 = playerStack.get(0);
+
+				try {
+					player1.getPlayerConnectionToClient().sendToClient(new InvalidShotMessage("single"));
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
 			// If player 1's turn, based off of the turnCounter
-			if (turnCounter % 2 == 0 && arg1.getId() == playerStack.get(0).getPlayerConnectionToClient().getId()) {
+			} else if (turnCounter % 2 == 0 && arg1.getId() == playerStack.get(0).getPlayerConnectionToClient().getId()) {
 				
 				// Get the players involved (only two)
 				PlayerData player1 = playerStack.get(0);
@@ -237,13 +253,16 @@ public class BattleshipServer extends AbstractServer
 				// Check that the player hasn't fired at the location before.
 				if (!player1.getPlayerTargetingGrid().get(shotFired.getPosition()).getHitCharacter().equals("0")) {		// Check that the cell hasn't been fired at before by checking that the target grid is not "1" or "2."
 					
+//					System.out.println("You already fired here.");
+					
+					try {
+						player1.getPlayerConnectionToClient().sendToClient(new InvalidShotMessage("repeat"));
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 					
 					
-					System.out.println("You already fired here.");
-					
-					// Do NOT use turnCounter here.
-//					turnCounter++;
-
 				
 				// --------------------- CHECK IF PLAYER 1 MISSES ------------------------
 				} else if (hitOceanLabel.getShipCharacter().equals("0")) {
@@ -252,6 +271,13 @@ public class BattleshipServer extends AbstractServer
 					
 //					System.out.println("Misses shot: ");
 //					System.out.println(player1TargetingGrid.get(shotFired.getPosition()).getHitCharacter());
+					
+					try {
+						player1.getPlayerConnectionToClient().sendToClient(new InvalidShotMessage("blank"));
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 					
 					turnCounter++;
 
@@ -266,22 +292,52 @@ public class BattleshipServer extends AbstractServer
 					case "C":						
 						player2.setCarrierHitCount(player2.getCarrierHitCount() + 1);				// Increment the hit count.
 						player1TargetingGrid.get(shotFired.getPosition()).setHitCharacter("1");		// Set the targeting grid character.
+						try {
+							player1.getPlayerConnectionToClient().sendToClient(new InvalidShotMessage("blank"));
+						} catch (IOException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
 						break;
 					case "B":
 						player2.setBattleshipHitCount(player2.getBattleshipHitCount() + 1);
 						player1TargetingGrid.get(shotFired.getPosition()).setHitCharacter("1");
+						try {
+							player1.getPlayerConnectionToClient().sendToClient(new InvalidShotMessage("blank"));
+						} catch (IOException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
 						break;
 					case "D":
 						player2.setDestroyerHitCount(player2.getDestroyerHitCount() + 1);
 						player1TargetingGrid.get(shotFired.getPosition()).setHitCharacter("1");
+						try {
+							player1.getPlayerConnectionToClient().sendToClient(new InvalidShotMessage("blank"));
+						} catch (IOException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
 						break;
 					case "S":
 						player2.setSubmarineHitCount(player2.getSubmarineHitCount() + 1);
 						player1TargetingGrid.get(shotFired.getPosition()).setHitCharacter("1");
+						try {
+							player1.getPlayerConnectionToClient().sendToClient(new InvalidShotMessage("blank"));
+						} catch (IOException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
 						break;
 					case "P":
 						player2.setPatrolHitCount(player2.getPatrolHitCount() + 1);
 						player1TargetingGrid.get(shotFired.getPosition()).setHitCharacter("1");
+						try {
+							player1.getPlayerConnectionToClient().sendToClient(new InvalidShotMessage("blank"));
+						} catch (IOException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
 						break;
 					}
 					
@@ -427,21 +483,30 @@ public class BattleshipServer extends AbstractServer
 				// Check that the player hasn't fired at the location before.
 				if (!player2.getPlayerTargetingGrid().get(shotFired.getPosition()).getHitCharacter().equals("0")) {		// Check that the cell hasn't been fired at before by checking that the target grid is not "1" or "2."
 					
+//					System.out.println("You already fired here.");
 					
-					
-					System.out.println("You already fired here.");
-					
-					// Do NOT use turnCounter here.
-//					turnCounter++;
+					try {
+						player2.getPlayerConnectionToClient().sendToClient(new InvalidShotMessage("repeat"));
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 
 				
-				// --------------------- CHECK IF PLAYER 1 MISSES ------------------------
+				// --------------------- CHECK IF PLAYER 2 MISSES ------------------------
 				} else if (hitOceanLabel.getShipCharacter().equals("0")) {
 					
 					player2TargetingGrid.get(shotFired.getPosition()).setHitCharacter("2");
 					
 //					System.out.println("Misses shot: ");
 //					System.out.println(player1TargetingGrid.get(shotFired.getPosition()).getHitCharacter());
+					
+					try {
+						player2.getPlayerConnectionToClient().sendToClient(new InvalidShotMessage("blank"));
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 					
 					turnCounter++;
 
@@ -453,26 +518,52 @@ public class BattleshipServer extends AbstractServer
 					
 					switch (hitOceanLabel.getShipCharacter()) {
 					
-					case "C":						
+					case "C":				
 						player1.setCarrierHitCount(player1.getCarrierHitCount() + 1);				// Increment the hit count.
 						player2TargetingGrid.get(shotFired.getPosition()).setHitCharacter("1");		// Set the targeting grid character.
+						try {
+							player2.getPlayerConnectionToClient().sendToClient(new InvalidShotMessage("blank"));
+						} catch (IOException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
 						break;
 					case "B":
 						player1.setBattleshipHitCount(player1.getBattleshipHitCount() + 1);
 						player2TargetingGrid.get(shotFired.getPosition()).setHitCharacter("1");
-						break;
+						try {
+							player2.getPlayerConnectionToClient().sendToClient(new InvalidShotMessage("blank"));
+						} catch (IOException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}break;
 					case "D":
 						player1.setDestroyerHitCount(player1.getDestroyerHitCount() + 1);
 						player2TargetingGrid.get(shotFired.getPosition()).setHitCharacter("1");
-						break;
+						try {
+							player2.getPlayerConnectionToClient().sendToClient(new InvalidShotMessage("blank"));
+						} catch (IOException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}break;
 					case "S":
 						player1.setSubmarineHitCount(player1.getSubmarineHitCount() + 1);
 						player2TargetingGrid.get(shotFired.getPosition()).setHitCharacter("1");
-						break;
+						try {
+							player2.getPlayerConnectionToClient().sendToClient(new InvalidShotMessage("blank"));
+						} catch (IOException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}break;
 					case "P":
 						player1.setPatrolHitCount(player1.getPatrolHitCount() + 1);
 						player2TargetingGrid.get(shotFired.getPosition()).setHitCharacter("1");
-						break;
+						try {
+							player2.getPlayerConnectionToClient().sendToClient(new InvalidShotMessage("blank"));
+						} catch (IOException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}break;
 					}
 					
 					// Check if player one has sunk a ship.
@@ -580,6 +671,17 @@ public class BattleshipServer extends AbstractServer
 					}
 					
 				}
+				
+			} else {
+				
+				System.out.println("You're going out of turn!");
+				
+//				try {
+//					player1.getPlayerConnectionToClient().sendToClient(new WinLoseMessage("lose"));
+//				} catch (IOException e) {
+//					// TODO Auto-generated catch block
+//					e.printStackTrace();
+//				}
 				
 			}
 			
