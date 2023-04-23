@@ -18,6 +18,7 @@ import dataclasses.SunkMessage;
 import dataclasses.TargetLabel;
 import dataclasses.UpdatedOceanGridData;
 import dataclasses.UpdatedTargetGridData;
+import dataclasses.WinLoseMessage;
 import gameplaypanel.GameplayPanel;
 
 public class BattleshipClient extends AbstractClient{
@@ -166,6 +167,22 @@ public class BattleshipClient extends AbstractClient{
 				String ghjk = gameplayPanel.getSunkShipsLabel().getText();
 				gameplayPanel.getSunkShipsLabel().setText(ghjk + "patrol ");
 				break;
+				
+			}
+			
+		} else if (arg0 instanceof WinLoseMessage) {
+			
+			WinLoseMessage winLoseMessage = (WinLoseMessage)arg0;
+			
+			String message = winLoseMessage.getMessage();
+			
+			if (message.equals("win")) {
+				
+				gameplayPanel.getWinLoseLabel().setText("You win!");
+				
+			} else if (message.equals("lose")) {
+				
+				gameplayPanel.getWinLoseLabel().setText("You lose!");				
 				
 			}
 			

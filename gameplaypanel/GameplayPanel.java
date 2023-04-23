@@ -28,6 +28,7 @@ public class GameplayPanel extends JPanel {
 
 	private ShipPlacementPanel shipPlacementPanel;
 	JLabel sunkShipsLabel;
+	JLabel winLoseLabel;
 	
 	// Constructor
 	public GameplayPanel(GameplayControl gameplayControl, BattleshipClient battleshipClient){
@@ -84,7 +85,7 @@ public class GameplayPanel extends JPanel {
 
 		// North panel
 		JLabel youLabel = new JLabel("You: ");
-		JLabel winLoseLabel = new JLabel("temp");
+		winLoseLabel = new JLabel("");
 		JLabel opponentLabel = new JLabel("Opponent: ");
 		northPanel.add(youLabel);
 		northPanel.add(winLoseLabel);
@@ -265,6 +266,16 @@ public class GameplayPanel extends JPanel {
 
 	public void setSunkShipsLabel(JLabel sunkShipsLabel) {
 		this.sunkShipsLabel = sunkShipsLabel;
+	}
+
+
+	public JLabel getWinLoseLabel() {
+		return winLoseLabel;
+	}
+
+
+	public void setWinLoseLabel(JLabel winLoseLabel) {
+		this.winLoseLabel = winLoseLabel;
 	}
 	
 	

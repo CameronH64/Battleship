@@ -25,6 +25,7 @@ import dataclasses.SunkMessage;
 import dataclasses.TargetLabel;
 import dataclasses.UpdatedOceanGridData;
 import dataclasses.UpdatedTargetGridData;
+import dataclasses.WinLoseMessage;
 
 // This also has the main method to start the BattleshipServer.
 
@@ -378,7 +379,20 @@ public class BattleshipServer extends AbstractServer
 				
 				if (player2.isCarrierSunk() && player2.isBattleshipSunk() && player2.isDestroyerSunk() && player2.isSubmarineSunk() && player2.isPatrolSunk()) {
 					
-					System.out.println("Player 1 wins!");
+					try {
+						player1.getPlayerConnectionToClient().sendToClient(new WinLoseMessage("win"));
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+
+					try {
+						player2.getPlayerConnectionToClient().sendToClient(new WinLoseMessage("lose"));
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+
 					
 				}
 				
@@ -551,7 +565,19 @@ public class BattleshipServer extends AbstractServer
 				
 				if (player1.isCarrierSunk() && player1.isBattleshipSunk() && player1.isDestroyerSunk() && player1.isSubmarineSunk() && player1.isPatrolSunk()) {
 					
-					System.out.println("Player 1 wins!");
+					try {
+						player2.getPlayerConnectionToClient().sendToClient(new WinLoseMessage("win"));
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+
+					try {
+						player1.getPlayerConnectionToClient().sendToClient(new WinLoseMessage("lose"));
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 					
 				}
 				
