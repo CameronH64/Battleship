@@ -280,6 +280,20 @@ public class BattleshipServer extends AbstractServer
 					}
 					
 					turnCounter++;
+					
+					try {
+						player2.getPlayerConnectionToClient().sendToClient(new InvalidShotMessage("yesturn"));
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+
+					try {
+						player1.getPlayerConnectionToClient().sendToClient(new InvalidShotMessage("noturn"));
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 
 					
 				// --------------------- CHECK IF PLAYER 1 HITS PLAYER 2 ------------------------
@@ -404,7 +418,21 @@ public class BattleshipServer extends AbstractServer
 					}
 					
 					turnCounter++;
-					
+
+					try {
+						player2.getPlayerConnectionToClient().sendToClient(new InvalidShotMessage("yesturn"));
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+
+					try {
+						player1.getPlayerConnectionToClient().sendToClient(new InvalidShotMessage("noturn"));
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+
 				}
 				
 				
@@ -509,6 +537,20 @@ public class BattleshipServer extends AbstractServer
 					}
 					
 					turnCounter++;
+
+					try {
+						player1.getPlayerConnectionToClient().sendToClient(new InvalidShotMessage("yesturn"));
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+
+					try {
+						player2.getPlayerConnectionToClient().sendToClient(new InvalidShotMessage("noturn"));
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 
 					
 				// --------------------- CHECK IF PLAYER 1 HITS PLAYER 2 ------------------------
@@ -626,6 +668,20 @@ public class BattleshipServer extends AbstractServer
 					
 					turnCounter++;
 					
+					try {
+						player1.getPlayerConnectionToClient().sendToClient(new InvalidShotMessage("yesturn"));
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+
+					try {
+						player2.getPlayerConnectionToClient().sendToClient(new InvalidShotMessage("noturn"));
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+
 				}
 				
 				

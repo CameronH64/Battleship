@@ -208,6 +208,14 @@ public class BattleshipClient extends AbstractClient{
 			} else if (message.equals("inorder")) {
 				
 				gameplayPanel.getWinLoseLabel().setText("Wait your turn!");
+
+			} else if (message.equals("yesturn")) {
+				
+				gameplayPanel.getTargetGridLabel().setText("Targeting Grid (Your Turn)");
+				
+			} else if (message.equals("noturn")) {
+				
+				gameplayPanel.getTargetGridLabel().setText("Targeting Grid");
 				
 			}
 			

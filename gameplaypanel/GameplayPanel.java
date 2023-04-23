@@ -29,6 +29,7 @@ public class GameplayPanel extends JPanel {
 	private ShipPlacementPanel shipPlacementPanel;
 	JLabel sunkShipsLabel;
 	JLabel winLoseLabel;
+	JLabel targetGridLabel;
 	
 	// Constructor
 	public GameplayPanel(GameplayControl gameplayControl, BattleshipClient battleshipClient){
@@ -56,7 +57,7 @@ public class GameplayPanel extends JPanel {
 
 
 		// 1. North Game Section
-		JLabel targetGridLabel = new JLabel("Targeting Grid");
+		targetGridLabel = new JLabel("Targeting Grid");
 		targetGridLabel.setHorizontalAlignment(JLabel.CENTER);
 		JPanel targetGrid = createTargetGrid();
 
@@ -276,6 +277,16 @@ public class GameplayPanel extends JPanel {
 
 	public void setWinLoseLabel(JLabel winLoseLabel) {
 		this.winLoseLabel = winLoseLabel;
+	}
+
+
+	public JLabel getTargetGridLabel() {
+		return targetGridLabel;
+	}
+
+
+	public void setTargetGridLabel(JLabel targetGridLabel) {
+		this.targetGridLabel = targetGridLabel;
 	}
 	
 	
