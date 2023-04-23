@@ -1,32 +1,75 @@
 package accountdatabase;
 
+import java.io.IOException;
+import java.util.ArrayList;
 
-		/*
-		
-		Grant:
-		
-		Implement a class "AccountDatabase" that will store:
-		
-		username (String)
-		password (String, encrypted)
-		
-		I must be able to instantiate this class in the BattleshipServer class.
-		(If you can instantiate it in this very class, then I can instantiate in the BattleshipServer class).
-		
-		I need methods that will allow me to:
-		
-		Store this data into the database.
-		Retrieve this data from the database.
-		
-		Hint: Lab 7 In should be a good baseline for this!
-		
-		*/
 public class TestAccountDatabase {
-	
-	public TestAccountDatabase() {
-		
-		
-		
-	}
-	
+
+    private AccountDatabase db;
+
+    public TestAccountDatabase() throws IOException {
+        this.db = new AccountDatabase();
+    }
+
+    public void close() {
+        db.close();
+    }
+
+    public boolean verifyAccount(String username, String password) {
+        return db.verifyAccount(username, password);
+    }
+
+    public void storeAccount(String username, String password) {
+        db.storeAccount(username, password);
+    }
+
+    public void deleteAccount(String username) {
+        String sql = "DELETE FROM accounts WHERE username = (?)";
+        try {
+            db.executeDML(sql, username);
+            System.out.println("Account deleted successfully.");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public ArrayList<String> query(String query) {
+        return db.query(query);
+    }
+
+    public void executeDML(String dml) {
+        try {
+            db.executeDML(dml, dml);
+            System.out.println("DML executed successfully.");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void main(String[] args) throws IOException {
+        TestAccountDatabase testDb = new TestAccountDatabase();
+
+        // Store an account
+        testDb.storeAccount("user1", "password1");
+
+        // Verify the account
+        boolean verified = testDb.verifyAccount("user1", "password1");
+        System.out.println("Account verified: " + verified);
+
+        // Delete the account
+        testDb.deleteAccount("user1");
+
+        // Execute a DML statement
+        testDb.executeDML("INSERT INTO accounts (username, password) VALUES ('user2', 'password2')");
+
+        // Query the database
+        ArrayList<String> results = testDb.query("SELECT * FROM accounts");
+        System.out.println("Query results:");
+        for (String result : results) {
+            System.out.println(result);
+        }
+
+        // Close the database connection
+        testDb.close();
+    }
 }

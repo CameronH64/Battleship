@@ -68,7 +68,7 @@ public class AccountDatabase {
         return "hashed_" + password;
     }
     
-	public ArrayList<String> query(String query)
+	public ArrayList<String> query1(String query)
 	{
 
 		int i = 0;
@@ -140,12 +140,18 @@ public class AccountDatabase {
 
 	}
 	
-	public void executeDML(String dml) throws SQLException
+	public void executeDML(String dml, String username) throws SQLException
 	{
 		//Add your code here
 		
 		Statement stmt = conn.createStatement();
-		stmt.execute(dml);
+		//stmt.execute(dml);
+		try {
+	        stmt.executeUpdate(dml);
+	        System.out.println("DML executed successfully.");
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
 		
 	}
     
@@ -156,4 +162,14 @@ public class AccountDatabase {
             e.printStackTrace();
         }
     }
+
+	public ArrayList<String> query(String query) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+
+
+	
 }
