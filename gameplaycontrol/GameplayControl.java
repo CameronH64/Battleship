@@ -106,7 +106,7 @@ public class GameplayControl implements ActionListener
 				e.printStackTrace();
 			}
 			
-//			System.exit(0);
+			System.exit(0);
 				
 		}
 		
