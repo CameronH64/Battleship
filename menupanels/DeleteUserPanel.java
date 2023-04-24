@@ -25,7 +25,7 @@ public class DeleteUserPanel extends JPanel {
 	private JLabel labelStatusResponse;
 	//Data fields for text fields on this screen
 	private JTextField fieldUsername;
-	private JTextField fieldPassword;
+	private JPasswordField fieldPassword;
 	//Data fields for the buttons on this screen
 	private JButton buttonMainMenu;
 	private JButton buttonDeleteUser;
@@ -54,7 +54,7 @@ public class DeleteUserPanel extends JPanel {
 		labelEnterPassword = new JLabel("Enter Password: ");
 		labelStatusResponse = new JLabel("Enter account credentials to delete account.");
 		fieldUsername = new JTextField("");
-		fieldPassword = new JTextField("");
+		fieldPassword = new JPasswordField("");
 		buttonMainMenu = new JButton("Main Menu");
 		buttonMainMenu.addActionListener(deleteUserControl);
 		buttonDeleteUser = new JButton("Delete User");
@@ -276,7 +276,7 @@ public class DeleteUserPanel extends JPanel {
 	}
 
 
-	public void setFieldPassword(JTextField fieldPassword) {
+	public void setFieldPassword(JPasswordField fieldPassword) {
 		this.fieldPassword = fieldPassword;
 	}
 

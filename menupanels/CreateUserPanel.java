@@ -27,8 +27,8 @@ public class CreateUserPanel extends JPanel {
 	private JLabel labelStatusResponse;
 	//Data fields for text fields on this screen
 	private JTextField fieldUsername;
-	private JTextField fieldPassword;
-	private JTextField fieldConfirmPassword;
+	private JPasswordField fieldPassword;
+	private JPasswordField fieldConfirmPassword;
 	//Data fields for the buttons on this screen
 	private JButton buttonMainMenu;
 	private JButton buttonCreateUser;
@@ -58,8 +58,8 @@ public class CreateUserPanel extends JPanel {
 		labelConfirmPassword = new JLabel("Confirm Password: ");
 		labelStatusResponse = new JLabel("Enter credentials to create account");
 		fieldUsername = new JTextField("");
-		fieldPassword = new JTextField("");
-		fieldConfirmPassword = new JTextField("");
+		fieldPassword = new JPasswordField("");
+		fieldConfirmPassword = new JPasswordField("");
 		buttonMainMenu = new JButton("Main Menu");
 		buttonMainMenu.addActionListener(createUserControl);
 		buttonCreateUser = new JButton("Create User");
@@ -197,19 +197,19 @@ public class CreateUserPanel extends JPanel {
 		this.fieldUsername = fieldUsername;
 	}
 
-	public JTextField getFieldPassword() {
+	public JPasswordField getFieldPassword() {
 		return fieldPassword;
 	}
 
-	public void setFieldPassword(JTextField fieldPassword) {
+	public void setFieldPassword(JPasswordField fieldPassword) {
 		this.fieldPassword = fieldPassword;
 	}
 
-	public JTextField getFieldConfirmPassword() {
+	public JPasswordField getFieldConfirmPassword() {
 		return fieldConfirmPassword;
 	}
 
-	public void setFieldConfirmPassword(JTextField fieldConfirmPassword) {
+	public void setFieldConfirmPassword(JPasswordField fieldConfirmPassword) {
 		this.fieldConfirmPassword = fieldConfirmPassword;
 	}
 
