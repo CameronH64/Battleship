@@ -26,7 +26,7 @@ public class TestAccountDatabase {
     public void deleteAccount(String username) {
         String sql = "DELETE FROM accounts WHERE username = (?)";
         try {
-            db.executeDML(sql, username);
+            db.executeDML(sql);
             System.out.println("Account deleted successfully.");
         } catch (Exception e) {
             e.printStackTrace();
@@ -39,7 +39,7 @@ public class TestAccountDatabase {
 
     public void executeDML(String dml) {
         try {
-            db.executeDML(dml, dml);
+            db.executeDML(dml);
             System.out.println("DML executed successfully.");
         } catch (Exception e) {
             e.printStackTrace();

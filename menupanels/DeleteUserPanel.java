@@ -52,7 +52,7 @@ public class DeleteUserPanel extends JPanel {
 		//Initialize buttons and labels
 		labelEnterUsername = new JLabel("Enter Username: ");
 		labelEnterPassword = new JLabel("Enter Password: ");
-		labelStatusResponse = new JLabel("Enter account credentials to delete account");
+		labelStatusResponse = new JLabel("Enter account credentials to delete account.");
 		fieldUsername = new JTextField("");
 		fieldPassword = new JTextField("");
 		buttonMainMenu = new JButton("Main Menu");

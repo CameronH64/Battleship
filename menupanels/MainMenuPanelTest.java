@@ -16,7 +16,6 @@ public class MainMenuPanelTest extends JFrame{
 	static MainMenuControl mmControl;
 	static BattleshipClient clientTest;
 	static JPanel bufferPanel;
-	static String[] credentials = {"username", "password"};
 	static JButton buttonConnect;
 	static JButton buttonQuit;
 	static JButton buttonLogIn;

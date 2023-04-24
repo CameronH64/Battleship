@@ -111,30 +111,30 @@ public class MainMenuControl implements ActionListener
 
 			JButton loginButton = mainMenu.getButtonLogIn();
 			loginButton.setEnabled(true);
-			
+
 			if (fieldIPAddress.getText().equals("")) {
-				
+
 				try {
 					battleshipClient.openConnection();
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}				
-				
+
 			} else {
-				
+
 				// Because there's something in the IP address field, open the connection with that.
 				battleshipClient.setHost(fieldIPAddress.getText());
-				
+
 				try {
 					battleshipClient.openConnection();
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				
+
 			}
-			
+
 		}
 
 	}
