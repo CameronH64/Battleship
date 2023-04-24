@@ -1,1 +1,1 @@
-java -cp .;ocsf.jar server.BattleshipServerGUI
+java -cp .;ocsf.jar;mysql-connector-java-5.1.40-bin.jar server.BattleshipServerGUI
