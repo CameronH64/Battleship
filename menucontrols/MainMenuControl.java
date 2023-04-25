@@ -16,6 +16,7 @@ public class MainMenuControl implements ActionListener
 	private JPanel container; 
 	private MainMenuPanel mainMenu; 
 	private BattleshipClient battleshipClient; 
+	private MainMenuLoginData credentials;
 
 	// This constructor connects the outside components so that the control panel can affect things.
 	public MainMenuControl(JPanel container, BattleshipClient battleshipClient)
@@ -38,7 +39,7 @@ public class MainMenuControl implements ActionListener
 			JTextField fieldUsername = mainMenu.getFieldUsername();
 			JTextField fieldPassword = mainMenu.getFieldPassword();
 
-			MainMenuLoginData credentials = new MainMenuLoginData(fieldUsername.getText(), fieldPassword.getText());
+			credentials = new MainMenuLoginData(fieldUsername.getText(), fieldPassword.getText());
 
 			try 
 			{
@@ -157,6 +158,14 @@ public class MainMenuControl implements ActionListener
 
 	public void setClient(BattleshipClient client) {
 		this.battleshipClient = client;
+	}
+
+	public MainMenuLoginData getCredentials() {
+		return credentials;
+	}
+
+	public void setCredentials(MainMenuLoginData credentials) {
+		this.credentials = credentials;
 	}
 
 }
